@@ -1,0 +1,99 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	
+		<div class="p-grid">
+			<div class="p-col-12">
+				
+					<h1>#{msgs.titulo_bienvenida}</h1>
+					<p>#{msgs.title_welcome_sec_module}</p>
+					<h4 id="matriculate">
+						<i class="pi pi-user-plus" style="font-size: 1.5rem"></i>
+						Matrícula
+					</h4>
+					<p>1. Los estudiantes se matriculan en sus respectivos grupos y
+						se les asigna un número de lista.</p>
+					<p>2. Un estudiante matriculado en el sistema puede ser búscado
+						para actualizar sus información. Del mismo modo es posible
+						eliminarlo de la matrícula.</p>
+					<p>3. Cierre de matrícula, permitiendo que los estudiantes se
+						ubiquen en sus respectivos grupos.</p>
+					<h4 id="studyProgram">
+						<i class="pi pi-book" style="font-size: 1.5rem"></i>
+						Plan de estudio
+					</h4>
+					<p>1. Gestionar planes de estudio, versiones, disciplinas y
+						asignaturas.</p>
+					<p>2. Asignar plan de estudio a los estudiantes.</p>
+					<p>3. Registar optativas, electivas y facultativas.</p>
+					<p>4. Duplicar planes de estudio.</p>
+					<h4 id="promotion">
+						<i class="pi pi-th-large" style="font-size: 1.5rem"></i>
+						Promoción
+					</h4>
+					<p>1. La promoción permite que los estudiantes pasen de año.</p>
+					<p>2. Se realiza en orden inverso, comenzando por el último año
+						y hacia el primero.</p>
+					<p>3. El curso de promoción siempre es el que acaba de
+						culminar.</p>
+					<p>4. Los estudiantes que promueven limpio son aquellos que
+						tienen todas sus asignaturas aprobadas. Aquellos que tengan
+						algunas suspensas serán valorados para repitencia o promoción con
+						arrastre.</p>
+					<h4 id="drop">
+						<i class="pi pi-sort-alt" style="font-size: 1.5rem"></i>
+						Bajas - altas
+					</h4>
+					<p>1. Dar bajas temporales y permanentes.</p>
+					<p>2. Registrar traslados entre carreras y centros.</p>
+					<p>3. Activar o incorporar estudiantes que fueron dados de
+						baja.</p>
+					<p>4. Rerportes asociados.</p>
+					<h4 id="docentControl">
+						<i class="pi pi-pencil" style="font-size: 1.5rem"></i>
+						Control docente
+					</h4>
+					<p>1. Actualizar datos de estudiante.</p>
+					<p>2. Distribuir estudiantes.</p>
+					<p>3. Reportes Hoja Académica, Planilla del estudiante,
+						Certificación de notas.</p>
+					<p>4. Matricular asignaturas al estudiante.</p>
+					<p>5. Registro de notas por estudiante y por acta de examen.</p>
+					<p>6. Registrar premios y bonificaciones.</p>
+					<p>7. Reportes Acta de examen, Registro de evaluaciones y
+						asistencia, Listado del grupo.</p>
+
+					<!-- <p:panelGrid columns="2" styleClass="ui-panelgrid-blank" layout="grid">
+            					<p:outputPanel rendered="#{not empty mainBean.faculties}">
+            						<p:selectOneMenu value="#{mainBean.facultyId}" style="width:80%;">
+					        			<f:selectItem itemLabel="Facultades del usuario autenticado" noSelectionOption="true"/>
+					        			<f:selectItems value="#{mainBean.faculties}" var="fac" itemLabel="#{fac.name}" itemValue="#{fac.facultyId}"/>
+					        			<p:ajax event="change" update="pieChart" listener="#{mainBean.createPieModel}" process="@this"></p:ajax>
+					        		</p:selectOneMenu>
+					        		<br/><br/><br/>
+									<p:chart type="pie" model="#{mainBean.pieModel2}" id="pieChart" widgetVar="pieChart" responsive="true"/>	
+            					</p:outputPanel>
+            					
+            					<p:outputPanel rendered="#{not empty mainBean.townUniversities}">
+            					<p:selectOneMenu value="#{mainBean.townUniversityId}" style="width:80%;">
+			        			<f:selectItem itemLabel="Filiales del usuario autenticado" noSelectionOption="true"/>
+			        			<f:selectItems value="#{mainBean.townUniversities}" var="town" itemLabel="#{town.name}" itemValue="#{town.townUniversityId}"/>
+			        			<p:ajax event="change" update="pieChart1" partialSubmit="true" listener="#{mainBean.createPieModel1}" process="@this"></p:ajax>
+			        		</p:selectOneMenu>
+			        		<br/><br/><br/>
+							<p:chart type="pie" model="#{mainBean.pieModel1}" id="pieChart1" widgetVar="pieChart1" responsive="true"/>
+            					</p:outputPanel>
+            				</p:panelGrid>
+            				 -->
+
+
+				</div>
+			</div>
+
+	
+
+</ui:composition>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:facet name="first">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+	</f:facet>
+	<title>Sigenu - Accceso denegado</title>
+	<h:outputScript name="js/ripple.js" library="ultima-layout" />
+
+	<script type="text/javascript">
+		function ale() {
+			insertTrace();
+		
+		}
+	</script>
+
+</h:head>
+
+<h:body styleClass="exception-body accessdenied-page">
+
+	<div class="exception-type">
+		<p:graphicImage name="images/401.svg" library="ultima-layout" />
+	</div>
+
+	<div class="card exception-panel">
+		<i class="material-icons">&#xE32A;</i>
+		<h2>#{msgs.error_accessDenied}</h2>
+		<div class="exception-detail">#{msgs.page_accessDenied}</div>
+		<p:button value="Inicio" styleClass="secondary" href="/welcome" />
+		<p:button value="Ir al Portal" styleClass="secondary"
+			href="#{loginBean.currentUrl}sigenu-portal" />
+	</div>
+
+	<h:outputStylesheet name="css/ripple.css" library="ultima-layout" />
+	<h:outputStylesheet name="css/layout-#{guestPreferences.theme}.css"
+		library="ultima-layout" />
+
+	<h:form>
+		<p:remoteCommand name="insert" process="@this" async="true"
+			actionListener="#{remoteCommandBean.insertTrace}" />
+	</h:form>
+
+	<script type="text/javascript">
+		insert();
+	</script>   
+
+</h:body>
+
+</html>

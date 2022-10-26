@@ -1,0 +1,269 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pu="http://primefaces.org/ultima">
+
+	<h:form id="menuform">
+		<div id="layout-menu-container"
+			class="layout-menu #{guestPreferences.darkMenu ? 'layout-menu-dark' : ''}">
+			<ui:fragment
+				rendered="#{guestPreferences.profileMode == 'inline' and guestPreferences.menuLayoutClass != 'menu-layout-static menu-layout-horizontal'}">
+				<div class="profile">
+					<a id="profile-options" href="#"> <h:graphicImage
+							name="avatar.png" library="images"
+							styleClass="profile-image" style="border-radius:25px"/> <span class="profile-name">#{authentication.fullname}</span> <i class="pi pi-angle-down"></i>
+					</a>
+				</div>
+
+				<ul id="profile-menu" class="ultima-menu profile-menu">
+					<!-- <li role="menuitem"><a href="#" class="ripplelink"> <i
+							class="pi pi-user"></i> <span>Profile</span>
+					</a></li>
+					<li role="menuitem"><a href="#" class="ripplelink"> <i
+							class="pi pi-lock"></i> <span>Privacy</span>
+					</a></li>
+					<li role="menuitem"><a href="#" class="ripplelink"> <i
+							class="pi pi-cog"></i> <span>Settings</span>
+					</a></li> -->
+					<li role="menuitem"><a href="logout" class="ripplelink"> <i
+							class="pi pi-sign-out"></i> <span>Salir</span>
+					</a></li>
+				</ul>
+			</ui:fragment>
+			<pu:menu widgetVar="me">
+			    <p:menuitem id="om_dashboard" value="Inicio"
+					icon="pi pi-fw pi-fw pi-home" />
+				<p:submenu id="matriculate" label="#{msgs.menu_matriculate}"
+					icon="pi pi-user-plus" rendered="#{authentication.ifAnyGranted('SECRETARY, GENERAL_SECRETARY, ASSISTANT_STUDENTS_CONTROLLER')}">
+
+					<p:menuitem value="#{msgs.submenu_matriculatedStudent}"
+								action="uishell:MatriculatedStudentBean" />
+
+					<p:menuitem value="#{msgs.submenu_updateMatriculatedStudent}"
+								action="uishell:UpdateMatriculatedStudentBean" />
+
+					<p:menuitem value="#{msgs.menu_endMatriculate}"
+								action="uishell:ClossureProcessBean" />
+
+					<p:submenu label="#{msgs.submenu_matriculatedReport}">
+						<p:menuitem value="#{msgs.submenu_matriculatedDayReport}"
+							url="/pages/secretary/student/inscription/reports/CES/matriculateStudentDay.xhtml" />
+						<p:menuitem value="#{msgs.submenu_matriculatedStudentInRange}"
+							url="/pages/secretary/student/inscription/reports/CES/matriculateStudentDateRage.xhtml" />
+						<p:menuitem value="#{msgs.submenu_matriculatedTodayReport}"
+							url="/pages/secretary/student/inscription/reports/CES/matriculateStudentUntilToday.xhtml" />
+					</p:submenu>
+					
+				</p:submenu>
+
+				
+
+				<p:submenu label="#{msgs.menu_students}" id="studentsMenu" icon="pi pi-users"
+					rendered="#{authentication.ifAnyGranted('SECRETARY, GENERAL_SECRETARY, ASSISTANT_STUDENTS_CONTROLLER, SECRETARY_PARTIAL')}">
+					<p:menuitem value="#{msgs.submenu_searchStudent}" rendered="false"
+						action="uishell:StudentSearch" />
+					<p:menuitem value="Buscar/#{msgs.submenu_listStudent}"
+						action="uishell:StudentList" />
+						 
+					<p:menuitem value="#{msgs.submenu_promoteStudent}"				
+						action="uishell:StudentPromotionBean" rendered="#{authentication.ifAnyGranted('SECRETARY, GENERAL_SECRETARY, ASSISTANT_STUDENTS_CONTROLLER')}"/>
+						
+					<p:menuitem value="#{msgs.submenu_distributeStudent}"
+						action="uishell:StudentsDistributionBean" rendered="#{authentication.ifAnyGranted('SECRETARY, GENERAL_SECRETARY, ASSISTANT_STUDENTS_CONTROLLER')}"/>
+						
+					<p:menuitem value="Evaluar estudiantes"
+						outcome="listStudentEvaluation" rendered="false" />
+
+					<p:menuitem value="#{msgs.submenu_generalEvaluation}"
+								action="uishell:GeneralEvaluationBean" />
+
+				</p:submenu>
+
+				<p:submenu label="#{msgs.menu_studyProgram}" id="spMenu"
+					icon="pi pi-book" >
+					<p:menuitem value="#{msgs.submenu_studyPrograms}"
+						url="/pages/secretary/studyProgram/list/studyProgramList.xhtml" />
+					<p:menuitem value="#{msgs.submenu_optativeSubject}"
+						url="/pages/secretary/subjects/optativeElectiveSubject/optativeElectiveSubject.xhtml" />
+					<p:submenu label="#{msgs.submenu_studyProgramSubjects}">
+						<p:menuitem value="#{msgs.submenu_studyProgramSubject}"
+							url="/pages/secretary/codifier/academics/studyPlan/subject/subjectCodifier.xhtml" />
+						<p:menuitem value="#{msgs.submenu_studyProgramAdjustmentSubject}"
+							url="/pages/secretary/codifier/academics/studyPlan/adjustmentSubject/adjustmentSubject.xhtml" />
+						<p:menuitem value="#{msgs.submenu_studyProgramFacultativeSubject}"
+							url="/pages/secretary/codifier/academics/studyPlan/facultativeSubject/facultativeSubjects.xhtml" />
+						<p:menuitem value="#{msgs.submenu_studyProgramDiscipline}"
+							url="/pages/secretary/codifier/academics/studyPlan/discipline/discipline.xhtml" />
+						<p:menuitem value="#{msgs.submenu_studyProgramDisciplineName}"
+							url="/pages/secretary/codifier/academics/studyPlan/disciplineName/disciplineName.xhtml" />
+						<p:menuitem
+							value="#{msgs.submenu_studyProgramAssignDepartmentToSubject}"
+							url="/pages/secretary/subjects/assignDepartmentToSubject/assignDepartmentToSubject.xhtml" />
+					</p:submenu>
+				</p:submenu>
+
+<p:submenu label="#{msgs.menu_center}" id="centerMenu"
+					icon="pi pi-sitemap"
+					>
+					<p:menuitem value="#{msgs.submenu_university}"
+						url="/pages/secretary/codifier/academics/centerCareer/university/universityCodifier.xhtml"
+						rendered="#{authentication.ifAnyGranted('GENERAL_SECRETARY, ADMINISTRATOR')}" />
+					<p:menuitem value="#{msgs.submenu_faculty}"
+						url="/pages/secretary/codifier/academics/centerCareer/faculty/facultyCodifier.xhtml"
+						rendered="#{authentication.ifAnyGranted('GENERAL_SECRETARY, ADMINISTRATOR')}" />
+					<p:menuitem value="#{msgs.submenu_filial}"
+						url="/pages/secretary/codifier/academics/centerCareer/townUniversity/townUniversityCodifier.xhtml"
+						rendered="#{authentication.ifAnyGranted('GENERAL_SECRETARY, ADMINISTRATOR')}" />
+					<p:menuitem value="#{msgs.submenu_national_career}"
+						url="/pages/secretary/codifier/academics/centerCareer/nationalCareer/nationalCareerCodifier.xhtml"
+						rendered="#{authentication.ifAnyGranted('GENERAL_SECRETARY, ADMINISTRATOR')}" />
+					<p:menuitem value="#{msgs.submenu_career}"
+						url="/pages/secretary/codifier/academics/centerCareer/career/careerCodifier.xhtml"
+						rendered="#{authentication.ifAnyGranted('GENERAL_SECRETARY, ADMINISTRATOR')}" />
+
+					<p:menuitem value="#{msgs.submenu_academic_year}"
+						url="/pages/secretary/codifier/academics/centerCareer/academicYear/academicYearCodifier.xhtml"
+						rendered="#{authentication.ifAnyGranted('SP_CONTROLLER')}" />
+					<p:menuitem value="#{msgs.submenu_brigade}"
+						url="/pages/secretary/codifier/academics/centerCareer/group/listGroups.xhtml"
+						rendered="#{authentication.ifAnyGranted('SECRETARY, SECRETARY_PARTIAL')}" />
+				</p:submenu>
+				<p:submenu label="#{msgs.menu_reports}" icon="pi pi-file"
+					>
+					<p:menuitem value="#{msgs.submenu_dropsReport}"
+						url="/pages/secretary/student/docentControl/dropsReport.xhtml" />
+					<p:menuitem value="#{msgs.submenu_assistantStudentsReport}"
+						url="/pages/secretary/student/reports/assistantsReport.xhtml" />
+					<p:menuitem value="#{msgs.title_cadetsReport}"
+						url="/pages/secretary/student/reports/cadetsReport.xhtml" />
+					<p:menuitem value="#{msgs.submenu_yearReport}"
+						url="/pages/secretary/student/reports/dragStudentReportsContent.xhtml" />
+					<p:menuitem value="#{msgs.label_drag_student_report}"
+						url="/pages/secretary/student/reports/dragStudentReports.xhtml" />
+					<p:menuitem value="Estudiantes con mundial"
+						url="/pages/secretary/student/reports/studentWithWorldExaminationReport.xhtml" />
+					<p:menuitem value="#{msgs.notes_students_summons}"
+						url="/pages/secretary/student/reports/notesStudentForSummons.xhtml" />
+				</p:submenu>
+
+				<p:submenu label="#{msgs.menu_audits}" icon="pi pi-shield"
+					>
+					<p:menuitem value="#{msgs.submenu_studentsWithoutYear}"
+						url="/pages/secretary/audit/studentsWithoutYear.xhtml" />
+					<p:menuitem value="#{msgs.submenu_studentsWithoutStudyPlan}"
+						url="/pages/secretary/audit/studentsWithoutStudyPlan.xhtml" />
+					<p:menuitem value="#{msgs.submenu_yearsWithoutStudyPlan}"
+						url="/pages/secretary/audit/yearsWithoutStudyPlan.xhtml" />
+					<p:menuitem value="#{msgs.submenu_foreignersWithoutNativeCountry}"
+						url="/pages/secretary/audit/foreignersWithoutNativeCountry.xhtml" />
+					<p:menuitem value="#{msgs.submenu_studentsWithoutTown}"
+						url="/pages/secretary/audit/studentsWithoutTown.xhtml" />
+					<p:menuitem value="#{msgs.submenu_studentsWithoutSourceEntrance}"
+						url="/pages/secretary/audit/studentsWithoutSourceEntrance.xhtml" />
+					<p:menuitem
+						value="#{msgs.submenu_studentsWithoutNoRegisteredSubjectsOfCrawl}"
+						url="/pages/secretary/audit/studentsWithoutNoRegisteredSubjectsOfCrawl.xhtml" />
+					<p:menuitem
+						value="#{msgs.submenu_studentsForeignersNotWellDefined}"
+						url="/pages/secretary/audit/studentsForeignersNotWellDefined.xhtml" />
+					<p:menuitem value="#{msgs.submenu_studentsEvaluatedTwice}"
+						url="/pages/secretary/audit/studentsWithSubjectsEvaluatedTwice.xhtml" />
+				</p:submenu>
+
+
+				<p:submenu label="#{msgs.menu_helps}" icon="pi pi-fw pi-info-circle"
+					>
+					<p:menuitem value="#{msgs.submenu_onlineHelp}"
+						url="/pages/help/online/Sigenu.html" target="blank" />
+					<p:menuitem value="#{msgs.submenu_onlineHelp} (PDF)"
+						url="/pages/help/online/Sigenu.pdf" target="blank" />
+					
+				</p:submenu>
+
+
+
+				
+				<!-- <p:submenu id="om_components" label="UI Kit" icon="pi pi-fw pi-fw pi-star" badge="6">
+                    <p:menuitem id="om_formlayout" value="Form Layout" icon="pi pi-fw pi-id-card" outcome="/formlayout"/>
+                    <p:menuitem id="om_input" value="Input" icon="pi pi-fw pi-check-square" outcome="/input"/>
+                    <p:menuitem id="om_floatlabel" value="Float Label" icon="pi pi-fw pi-bookmark" outcome="/floatlabel"/>
+                    <p:menuitem id="om_invalidstate" value="Invalid State" icon="pi pi-fw pi-exclamation-circle" outcome="/invalidstate"/>
+                    <p:menuitem id="om_button" value="Button" icon="pi pi-fw pi-mobile" outcome="/button" styleClass="rotated-icon"/>
+                    <p:menuitem id="om_table" value="Table" icon="pi pi-fw pi-table" outcome="/table"/>
+                    <p:menuitem id="om_list" value="List" icon="pi pi-fw pi-list" outcome="/list"/>
+                    <p:menuitem id="om_tree" value="Tree" icon="pi pi-fw pi-share-alt" outcome="/tree"/>
+                    <p:menuitem id="om_panel" value="Panel" icon="pi pi-fw pi-tablet" outcome="/panel"/>
+                    <p:menuitem id="om_overlay" value="Overlay" icon="pi pi-fw pi-clone" outcome="/overlay"/>
+                    <p:menuitem id="om_menu" value="Menu" icon="pi pi-fw pi-bars" outcome="/menu"/>
+                    <p:menuitem id="om_message" value="Message" icon="pi pi-fw pi-comment" outcome="/messages"/>
+                    <p:menuitem id="om_file" value="File" icon="pi pi-fw pi-file" outcome="/file"/>
+                    <p:menuitem id="om_chart" value="Chart" icon="pi pi-fw pi-chart-bar" outcome="/charts"/>
+                    <p:menuitem id="om_media" value="Media" icon="pi pi-image" outcome="/media" />
+                    <p:menuitem id="om_misc" value="Misc" icon="pi pi-fw pi-circle-off" outcome="/misc"/>
+                </p:submenu>
+                <p:submenu id="om_utils" label="Utilities" icon="pi pi-fw pi-compass">
+                    <p:menuitem id="om_display" value="Display" icon="pi pi-fw pi-desktop" outcome="/display"/>
+                    <p:menuitem id="om_elevation" value="Elevation" icon="pi pi-fw pi-external-link" outcome="/elevation"/>
+                    <p:menuitem id="om_flexbox" value="FlexBox" icon="pi pi-fw pi-directions" outcome="/flexbox"/>
+                    <p:menuitem id="om_icons" value="Icons" icon="pi pi-fw pi-search" outcome="/icons"/>
+                    <p:menuitem id="om_text" value="Text" icon="pi pi-fw pi-pencil" outcome="/text"/>
+                    <p:menuitem id="om_grid" value="Grid System" icon="pi pi-fw pi-th-large" outcome="/grid"/>
+                    <p:menuitem id="om_spacing" value="Spacing" icon="pi pi-fw pi-arrow-right" outcome="/spacing"/>
+                    <p:menuitem id="om_typography" value="Typography" icon="pi pi-fw pi-align-center" outcome="/typography"/>
+                </p:submenu>
+                <p:submenu id="om_default" label="Pages" icon="pi pi-fw pi-briefcase" badge="8">
+                    <p:menuitem id="om_crud" value="Crud" icon="pi pi-fw pi-pencil" outcome="/crud"/>
+                    <p:menuitem id="om_calendar" value="Calendar" icon="pi pi-fw pi-calendar-plus" outcome="/calendar"/>
+                    <p:menuitem id="om_chronoline" value="Chronoline" icon="pi pi-fw pi-calendar" outcome="/chronoline"/>
+                    <p:menuitem id="om_landing" value="Landing" icon="pi pi-fw pi-user-plus" outcome="/landing"/>
+                    <p:menuitem id="om_login" value="Login" icon="pi pi-fw pi-sign-in" outcome="/login"/>
+                    <p:menuitem id="om_invoice" value="Invoice" icon="pi pi-fw pi-dollar" outcome="/invoice"/>
+                    <p:menuitem id="om_help" value="Help" icon="pi pi-fw pi-question-circle" outcome="/help"/>
+                    <p:menuitem id="om_error" value="Error" icon="pi pi-fw pi-times-circle" outcome="/error"/>
+                    <p:menuitem id="om_notfound" value="Not Found" icon="pi pi-fw pi-exclamation-circle" outcome="/notfound"/>
+                    <p:menuitem id="om_access" value="Access Denied" icon="pi pi-fw pi-lock" outcome="/access"/>
+                    <p:menuitem id="om_wizard" value="Wizard" icon="pi pi-fw pi-star" outcome="/wizard"/>
+                    <p:menuitem id="om_empty" value="Empty" icon="pi pi-fw pi-circle-off" outcome="/empty"/>
+                </p:submenu> -->
+				<p:submenu id="om_hierarchy" label="Hierarchy" rendered="false"
+					icon="pi pi-fw pi-align-left">
+					<p:submenu id="om_sm1" label="Submenu 1"
+						icon="pi pi-fw pi-align-left">
+						<p:submenu id="om_sm11" label="Submenu 1.1"
+							icon="pi pi-fw pi-align-left">
+							<p:menuitem id="om_lnk111" value="Link 1.1.1"
+								icon="pi pi-fw pi-align-left" url="#" />
+							<p:menuitem id="om_lnk112" value="Link 1.1.2"
+								icon="pi pi-fw pi-align-left" url="#" />
+							<p:menuitem id="om_lnk113" value="Link 1.1.3"
+								icon="pi pi-fw pi-align-left" url="#" />
+						</p:submenu>
+						<p:submenu id="om_sm12" label="Submenu 1.2"
+							icon="pi pi-fw pi-align-left">
+							<p:menuitem id="om_lnk121" value="Link 1.2.1"
+								icon="pi pi-fw pi-align-left" url="#" />
+						</p:submenu>
+					</p:submenu>
+					<p:submenu id="om_sm2" label="Submenu 2"
+						icon="pi pi-fw pi-align-left">
+						<p:submenu id="om_sm21" label="Submenu 2.1"
+							icon="pi pi-fw pi-align-left">
+							<p:menuitem id="om_lnk211" value="Link 2.1.1"
+								icon="pi pi-fw pi-align-left" url="#" />
+							<p:menuitem id="om_lnk212" value="Link 2.1.2"
+								icon="pi pi-fw pi-align-left" url="#" />
+						</p:submenu>
+						<p:submenu id="om_sm22" label="Submenu 2.2"
+							icon="pi pi-fw pi-align-left">
+							<p:menuitem id="om_lnk221" value="Link 2.2.1"
+								icon="pi pi-fw pi-align-left" url="#" />
+						</p:submenu>
+					</p:submenu>
+				</p:submenu>
+
+			</pu:menu>
+		</div>
+	</h:form>
+</ui:composition>

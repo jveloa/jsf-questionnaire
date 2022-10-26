@@ -1,0 +1,28 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui">
+
+    <div class="layout-breadcrumb">
+        <ul>
+            <li>
+                Hola #{authentication.fullname}, bienvenido.
+            </li>
+            
+            
+        </ul>
+
+        <div class="layout-breadcrumb-options">
+            <!-- <a href="#" title="Backup">
+                <i class="pi pi-cloud-upload"/>
+            </a>
+            <a href="#" title="Bookmark">
+                <i class="pi pi-bookmark"/>
+            </a> -->
+            <a href="logout" title="Salir">
+                <i class="pi pi-sign-out"/>
+            </a>
+        </div>
+    </div>
+
+</ui:composition>

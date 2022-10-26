@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <link rel="icon"
+		href="#{request.contextPath}/resources/images/favicon-sec.png"
+		type="image/x-icon" />
+	<link rel="shortcut icon"
+		href="#{request.contextPath}/resources/images/favicon-sec.png" />
+	<f:facet name="first">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="theme-color"
+			content="#{guestPreferences.themeColors[guestPreferences.theme]}" />
+	</f:facet>
+	<!-- <title>#{msgs.sitio_slogan}</title> -->
+	<title>Sigenu Control Docente</title>
+	<h:outputScript name="js/layout.js" library="ultima-layout" />
+	<h:outputScript name="js/prism.js" library="ultima-layout" />
+	<h:outputScript name="js/ripple.js" library="ultima-layout"
+		rendered="#{guestPreferences.ripple}" />
+	<ui:insert name="head" />
+</h:head>
+
+<h:body styleClass="#{guestPreferences.inputStyleClass}">
+
+	<div class="layout-wrapper #{guestPreferences.menuLayoutClass}">
+		<ui:include src="/pages/template/topbar.xhtml" />
+		<!-- <ui:include src="/pages/template/config.xhtml" />
+		<ui:include src="/pages/template/rightpanel.xhtml" /> -->
+		<ui:include src="/pages/template/menu.xhtml" />
+
+		<div class="layout-main">
+			<ui:include src="/pages/template/breadcrumb.xhtml" />
+
+			<div class="layout-content">
+				<!-- <div class="ui-growl ui-widget" aria-live="polite"
+					style="z-index: 1005;">
+					<div
+						class="ui-growl-item-container ui-state-highlight ui-corner-all ui-helper-hidden ui-shadow ui-growl-loading"
+						style="display: block;">
+						<div role="alert" class="ui-growl-item">
+							
+							<div class="ui-growl-message-loading">
+								<p>Procesando, por favor espere...</p>
+							</div>
+						</div>
+					</div>
+				</div> -->
+				 
+				<h:form id="mainForm">
+				    <p:growl id="msgs" showDetail="false" />
+				    	
+					<p:tabView id="mainTabView"
+						activeIndex="#{dynTabManager.activeTabIndex}"
+						widgetVar="mainTabView">
+						<!-- dynamic="true"  activeIndex= -->
+						<p:ajax event="tabChange" listener="#{dynTabManager.onTabChange}" />
+						<p:ajax event="tabClose" listener="#{dynTabManager.onTabClose}" />
+						<c:forEach items="#{dynTabManager.tabMenuModel}" var="tab">
+							<p:tab id="#{tab.id}" title="#{tab.title}"
+								closable="#{tab.closeable}">
+								<f:subview id="_sub_#{tab.id}">
+									<ui:include src="#{tab.includePage}">
+										<ui:param name="cdiBean" value="#{tab.cdiBean}" />
+										<ui:param name="dynTab" value="#{tab}" />
+									</ui:include>
+								</f:subview>
+							</p:tab>
+						</c:forEach>
+					</p:tabView>
+				</h:form>
+				<!-- <ui:insert name="body"/> -->
+			</div>
+
+			<ui:include src="/pages/template/footer.xhtml" />
+		</div>
+	</div>
+
+	<p:ajaxStatus
+		style="position:fixed;right:7px;bottom:7px">
+		<f:facet name="start">
+			<div class="ui-growl ui-widget" aria-live="polite"
+					style="z-index: 1005;">
+					<div
+						class="ui-growl-item-container ui-state-highlight ui-corner-all ui-helper-hidden ui-shadow ui-growl-loading"
+						style="display: block;">
+						<div role="alert" class="ui-growl-item">
+							
+							<div class="ui-growl-message-loading">
+								<!-- <i class="pi pi-spin pi-spinner" style="font-size: 2rem; color: #fff;"></i> --> <p>Procesando, por favor espere...</p>
+							</div>
+						</div>
+					</div>
+				</div>
+		</f:facet>
+
+		<f:facet name="complete">
+			<h:outputText value="" />
+		</f:facet>
+	</p:ajaxStatus>
+
+	<h:outputStylesheet name="css/primeicons.css" library="ultima-layout" />
+	<h:outputStylesheet name="css/primeflex.min.css"
+		library="ultima-layout" />
+	<h:outputStylesheet name="css/ripple.css" library="ultima-layout"
+		rendered="#{guestPreferences.ripple}" />
+	<h:outputStylesheet name="css/layout-#{guestPreferences.theme}.css"
+		library="ultima-layout" />
+	<h:outputStylesheet name="custom.css" library="css" />
+</h:body>
+
+</html>

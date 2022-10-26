@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:c="http://java.sun.com/jstl/core"
+    xmlns:p="http://primefaces.org/ui"
+	xml:lang="en" lang="en">
+	
+	<ui:composition template="/pages/template/layout.xhtml">
+		<ui:define name="breadCrumb">
+			<li class="active">#{msgs.error_invalidRequest}</li>
+		</ui:define>
+		<ui:define name="body">
+			<div class="ui-g">
+				<div class="ui-g-12" >
+					<div class="well" style="padding-top:0px;">
+						<h1 class="lighter smaller">
+							<span class="blue">
+								<i class="fa fa-random"></i>
+								500
+							</span>
+							Ha ocurrido un error
+						</h1>
+						<hr />
+						<h3 class="lighter smaller">
+								Pero estamos trabajando
+								<i class="ace-icon fa fa-wrench icon-animated-wrench bigger-125"></i>
+								en ello!
+							</h3>
+
+							<br/>
+
+							<div>
+								<h4 class="lighter smaller">De cualquier modo, puede intentar lo siguiente:</h4>
+
+								<ul class="list-unstyled spaced inline bigger-110 margin-15">
+									<li>
+										<i class="fa fa-hand-o-right blue"></i>
+										Vuelva a cargar la página.
+									</li>
+									
+									<li>
+										<i class="fa fa-hand-o-right blue"></i>
+										Intente ejecutar nuevamente la misma funcionalidad.
+									</li>
+
+									<li>
+										<i class="fa fa-hand-o-right blue"></i>
+										Reporte el error ocurrido en nuestro sistema de incidencias. 
+										<a href="http://10.8.1.250/mantisbt" class="label label-danger">
+											<i class="fa fa-bullhorn"></i>
+											Reportar
+										</a>
+									</li>
+								</ul>
+							</div>
+
+							<hr />
+							<div class="space"></div>
+
+							<div class="center">
+								<a href="javascript:history.back()" class="btn btn-grey">
+									<i class="ace-icon fa fa-arrow-left"></i>
+									Volver
+								</a>
+								<p:spacer width="10"></p:spacer>
+								<h:outputLink class="btn btn-primary"
+									value="${facesContext.externalContext.requestContextPath}/pages/welcome/content.jsf">
+									<i class="fa fa-check"></i> <h:outputText value=" #{msgs.label_welcome}" />
+		                       	</h:outputLink>
+							</div>
+					</div>
+				</div>
+			</div>
+		</ui:define>
+	</ui:composition>
+</html>

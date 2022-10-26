@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <link rel="icon"
+		href="#{request.contextPath}/resources/images/favicon-sec.png"
+		type="image/x-icon" />
+	<link rel="shortcut icon"
+		href="#{request.contextPath}/resources/images/favicon-sec.png" />
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+        <title>Sigenu Login</title>
+        <h:outputScript name="js/ripple.js" library="ultima-layout" />
+        <h:outputScript name="js/layout.js" library="ultima-layout" />
+    </h:head>
+
+    <h:body >
+    <h:form prependId="false">
+	        <p:growl for="securityMessages"  globalOnly="true" showDetail="true" showSummary="false" />	
+	    <!-- <div class="p-d-flex p-jc-center">
+	        <div class="p-as-end"><p:graphicImage name="sigenu-logo.png" library="images" width="48" height="48"/></div>
+		    
+		</div>     -->
+	    
+        <div class="card login-panel ui-fluid">
+            <div class="p-grid">
+                <div class="p-col-12">
+                    <i class="pi pi-shield" style="font-size: 4rem; color: #E91E63;"></i>
+                </div>
+                <div class="p-col-12">
+                    <span class="ui-float-label">
+                    	<p:inputText value="#{authentication.username}" style="width:100%" required="true" id="username" requiredMessage="Valor requerido"/>
+				        <p:outputLabel for="@previous" value="Nombre de usuario"/>
+                    </span>
+			     </div>
+			     <div class="p-col-12">
+				     <span class="ui-float-label">
+				      	<p:password style="width:100%" value="#{authentication.password}" required="true" requiredMessage="Valor requerido" id="password"/>
+				      	<p:outputLabel for="@previous" value="Constraseña"/>
+				      </span>
+                </div>
+                
+                <div class="p-col-12">
+                    <p:commandButton ajax="false" icon="pi pi-sign-in" value="Entrar" action="#{authentication.auth}" style="width: 100%"/>
+                    <p:button value="Ir al Portal" style="width: 100%" styleClass="ui-button-secondary"
+                              icon="pi pi-question-circle"/>
+                </div>
+            </div>
+        </div>
+</h:form>
+        <h:outputStylesheet name="css/primeicons.css" library="ultima-layout"/>
+        <h:outputStylesheet name="css/primeflex.min.css" library="ultima-layout"/>
+        <h:outputStylesheet name="css/ripple.css" library="ultima-layout" />
+        <h:outputStylesheet name="css/layout-#{guestPreferences.theme}.css" library="ultima-layout" />
+    </h:body>
+
+</html>
