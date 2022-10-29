@@ -21,8 +21,7 @@
 		<meta name="theme-color"
 			content="#{guestPreferences.themeColors[guestPreferences.theme]}" />
 	</f:facet>
-	<!-- <title>#{msgs.sitio_slogan}</title> -->
-	<title>Sigenu Control Docente</title>
+	<title>Sigenu Encuesta</title>
 	<h:outputScript name="js/layout.js" library="ultima-layout" />
 	<h:outputScript name="js/prism.js" library="ultima-layout" />
 	<h:outputScript name="js/ripple.js" library="ultima-layout"
@@ -34,28 +33,13 @@
 
 	<div class="layout-wrapper #{guestPreferences.menuLayoutClass}">
 		<ui:include src="/pages/template/topbar.xhtml" />
-		<!-- <ui:include src="/pages/template/config.xhtml" />
-		<ui:include src="/pages/template/rightpanel.xhtml" /> -->
 		<ui:include src="/pages/template/menu.xhtml" />
 
 		<div class="layout-main">
 			<ui:include src="/pages/template/breadcrumb.xhtml" />
 
 			<div class="layout-content">
-				<!-- <div class="ui-growl ui-widget" aria-live="polite"
-					style="z-index: 1005;">
-					<div
-						class="ui-growl-item-container ui-state-highlight ui-corner-all ui-helper-hidden ui-shadow ui-growl-loading"
-						style="display: block;">
-						<div role="alert" class="ui-growl-item">
-							
-							<div class="ui-growl-message-loading">
-								<p>Procesando, por favor espere...</p>
-							</div>
-						</div>
-					</div>
-				</div> -->
-				 
+				
 				<h:form id="mainForm">
 				    <p:growl id="msgs" showDetail="false" />
 				    	
@@ -78,7 +62,7 @@
 						</c:forEach>
 					</p:tabView>
 				</h:form>
-				<!-- <ui:insert name="body"/> -->
+				
 			</div>
 
 			<ui:include src="/pages/template/footer.xhtml" />
@@ -96,7 +80,7 @@
 						<div role="alert" class="ui-growl-item">
 							
 							<div class="ui-growl-message-loading">
-								<!-- <i class="pi pi-spin pi-spinner" style="font-size: 2rem; color: #fff;"></i> --> <p>Procesando, por favor espere...</p>
+								 <p>Procesando, por favor espere...</p>
 							</div>
 						</div>
 					</div>

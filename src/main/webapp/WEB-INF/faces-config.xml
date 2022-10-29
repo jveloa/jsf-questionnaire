@@ -52,8 +52,7 @@
 	<!-- DynTabTracker, manager, etc... -->
 	<managed-bean>
 		<managed-bean-name>dynTabTracker</managed-bean-name>
-		<managed-bean-class>cu.edu.mes.sigenu.training.web.config.spa.DynTabTracker
-		</managed-bean-class>
+		<managed-bean-class>cu.edu.mes.sigenu.training.web.config.spa.DynTabTracker</managed-bean-class>
 		<managed-bean-scope>view</managed-bean-scope>
 		<managed-property>
 			<property-name>maxNumberOfTabs</property-name>
@@ -72,8 +71,7 @@
 
 	<managed-bean>
 		<managed-bean-name>dynTabManager</managed-bean-name>
-		<managed-bean-class>cu.edu.mes.sigenu.training.web.config.spa.DynTabManager
-		</managed-bean-class>
+		<managed-bean-class>cu.edu.mes.sigenu.training.web.config.spa.DynTabManager</managed-bean-class>
 		<managed-bean-scope>view</managed-bean-scope>
 		<managed-property>
 			<property-name>tabTracker</property-name>
@@ -94,8 +92,7 @@
 	<!-- DynTab instances -->
 	<managed-bean>
 		<managed-bean-name>HomeDynTab</managed-bean-name>
-		<managed-bean-class>cu.edu.mes.sigenu.training.web.config.spa.DynTab
-		</managed-bean-class>
+		<managed-bean-class>cu.edu.mes.sigenu.training.web.config.spa.DynTab</managed-bean-class>
 		<managed-bean-scope>view</managed-bean-scope>
 		<managed-property>
 			<property-name>uniqueIdentifier</property-name>
@@ -103,7 +100,7 @@
 		</managed-property>
 		<managed-property>
 			<property-name>title</property-name>
-			<value>Inicio</value>
+			<value>#{msgs.presentation}</value>
 		</managed-property>
 		<managed-property>
 			<property-name>includePage</property-name>
