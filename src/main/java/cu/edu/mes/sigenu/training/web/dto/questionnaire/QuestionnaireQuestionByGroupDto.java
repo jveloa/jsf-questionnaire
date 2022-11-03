@@ -12,6 +12,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class QuestionnaireQuestionByGroupDto {
-    private cu.edu.mes.sigenu.training.core.dto.GroupQuestionDto groupQuestionDto;
-    private List<cu.edu.mes.sigenu.training.core.dto.QuestionnaireQuestionDto> questionnaireQuestionDto;
+    private GroupQuestionDto groupQuestionDto;
+    private List<QuestionnaireQuestionDto> questionnaireQuestionDto;
 }

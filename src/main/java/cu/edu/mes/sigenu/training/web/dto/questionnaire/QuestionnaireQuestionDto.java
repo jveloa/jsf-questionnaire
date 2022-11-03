@@ -9,6 +9,6 @@ import java.util.List;
 @Data
 @Builder
 public class QuestionnaireQuestionDto {
-    private cu.edu.mes.sigenu.training.core.dto.QuestionDto question;
+    private QuestionDto question;
     private List<AnswerDto> answerList;
 }
