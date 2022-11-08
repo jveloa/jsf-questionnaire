@@ -15,4 +15,5 @@ import java.util.List;
 public class QuestionnaireQuestionDto {
     private QuestionDto question;
     private List<AnswerDto> answerList;
+    private Integer selectedAnswer;
 }

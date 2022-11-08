@@ -30,7 +30,8 @@
             <pu:menu widgetVar="me">
                 <p:menuitem id="home" value="#{msgs.presentation}" icon="pi pi-home"/>
     
-                <p:menuitem id="take_questionnaire" value="#{msgs.menu_questionnaire}" icon="pi pi-question"/>
+                <p:menuitem id="take_questionnaire" value="#{msgs.menu_questionnaire}" icon="pi pi-question"
+                            action="uishell:listQuestionnaireBean"/>
                 
                 <p:submenu id="questionnaire_info" label="#{msgs.menu_crud}"
                            icon="pi pi-user-plus"

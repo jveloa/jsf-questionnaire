@@ -1,139 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
 <faces-config version="2.0"
-	xmlns="http://java.sun.com/xml/ns/javaee"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+              xmlns="http://java.sun.com/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
 
-	<name>training</name>
+    <name>training</name>
 
-	<component>
-		<component-type>org.primefaces.component.UltimaMenu</component-type>
-		<component-class>cu.edu.mes.sigenu.training.web.ultima.component.UltimaMenu
-		</component-class>
-	</component>
+    <component>
+        <component-type>org.primefaces.component.UltimaMenu</component-type>
+        <component-class>cu.edu.mes.sigenu.training.web.ultima.component.UltimaMenu
+        </component-class>
+    </component>
 
-	<render-kit>
-		<renderer>
-			<component-family>org.primefaces.component</component-family>
-			<renderer-type>org.primefaces.component.UltimaMenuRenderer
-			</renderer-type>
-			<renderer-class>cu.edu.mes.sigenu.training.web.ultima.component.UltimaMenuRenderer
-			</renderer-class>
-		</renderer>
-	</render-kit>
+    <render-kit>
+        <renderer>
+            <component-family>org.primefaces.component</component-family>
+            <renderer-type>org.primefaces.component.UltimaMenuRenderer
+            </renderer-type>
+            <renderer-class>cu.edu.mes.sigenu.training.web.ultima.component.UltimaMenuRenderer
+            </renderer-class>
+        </renderer>
+    </render-kit>
 
-	<factory>
-		<exception-handler-factory>cu.edu.mes.sigenu.training.web.config.exception.CustomExceptionHandlerFactory
-		</exception-handler-factory>
-	</factory>
+    <factory>
+        <exception-handler-factory>cu.edu.mes.sigenu.training.web.config.exception.CustomExceptionHandlerFactory
+        </exception-handler-factory>
+    </factory>
 
-	<application>
-		<action-listener>org.primefaces.application.DialogActionListener
-		</action-listener>
-		<navigation-handler>org.primefaces.application.DialogNavigationHandler
-		</navigation-handler>
-		<view-handler>org.primefaces.application.DialogViewHandler
-		</view-handler>
-		<locale-config>
-			<default-locale>es</default-locale>
-		</locale-config>
-		<el-resolver>org.primefaces.application.exceptionhandler.PrimeExceptionHandlerELResolver
-		</el-resolver>
-		<!-- <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver> -->
-		<resource-bundle>
-			<base-name>i18n.messages</base-name>
-			<var>msgs</var>
-		</resource-bundle>
+    <application>
+        <action-listener>org.primefaces.application.DialogActionListener
+        </action-listener>
+        <navigation-handler>org.primefaces.application.DialogNavigationHandler
+        </navigation-handler>
+        <view-handler>org.primefaces.application.DialogViewHandler
+        </view-handler>
+        <locale-config>
+            <default-locale>es</default-locale>
+        </locale-config>
+        <el-resolver>org.primefaces.application.exceptionhandler.PrimeExceptionHandlerELResolver
+        </el-resolver>
+        <!-- <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver> -->
+        <resource-bundle>
+            <base-name>i18n.messages</base-name>
+            <var>msgs</var>
+        </resource-bundle>
 
-		<navigation-handler>cu.edu.mes.sigenu.training.web.config.spa.TabNavigationHandler
-		</navigation-handler>
-	</application>
+        <navigation-handler>cu.edu.mes.sigenu.training.web.config.spa.TabNavigationHandler
+        </navigation-handler>
+    </application>
 
-	<!-- DynTabTracker, manager, etc... -->
-	<managed-bean>
-		<managed-bean-name>dynTabTracker</managed-bean-name>
-		<managed-bean-class>cu.edu.mes.sigenu.training.web.config.spa.DynTabTracker</managed-bean-class>
-		<managed-bean-scope>view</managed-bean-scope>
-		<managed-property>
-			<property-name>maxNumberOfTabs</property-name>
-			<property-class>java.lang.Integer</property-class>
-			<value>10</value>
-		</managed-property>
-		<managed-property>
-			<property-name>initialTabs</property-name>
-			<property-class>java.util.List</property-class>
-			<list-entries>
-				<value-class>cu.edu.mes.sigenu.training.web.config.spa.DynTab</value-class>
-				<value>#{HomeDynTab}</value>
-			</list-entries>
-		</managed-property>
-	</managed-bean>
+    <!-- DynTabTracker, manager, etc... -->
+    <managed-bean>
+        <managed-bean-name>dynTabTracker</managed-bean-name>
+        <managed-bean-class>cu.edu.mes.sigenu.training.web.config.spa.DynTabTracker</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+        <managed-property>
+            <property-name>maxNumberOfTabs</property-name>
+            <property-class>java.lang.Integer</property-class>
+            <value>10</value>
+        </managed-property>
+        <managed-property>
+            <property-name>initialTabs</property-name>
+            <property-class>java.util.List</property-class>
+            <list-entries>
+                <value-class>cu.edu.mes.sigenu.training.web.config.spa.DynTab</value-class>
+                <value>#{HomeDynTab}</value>
+            </list-entries>
+        </managed-property>
+    </managed-bean>
 
-	<managed-bean>
-		<managed-bean-name>dynTabManager</managed-bean-name>
-		<managed-bean-class>cu.edu.mes.sigenu.training.web.config.spa.DynTabManager</managed-bean-class>
-		<managed-bean-scope>view</managed-bean-scope>
-		<managed-property>
-			<property-name>tabTracker</property-name>
-			<property-class>cu.edu.mes.sigenu.training.web.config.spa.DynTabTracker
-			</property-class>
-			<value>#{dynTabTracker}</value>
-		</managed-property>
-		<managed-property>
-			<property-name>initialTabs</property-name>
-			<property-class>java.util.List</property-class>
-			<list-entries>
-				<value-class>cu.edu.mes.sigenu.training.web.config.spa.DynTab</value-class>
-				<value>#{HomeDynTab}</value>
-			</list-entries>
-		</managed-property>
-	</managed-bean>
+    <managed-bean>
+        <managed-bean-name>dynTabManager</managed-bean-name>
+        <managed-bean-class>cu.edu.mes.sigenu.training.web.config.spa.DynTabManager</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+        <managed-property>
+            <property-name>tabTracker</property-name>
+            <property-class>cu.edu.mes.sigenu.training.web.config.spa.DynTabTracker
+            </property-class>
+            <value>#{dynTabTracker}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>initialTabs</property-name>
+            <property-class>java.util.List</property-class>
+            <list-entries>
+                <value-class>cu.edu.mes.sigenu.training.web.config.spa.DynTab</value-class>
+                <value>#{HomeDynTab}</value>
+            </list-entries>
+        </managed-property>
+    </managed-bean>
 
-	<!-- DynTab instances -->
-	<managed-bean>
-		<managed-bean-name>HomeDynTab</managed-bean-name>
-		<managed-bean-class>cu.edu.mes.sigenu.training.web.config.spa.DynTab</managed-bean-class>
-		<managed-bean-scope>view</managed-bean-scope>
-		<managed-property>
-			<property-name>uniqueIdentifier</property-name>
-			<value>Home</value>
-		</managed-property>
-		<managed-property>
-			<property-name>title</property-name>
-			<value>#{msgs.presentation}</value>
-		</managed-property>
-		<managed-property>
-			<property-name>includePage</property-name>
-			<value>/pages/welcome/welcome.xhtml</value>
-		</managed-property>
-		<managed-property>
-			<property-name>closeable</property-name>
-			<value>false</value>
-		</managed-property>
-	</managed-bean>
+    <!-- DynTab instances -->
+    <managed-bean>
+        <managed-bean-name>HomeDynTab</managed-bean-name>
+        <managed-bean-class>cu.edu.mes.sigenu.training.web.config.spa.DynTab</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+        <managed-property>
+            <property-name>uniqueIdentifier</property-name>
+            <value>Home</value>
+        </managed-property>
+        <managed-property>
+            <property-name>title</property-name>
+            <value>#{msgs.presentation}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>includePage</property-name>
+            <value>/pages/welcome/welcome.xhtml</value>
+        </managed-property>
+        <managed-property>
+            <property-name>closeable</property-name>
+            <value>false</value>
+        </managed-property>
+    </managed-bean>
 
-	<!-- <managed-bean>
-		<managed-bean-name>StudentListDynTab</managed-bean-name>
-		<managed-bean-class>cu.edu.mes.sigenu.web.config.spa.DynTab
-		</managed-bean-class>
-		<managed-bean-scope>request</managed-bean-scope>
-		<managed-property>
-			<property-name>uniqueIdentifier</property-name>
-			<value>StudentList</value>
-		</managed-property>
-		<managed-property>
-			<property-name>title</property-name>
-			<value>Buscar/Listar estudiantes</value>
-		</managed-property>
-		<managed-property>
-			<property-name>includePage</property-name>
-			<value>/pages/secretary/student/list/listStudent.xhtml</value>
-		</managed-property>
-		<managed-property>
-			<property-name>closeable</property-name>
-			<value>true</value>
-		</managed-property>
+    <managed-bean>
+        <managed-bean-name>listQuestionnaireBeanDynTab</managed-bean-name>
+        <managed-bean-class>cu.edu.mes.sigenu.training.web.config.spa.DynTab</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+        <managed-property>
+            <property-name>uniqueIdentifier</property-name>
+            <value>listQuestionnaireBean</value>
+        </managed-property>
+        <managed-property>
+            <property-name>title</property-name>
+            <value>#{msgs.menu_questionnaire}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>includePage</property-name>
+            <value>/pages/questionnaire/makeQuestionnaire/listQuestionnaire.xhtml</value>
+        </managed-property>
+        <managed-property>
+            <property-name>closeable</property-name>
+            <value>true</value>
+        </managed-property>
+    </managed-bean>
 
-	</managed-bean> -->
+    <managed-bean>
+        <managed-bean-name>makeQuestionnaireBeanDynTab</managed-bean-name>
+        <managed-bean-class>cu.edu.mes.sigenu.training.web.config.spa.DynTab</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+        <managed-property>
+            <property-name>uniqueIdentifier</property-name>
+            <value>makeQuestionnaireBean</value>
+        </managed-property>
+        <managed-property>
+            <property-name>title</property-name>
+            <value>#{msgs.make_questionnaire}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>includePage</property-name>
+            <value>/pages/questionnaire/makeQuestionnaire/makeQuestionnaire.xhtml</value>
+        </managed-property>
+        <managed-property>
+            <property-name>closeable</property-name>
+            <value>true</value>
+        </managed-property>
+    </managed-bean>
+
+
+
+    <!-- <managed-bean>
+        <managed-bean-name>StudentListDynTab</managed-bean-name>
+        <managed-bean-class>cu.edu.mes.sigenu.web.config.spa.DynTab
+        </managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        <managed-property>
+            <property-name>uniqueIdentifier</property-name>
+            <value>StudentList</value>
+        </managed-property>
+        <managed-property>
+            <property-name>title</property-name>
+            <value>Buscar/Listar estudiantes</value>
+        </managed-property>
+        <managed-property>
+            <property-name>includePage</property-name>
+            <value>/pages/secretary/student/list/listStudent.xhtml</value>
+        </managed-property>
+        <managed-property>
+            <property-name>closeable</property-name>
+            <value>true</value>
+        </managed-property>
+
+    </managed-bean> -->
 
 </faces-config>
