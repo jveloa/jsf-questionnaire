@@ -9,8 +9,8 @@ import java.util.List;
 
 @Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class QuestionnaireQuestionByGroupDto {
     private GroupQuestionDto groupQuestionDto;
     private List<QuestionnaireQuestionDto> questionnaireQuestionDto;
