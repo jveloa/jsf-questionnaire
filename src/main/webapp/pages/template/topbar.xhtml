@@ -1,76 +1,42 @@
-<ui:composition 
+<ui:composition
     xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:p="http://primefaces.org/ui"
-    xmlns:pu="http://primefaces.org/ultima">
-
+>
+    
     <h:form id="topbarForm">
+        
         <div class="topbar clearfix">
+            
             <div class="topbar-left">
-                <a href="${facesContext.externalContext.requestContextPath}/workspace">           
-	               <i class="topbar-icon pi pi-check-circle" style="color:#ffffff;font-size:45px;margin-top:-5px;float:left;"></i>
-	               <span style="color:#fff;font-size:35px; postion:absolute;float:left;margin-left:5px;margin-top:-10px">SIGENU</span><br/>
-	               <span style="color:#fff;postion:absolute;float:left;margin-left:8px;margin-top:-8px">Módulo Encuesta</span>
-	              </a> 
-        </div>
-
+                <a href="${facesContext.externalContext.requestContextPath}/workspace">
+                    <i class="topbar-icon pi pi-check-circle"
+                       style="color:#ffffff;font-size:45px;margin-top:-5px;float:left;"></i>
+                    <span
+                        style="color:#fff;font-size:35px; postion:absolute;float:left;margin-left:5px;margin-top:-10px">SIGENU</span><br/>
+                    <span
+                        style="color:#fff;postion:absolute;float:left;margin-left:8px;margin-top:-8px">Módulo Encuesta</span>
+                </a>
+            </div>
+            
             <div class="topbar-right">
                 <a id="menu-button" href="#">
                     <i class="pi pi-angle-left"></i>
                 </a>
-
-               <!--  <a id="rightpanel-menu-button" href="#">
-                    <i class="pi pi-ellipsis-v"></i>
-                </a> -->
-
+                
                 <a id="topbar-menu-button" href="#">
                     <i class="pi pi-bars"></i>
                 </a>
-
+                
                 <ul class="topbar-items animated fadeInDown">
-                    <!-- <ui:fragment id="topbarProfile" rendered="#{guestPreferences.profileMode == 'overlay'|| guestPreferences.menuLayoutClass == 'menu-layout-static menu-layout-horizontal'}">
-                        <li class="profile-item">
-                            <a href="#">
-                                <h:graphicImage name="images/avatar.png" library="ultima-layout" styleClass="profile-image"/>
-                                <span class="topbar-item-name">Jane Williams</span>
-                            </a>
-
-                            <ul class="ultima-menu animated fadeInDown">
-                                <li role="menuitem">
-                                    <a href="#">
-                                        <i class="pi pi-user"></i>
-                                        <span>Profile</span>
-                                    </a>
-                                </li>
-                                <li role="menuitem">
-                                    <a href="#">
-                                        <i class="pi pi-lock"></i>
-                                        <span>Privacy</span>
-                                    </a>
-                                </li>
-                                <li role="menuitem">
-                                    <a href="#">
-                                        <i class="pi pi-cog"></i>
-                                        <span>Settings</span>
-                                    </a>
-                                </li>
-                                <li role="menuitem">
-                                    <a href="#">
-                                        <i class="pi pi-power-off"></i>
-                                        <span>Logout</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ui:fragment> -->
-
                     <li>
+                        
                         <a href="#">
                             <i class="topbar-icon pi pi-cog"></i>
                             <span class="topbar-item-name">Configuraciones</span>
                         </a>
+                        
                         <ul class="ultima-menu animated fadeInDown">
                             <li role="menuitem">
                                 <a href="#">
@@ -84,20 +50,9 @@
                                     <span>Cambiar contraseña</span>
                                 </a>
                             </li>
-                            <!-- <li role="menuitem">
-                                <a href="#">
-                                    <i class="pi pi-lock"></i>
-                                    <span>Lock Screen</span>
-                                </a>
-                            </li>
-                            <li role="menuitem">
-                                <a href="#">
-                                    <i class="pi pi-image"></i>
-                                    <span>Wallpaper</span>
-                                </a>
-                            </li> -->
                         </ul>
                     </li>
+                    
                     <li>
                         <a href="#">
                             <i class="topbar-icon pi pi-envelope animated swing"/>
@@ -111,32 +66,9 @@
                                     <span>En construcción...</span>
                                 </a>
                             </li>
-                            <!-- <li role="menuitem">
-                                <a href="#" class="topbar-message">
-                                    <p:graphicImage name="images/avatar2.png" library="ultima-layout" width="35"/>
-                                    <span>Sales reports attached</span>
-                                </a>
-                            </li>
-                            <li role="menuitem">
-                                <a href="#" class="topbar-message">
-                                    <p:graphicImage name="images/avatar3.png" library="ultima-layout" width="35"/>
-                                    <span>About your invoice</span>
-                                </a>
-                            </li>
-                            <li role="menuitem">
-                                <a href="#" class="topbar-message">
-                                    <p:graphicImage name="images/avatar2.png" library="ultima-layout" width="35"/>
-                                    <span>Meeting today at 10pm</span>
-                                </a>
-                            </li>
-                            <li role="menuitem">
-                                <a href="#" class="topbar-message">
-                                    <p:graphicImage name="images/avatar4.png" library="ultima-layout" width="35"/>
-                                    <span>Out of office</span>
-                                </a>
-                            </li> -->
                         </ul>
                     </li>
+                    
                     <li>
                         <a href="#">
                             <i class="topbar-icon pi pi-bell"></i>
@@ -150,32 +82,10 @@
                                     <span>En construcción...</span>
                                 </a>
                             </li>
-                            <!-- <li role="menuitem">
-                                <a href="#">
-                                    <i class="pi pi-calendar"></i>
-                                    <span>Meeting today at 3pm</span>
-                                </a>
-                            </li>
-                            <li role="menuitem">
-                                <a href="#">
-                                    <i class="pi pi-download"></i>
-                                    <span>Download documents</span>
-                                </a>
-                            </li>
-                            <li role="menuitem">
-                                <a href="#">
-                                    <i class="pi pi-ticket"></i>
-                                    <span>Book flight</span>
-                                </a>
-                            </li> -->
+                        
                         </ul>
                     </li>
-                    <li class="search-item">
-                    <span class="ui-input-icon-left">
-                        <i class="topbar-icon pi pi-search"></i>
-                        <p:inputText placeholder="Buscar por ci"/>
-                    </span>
-                    </li>
+                
                 </ul>
             </div>
         </div>

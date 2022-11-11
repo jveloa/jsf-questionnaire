@@ -33,14 +33,8 @@ public class UrlRewriteConfigurationProvider extends HttpConfigurationProvider{
 				.addRule(Join.path("/error-not-found").to("/pages/error/notFound.xhtml"))
 				//access denied page
 				.addRule(Join.path("/error-access-denied").to("/pages/error/accessDenied.xhtml"))
-				
-				
 
-				
-				
-				
 				;
-				
 				
 				
 				
