@@ -106,12 +106,8 @@ public class MakeQuestionnaireBean implements Serializable {
     }
 
     boolean checkStudentAlreadyTookQuestionnaire(String sigenuId,Integer questionnarieId){
-        List<QuestionnaireStudentDto> questionnaireStudentDtos = questionnaireStudentService.questionnaireByStudent(sigenuId);
-        for (QuestionnaireStudentDto items:questionnaireStudentDtos){
-            if (items.getQuestionnarieId().getId().equals(questionnarieId)){
-                return true;
-            }
-        }
-        return false;
+    	
+    	return questionnaireStudentService.questionnaireByStudent(sigenuId)
+    				.stream().anyMatch(item -> item.getQuestionnarieId().getId().equals(questionnarieId));
     }
 }
