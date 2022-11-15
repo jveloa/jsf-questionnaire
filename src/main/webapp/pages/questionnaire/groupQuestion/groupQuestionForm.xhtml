@@ -38,7 +38,7 @@
         <f:facet name="footer">
             <p:commandButton value="Salvar" icon="pi pi-check"
                              actionListener="#{groupQuestionBean.save}"
-                             process="manageGroupQuestion"
+                             process="manageGroupQuestion, @this"
                              update="dt-Group"/>
             <p:commandButton value="Cancelar" icon="pi pi-times"
                              onclick="PF('groupQuestion').hide()" class="ui-button-secondary"/>
