@@ -1,0 +1,72 @@
+<ui:composition xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:sec="http://www.springframework.org/security/tags"
+>
+    <p:panelGrid columns="1" layout="grid" id="principal">
+        
+        <p:outputPanel class="card" id="main">
+            
+            <p:toolbar styleClass="card">
+                <p:toolbarGroup>
+                    <p:commandButton value="Nuevo grupo de preguntas" icon="pi pi-plus"
+                                     actionListener="#{groupQuestionBean.openNew}"
+                                     update="manageGroupQuestion"
+                                     oncomplete="PF('groupQuestion').show()"
+                                     styleClass="ui-button-success"
+                                     style="margin-right: .5rem"
+                                     process="manageGroupQuestion @this">
+                        <p:resetInput target="manageGroupQuestion"/>
+                    </p:commandButton>
+                </p:toolbarGroup>
+            </p:toolbar>
+            
+            <p:dataTable id="dt-Group" widgetVar="dtGroup" var="group" reflow="true" paginator="true"
+                         value="#{groupQuestionBean.groupQuestionDtos}" rows="10" paginatorPosition="bottom"
+                         styleClass="products-table">
+    
+                <p:column headerText="Id" sortBy="#{group.id}" >
+                    <h:outputText value="#{group.id}"/>
+                </p:column>
+                
+                <p:column headerText="Nombre" sortBy="#{group.nameGroup}" filterBy="#{group.nameGroup}">
+                    <h:outputText value="#{group.nameGroup}"/>
+                </p:column>
+                
+                <p:column headerText="Descripción" sortBy="#{group.description}">
+                    <h:outputText value="#{group.description}"/>
+                </p:column>
+                
+                <p:column headerText="Acciones">
+                    <p:outputPanel style="margin: 5px">
+                         <p:commandButton icon="pi pi-pencil"
+                                          update="@obs(event1)"
+                                          action="#{groupQuestionBean.openEdit}"
+                                          oncomplete="PF('groupQuestion').show()"
+                                          styleClass="edit-button rounded-button ui-button-success"
+                                          style="margin-right: 5px"
+                                          process="@this"
+                         >
+                             <f:setPropertyActionListener value="#{group}"
+                                                          target="#{groupQuestionBean.seletedGroupQuestion}"/>
+                         </p:commandButton>
+                        <p:commandButton id="delete" type="button" icon="pi pi pi-trash"
+                                         styleClass="ui-button-warning rounded-button"/>
+                    </p:outputPanel>
+                </p:column>
+            
+            </p:dataTable>
+            <ui:include src="groupQuestionForm.xhtml"></ui:include>
+    
+            <p:confirmDialog global="true" showEffect="fade" width="300">
+                <p:commandButton value="Si" type="button"
+                                 styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
+                <p:commandButton value="No" type="button"
+                                 styleClass="ui-confirmdialog-no ui-button-secondary"
+                                 icon="pi pi-times"/>
+            </p:confirmDialog>
+        </p:outputPanel>
+    </p:panelGrid>
+
+</ui:composition>

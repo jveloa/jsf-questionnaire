@@ -1,0 +1,47 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    
+    <p:dialog header="Grupo de pregunta" showEffect="fade" modal="true"
+              widgetVar="groupQuestion" responsive="true">
+        <p:outputPanel id="manageGroupQuestion" class="ui-fluid">
+            <p:autoUpdate on="event1"/>
+            <p:outputPanel >
+                <p:panelGrid layout="grid" columns="1">
+                    <h:panelGroup>
+    
+                        <p:outputPanel class="p-field" rendered="#{groupQuestionBean.seletedGroupQuestion.id != null}">
+                            <p:outputLabel for="@next">Id</p:outputLabel>
+                            <p:inputText id="Id" required="false" disabled="#{groupQuestionBean.seletedGroupQuestion.id != null}"
+                                         value="#{groupQuestionBean.seletedGroupQuestion.id}"/>
+                        </p:outputPanel>
+                        
+                        <p:outputPanel class="p-field">
+                            <p:outputLabel for="@next">Nombre del Grupo</p:outputLabel>
+                            <p:inputText id="nameGroup" required="true"
+                                         value="#{groupQuestionBean.seletedGroupQuestion.nameGroup}"/>
+                        </p:outputPanel>
+                        
+                        <p:outputPanel class="p-field">
+                            <p:outputLabel for="@next">Descripción</p:outputLabel>
+                            <p:inputText id="description" required="false"
+                                         value="#{groupQuestionBean.seletedGroupQuestion.description}"/>
+                        </p:outputPanel>
+                        
+                    </h:panelGroup>
+                </p:panelGrid>
+            </p:outputPanel>
+        </p:outputPanel>
+        
+        <f:facet name="footer">
+            <p:commandButton value="Salvar" icon="pi pi-check"
+                             actionListener="#{groupQuestionBean.save}"
+                             process="manageGroupQuestion"
+                             update="dt-Group"/>
+            <p:commandButton value="Cancelar" icon="pi pi-times"
+                             onclick="PF('groupQuestion').hide()" class="ui-button-secondary"/>
+        </f:facet>
+    </p:dialog>
+</ui:composition>
