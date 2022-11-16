@@ -6,74 +6,80 @@ import cu.edu.mes.sigenu.training.web.service.questionnaire.GroupQuestionService
 import cu.edu.mes.sigenu.training.web.utils.JsfUtils;
 import org.primefaces.PrimeFaces;
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Named
 @ViewScoped
-public class GroupQuestionBean {
+public class GroupQuestionBean implements Serializable{
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Inject
-    private GroupQuestionService groupQuestionService;
+	@Inject
+	private GroupQuestionService groupQuestionService;
 
-    List<GroupQuestionDto> groupQuestionDtos = new ArrayList<>();
+	private List<GroupQuestionDto> groupQuestionDtos;
 
-    GroupQuestionDto seletedGroupQuestion = new GroupQuestionDto();
+	private GroupQuestionDto seletedGroupQuestion;
 
+	public void openNew(){
+		this.seletedGroupQuestion = new GroupQuestionDto();
+	}
 
-    public List<GroupQuestionDto> getGroupQuestionDtos() {
-        return groupQuestionService.getAll();
-    }
+	public void openEdit(){
 
-    public void setGroupQuestionDtos(List<GroupQuestionDto> groupQuestionDtos) {
-        this.groupQuestionDtos = groupQuestionDtos;
-    }
+	}
 
-    public GroupQuestionDto getSeletedGroupQuestion() {
-        return seletedGroupQuestion;
-    }
+	@PostConstruct
+	public void init(){
 
-    public void setSeletedGroupQuestion(GroupQuestionDto seletedGroupQuestion) {
-        this.seletedGroupQuestion = seletedGroupQuestion;
-    }
+	}
 
-    public void openNew(){
-        this.seletedGroupQuestion = new GroupQuestionDto();
-    }
+	public void save(){
+		if(this.seletedGroupQuestion.getId() == null){
+			groupQuestionService.save(seletedGroupQuestion);
+			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_added");
+		}else{
+			groupQuestionService.update(seletedGroupQuestion);
+			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_edited");
+		}
+		groupQuestionDtos = groupQuestionService.getAll();
+		PrimeFaces.current().executeScript("PF('groupQuestion').hide()");
+		PrimeFaces.current().ajax().update("dt-Group");
+	}
 
-    public void openEdit(){
+	public void delete(){
 
-    }
+	}
 
-    @PostConstruct
-    public void init(){
+	public GroupQuestionService getGroupQuestionService() {
+		return groupQuestionService;
+	}
 
-    }
+	public void setGroupQuestionService(GroupQuestionService groupQuestionService) {
+		this.groupQuestionService = groupQuestionService;
+	}
 
-    public void save(){
-        if(this.seletedGroupQuestion.getId() == null){
-            groupQuestionService.save(seletedGroupQuestion);
-            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_added");
-        }else{
-            groupQuestionService.update(seletedGroupQuestion);
-            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_edited");
-        }
-        groupQuestionDtos = groupQuestionService.getAll();
-        PrimeFaces.current().executeScript("PF('groupQuestion').hide()");
-        PrimeFaces.current().ajax().update("dt-Group");
-    }
+	public List<GroupQuestionDto> getGroupQuestionDtos() {
+		return groupQuestionService.getAll();
+	}
 
-    public void delete(){
+	public void setGroupQuestionDtos(List<GroupQuestionDto> groupQuestionDtos) {
+		this.groupQuestionDtos = groupQuestionDtos;
+	}
 
-    }
+	public GroupQuestionDto getSeletedGroupQuestion() {
+		return seletedGroupQuestion;
+	}
 
-
+	public void setSeletedGroupQuestion(GroupQuestionDto seletedGroupQuestion) {
+		this.seletedGroupQuestion = seletedGroupQuestion;
+	}
 
 }
