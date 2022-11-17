@@ -40,19 +40,25 @@
                 
                 <p:column headerText="Acciones">
                     <p:outputPanel style="margin: 5px">
-                         <p:commandButton icon="pi pi-pencil"
-                                          update="@obs(event1)"
-                                          action="#{groupQuestionBean.openEdit}"
-                                          oncomplete="PF('groupQuestion').show()"
-                                          styleClass="edit-button rounded-button ui-button-success"
-                                          style="margin-right: 5px"
-                                          process="@this"
-                         >
+                        <p:commandButton icon="pi pi-pencil"
+                                         update="@obs(event1)"
+                                         oncomplete="PF('groupQuestion').show()"
+                                         styleClass="edit-button rounded-button ui-button-success"
+                                         style="margin-right: 5px"
+                                         process="@this">
                              <f:setPropertyActionListener value="#{group}"
                                                           target="#{groupQuestionBean.seletedGroupQuestion}"/>
-                         </p:commandButton>
-                        <p:commandButton id="delete" type="button" icon="pi pi pi-trash"
-                                         styleClass="ui-button-warning rounded-button"/>
+                        </p:commandButton>
+                        <p:commandButton id="delete" icon="pi pi pi-trash"
+                                         styleClass="ui-button-warning rounded-button"
+                                         action="#{groupQuestionBean.delete}"
+                                         update="dt-Group"
+                                         process="@this">
+                            <f:setPropertyActionListener value="#{group}"
+                                                         target="#{groupQuestionBean.seletedGroupQuestion}"/>
+                            <p:confirm header="Confirmar" message="Está seguro de eliminar al usuario?"
+                                       icon="pi pi-exclamation-triangle"/>
+                        </p:commandButton>
                     </p:outputPanel>
                 </p:column>
             

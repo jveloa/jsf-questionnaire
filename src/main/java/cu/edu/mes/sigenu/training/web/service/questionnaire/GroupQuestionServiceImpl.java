@@ -36,7 +36,7 @@ public class GroupQuestionServiceImpl implements GroupQuestionService {
         }catch (Exception e){
             e.printStackTrace();
         }
-        return groupQuestions;
+         return groupQuestions;
     }
 
     @Override
@@ -83,7 +83,7 @@ public class GroupQuestionServiceImpl implements GroupQuestionService {
             ApiRestMapper<ApiResponse> apiRestMapper = new ApiRestMapper<>();
 
             UriTemplate template = new UriTemplate("/api/v1/training/group-question");
-            String response = (String) restService.PATCH(template.toString(),params,groupQuestionDto,String.class,
+            String response = (String) restService.PUT(template.toString(),params,groupQuestionDto,String.class,
                                                          CurrentUserUtils.getTokenBearer()).getBody();
 
             apiResponse = apiRestMapper.mapOne(response,ApiResponse.class);
@@ -104,6 +104,7 @@ public class GroupQuestionServiceImpl implements GroupQuestionService {
             String uri = template.expand(id).toString();
 
             String response = (String) restService.DELETE(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+            apiResponse = apiRestMapper.mapOne(response,ApiResponse.class);
         }catch (Exception e){
             e.printStackTrace();
         }

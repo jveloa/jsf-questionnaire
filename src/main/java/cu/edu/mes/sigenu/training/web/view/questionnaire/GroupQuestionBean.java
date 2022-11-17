@@ -3,6 +3,7 @@ package cu.edu.mes.sigenu.training.web.view.questionnaire;
 
 import cu.edu.mes.sigenu.training.web.dto.questionnaire.GroupQuestionDto;
 import cu.edu.mes.sigenu.training.web.service.questionnaire.GroupQuestionService;
+import cu.edu.mes.sigenu.training.web.utils.ApiResponse;
 import cu.edu.mes.sigenu.training.web.utils.JsfUtils;
 import org.primefaces.PrimeFaces;
 import javax.annotation.PostConstruct;
@@ -30,15 +31,13 @@ public class GroupQuestionBean implements Serializable{
 
 	public void openNew(){
 		this.seletedGroupQuestion = new GroupQuestionDto();
-	}
-
-	public void openEdit(){
-
+		seletedGroupQuestion.setDescription("");
+		seletedGroupQuestion.setNameGroup("");
 	}
 
 	@PostConstruct
 	public void init(){
-
+        openNew();
 	}
 
 	public void save(){
@@ -51,10 +50,16 @@ public class GroupQuestionBean implements Serializable{
 		}
 		groupQuestionDtos = groupQuestionService.getAll();
 		PrimeFaces.current().executeScript("PF('groupQuestion').hide()");
-		PrimeFaces.current().ajax().update("dt-Group");
 	}
 
 	public void delete(){
+         ApiResponse response = groupQuestionService.delete(this.seletedGroupQuestion.getId());
+         if(response.isSuccess()){
+             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_deleted");
+             groupQuestionDtos = groupQuestionService.getAll();
+         }else{
+             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_not_deleted");
+         }
 
 	}
 
