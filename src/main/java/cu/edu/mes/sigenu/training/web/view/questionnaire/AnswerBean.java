@@ -38,6 +38,11 @@ public class AnswerBean implements Serializable {
     }
 
     public void save(){
+        if (!(selectedAnswer.getAnswer().length() > 2)){
+            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_WARN, "message_answer_invalid");
+            return;
+        }
+
         if(this.selectedAnswer.getId() == null){
             answerService.save(selectedAnswer);
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_added");
@@ -55,7 +60,7 @@ public class AnswerBean implements Serializable {
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_deleted");
             answerDtos = answerService.getAll();
         }else{
-            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_not_deleted");
+            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_WARN, "message_not_deleted");
         }
 
     }

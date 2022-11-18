@@ -39,6 +39,11 @@ public class GroupQuestionBean implements Serializable{
 	}
 
 	public void save(){
+	    if (!(seletedGroupQuestion.getNameGroup().length() > 2)){
+            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_WARN, "message_group_invalid");
+            return;
+        }
+
 		if(this.seletedGroupQuestion.getId() == null){
 			groupQuestionService.save(seletedGroupQuestion);
 			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_added");
@@ -56,7 +61,7 @@ public class GroupQuestionBean implements Serializable{
              JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_deleted");
              groupQuestionDtos = groupQuestionService.getAll();
          }else{
-             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_not_deleted");
+             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_WARN, "message_not_deleted");
          }
 
 	}
