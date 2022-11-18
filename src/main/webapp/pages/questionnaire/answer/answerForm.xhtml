@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    
+    <p:dialog header="Respuesta" showEffect="fade" modal="true"
+              widgetVar="answer" responsive="true">
+        <p:outputPanel id="manageAnswer" class="ui-fluid">
+            <p:autoUpdate on="event1"/>
+            <p:outputPanel >
+                <p:panelGrid layout="grid" columns="1">
+                    <h:panelGroup>
+                        
+                        <p:outputPanel class="p-field" rendered="#{answerBean.selectedAnswer.id != null}">
+                            <p:outputLabel for="@next">Id</p:outputLabel>
+                            <p:inputText id="Id" required="false" disabled="#{answerBean.selectedAnswer.id != null}"
+                                         value="#{answerBean.selectedAnswer.id}"/>
+                        </p:outputPanel>
+                        
+                        <p:outputPanel class="p-field">
+                            <p:outputLabel for="@next">Pregunta</p:outputLabel>
+                            <p:inputText id="answer" required="true"
+                                         value="#{answerBean.selectedAnswer.answer}"/>
+                        </p:outputPanel>
+                        
+                    </h:panelGroup>
+                </p:panelGrid>
+            </p:outputPanel>
+        </p:outputPanel>
+        
+        <f:facet name="footer">
+            <p:commandButton value="Salvar" icon="pi pi-check"
+                             actionListener="#{answerBean.save}"
+                             process="manageAnswer, @this"
+                             update="dt-Answer"/>
+            <p:commandButton value="Cancelar" icon="pi pi-times"
+                             onclick="PF('answer').hide()" class="ui-button-secondary"/>
+        </f:facet>
+    </p:dialog>
+</ui:composition>
