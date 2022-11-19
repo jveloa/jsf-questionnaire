@@ -52,8 +52,11 @@
                 </p:submenu>
                 
                 <p:submenu label="#{msgs.menu_report}" icon="pi pi-file">
-                    <p:menuitem value="#{msgs.submenu_dropsReport}"
-                                url="/pages/secretary/student/docentControl/dropsReport.xhtml"/>
+                        <p:submenu label="#{msgs.submenu_ReportBoss}">
+                            <p:menuitem value="#{msgs.report_student_not_computer}"
+                                action="uishell:studentNotComputerReportBean"/>
+                        </p:submenu>
+
                 </p:submenu>
                 
                 <p:submenu label="#{msgs.menu_chart_report}" icon="pi pi-chart-bar">
