@@ -1,21 +1,14 @@
 package cu.edu.mes.sigenu.training.web.view.report;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import cu.edu.mes.sigenu.training.web.config.spa.DynTabManager;
 import cu.edu.mes.sigenu.training.web.dto.questionnaire.*;
 import cu.edu.mes.sigenu.training.web.dto.questionnaire.report.StudentNotComputerDto;
-import cu.edu.mes.sigenu.training.web.service.questionnaire.QuestionnaireQuestionService;
 import cu.edu.mes.sigenu.training.web.service.questionnaire.QuestionnaireService;
-import cu.edu.mes.sigenu.training.web.service.questionnaire.QuestionnaireStudentService;
-import cu.edu.mes.sigenu.training.web.service.questionnaire.StudentAnswerService;
 import cu.edu.mes.sigenu.training.web.service.report.StudentNotComputerReportService;
 import cu.edu.mes.sigenu.training.web.utils.JsfUtils;
 import lombok.Data;
-
-import javax.enterprise.context.SessionScoped;
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -25,7 +18,7 @@ import java.util.List;
 
 
 @Named
-@ViewScoped
+@RequestScoped
 @Data
 public class StudentNotComputerReportBean implements Serializable {
 
@@ -39,9 +32,14 @@ public class StudentNotComputerReportBean implements Serializable {
 
     private Integer year;
 
-    private List<StudentNotComputerDto> studentNotComputerList = new ArrayList<>();
+    private List<StudentNotComputerDto> studentNotComputerList;
 
-
+    @PostConstruct
+    public void init(){
+        studentNotComputerList = new ArrayList<>();
+        questionnarieId = 0;
+        year = 0;
+    }
 
     public List<QuestionnaireDto> getAllQuestionnaire() {
         return questionnaireService.getAllQuestionnaire();
