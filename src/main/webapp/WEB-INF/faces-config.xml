@@ -246,6 +246,28 @@
     </managed-bean>
 
 
+    <managed-bean>
+        <managed-bean-name>StudentsWitchNotesReportBeanDynTab</managed-bean-name>
+        <managed-bean-class>cu.edu.mes.sigenu.training.web.config.spa.DynTab</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+        <managed-property>
+            <property-name>uniqueIdentifier</property-name>
+            <value>StudentsWitchNotesReportBean</value>
+        </managed-property>
+        <managed-property>
+            <property-name>title</property-name>
+            <value>#{msgs.report_students_notes}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>includePage</property-name>
+            <value>/pages/questionnaire/report/studentsWitchNotesReport.xhtml</value>
+        </managed-property>
+        <managed-property>
+            <property-name>closeable</property-name>
+            <value>true</value>
+        </managed-property>
+    </managed-bean>
+
     <!-- <managed-bean>
         <managed-bean-name>StudentListDynTab</managed-bean-name>
         <managed-bean-class>cu.edu.mes.sigenu.web.config.spa.DynTab

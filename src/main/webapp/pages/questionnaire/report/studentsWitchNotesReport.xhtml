@@ -1,0 +1,107 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+
+>
+
+    <p:panelGrid id="panel"  columns="2" layout="flex">
+
+        <h:panelGroup styleClass="ui-float-label">
+            <p:spinner id="yearCld" value="#{studentsWitchNotesReportBean.year}"
+                       min="2018" max="2050" required="true" onkeydown="return false"
+                       thousandSeparator=""/>
+
+            <p:outputLabel for="@previous" value="#{msgs.year}"/>
+        </h:panelGroup>
+        <h:panelGroup styleClass="ui-float-label">
+
+            <p:selectOneMenu style="width:100%;" required="true" value="#{studentsWitchNotesReportBean.questionnarieId}">
+                <f:selectItem itemLabel="" noSelectionOption="true"/>
+                <f:selectItems value="#{studentsWitchNotesReportBean.allQuestionnaire}" var="questionnaire"
+                               itemLabel="#{questionnaire.name}" itemValue="#{questionnaire.id}"/>
+            </p:selectOneMenu>
+            <p:outputLabel for="@previous" value="#{msgs.completed_questionnaire}"/>
+        </h:panelGroup>
+        <span></span>
+
+
+
+    </p:panelGrid>
+    <p:panel >
+        <hr></hr>
+
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-6">
+                <span class="text-danger">#{msgs.message_info_values_required}</span>
+            </div>
+            <div class="ui-g-12 ui-md-6" style="display: flex;flex-direction: row-reverse">
+                <p:commandButton value="#{msgs.button_cancel}"
+                                 action="startPageStudentsWitchNotesReport"
+                                 styleClass="button-prime btn btn-flat btn-labeled btn-danger pull-right"
+                                 icon="pi pi-times"
+
+                />
+                <p:commandButton value="#{msgs.button_view_Report}"
+                                 action="#{studentsWitchNotesReportBean.updateList}"
+                                 styleClass="button-prime btn btn-flat btn-labeled btn-primary pull-right"
+                                 update="panel form"
+                                 process="panel @this"
+                                 icon="pi pi-file" style="margin-right:3px;"
+                />
+            </div>
+        </div>
+    </p:panel>
+
+    <div class="card">
+
+        <h:form id="form">
+
+            <div class="p-d-flex p-jc-between" >
+                <div>
+                    <h5>#{msgs.export}</h5>
+                    <p:commandButton value="XLS" styleClass="p-mr-2 p-mb-2" update="@this" process="@this">
+                        <p:dataExporter type="xls" target="tbl" fileName="#{msgs.report_students_notes}" encoding="ISO-8859-1"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="PDF" styleClass="p-mr-2 p-mb-2" update="@this" process="@this">
+                        <p:dataExporter type="pdf" target="tbl" fileName="#{msgs.report_students_notes}" encoding="ISO-8859-1"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="CSV" styleClass="p-mr-2 p-mb-2" update="@this" process="@this">
+                        <p:dataExporter type="csv" target="tbl" fileName="#{msgs.report_students_notes}" encoding="ISO-8859-1"/>
+                    </p:commandButton>
+
+                </div>
+
+            </div>
+
+
+            <p:dataTable id="tbl" var="studentsNotes" value="#{studentsWitchNotesReportBean.allStudentsWitchNotes}"
+                         reflow="true" paginator="true" rows="20" paginatorPosition="bottom" styleClass="products-table">
+
+                <p:column headerText="Nombre" sortBy="#{studentsNotes.name}" filterBy="#{studentsNotes.name}">
+                    <h:outputText value="#{studentsNotes.name} "/>
+                </p:column>
+                <p:column headerText="Índice Academico" sortBy="#{studentsNotes.noteAve}">
+                    <h:outputText style="vertical-align: middle; margin-left: .5rem"
+                                  value="#{studentsNotes.noteAve}"/>
+                </p:column>
+                <p:column headerText="Español" sortBy="#{studentsNotes.noteSpanish}">
+                    <h:outputText style="vertical-align: middle; margin-left: .5rem"
+                                  value="#{studentsNotes.noteSpanish}"/>
+                </p:column>
+                <p:column headerText="Matemática" sortBy="#{studentsNotes.noteMat}">
+                    <h:outputText style="vertical-align: middle; margin-left: .5rem"
+                                  value="#{studentsNotes.noteMat}"/>
+                </p:column>
+                <p:column headerText="Historia" sortBy="#{studentsNotes.noteHistory}">
+                    <h:outputText style="vertical-align: middle; margin-left: .5rem"
+                                  value="#{studentsNotes.noteHistory}"/>
+                </p:column>
+
+            </p:dataTable>
+        </h:form>
+    </div>
+</ui:composition>
