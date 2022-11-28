@@ -1,0 +1,109 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+
+>
+
+    <p:panelGrid id="panel"  columns="2" layout="flex">
+
+        <h:panelGroup styleClass="ui-float-label">
+            <p:spinner id="yearCld" value="#{percentsStudyFormsByAnswerReportBean.year}"
+                       min="2018" max="2050" required="true" onkeydown="return false"
+                       thousandSeparator=""/>
+
+            <p:outputLabel for="@previous" value="#{msgs.year}"/>
+        </h:panelGroup>
+        <h:panelGroup styleClass="ui-float-label">
+
+            <p:selectOneMenu style="width:100%;" required="true" value="#{percentsStudyFormsByAnswerReportBean.questionnarieId}">
+                <f:selectItem itemLabel="" noSelectionOption="true"/>
+                <f:selectItems value="#{percentsStudyFormsByAnswerReportBean.allQuestionnaire}" var="questionnaire"
+                               itemLabel="#{questionnaire.name}" itemValue="#{questionnaire.id}"/>
+            </p:selectOneMenu>
+            <p:outputLabel for="@previous" value="#{msgs.completed_questionnaire}"/>
+        </h:panelGroup>
+        <span></span>
+
+
+
+    </p:panelGrid>
+    <p:panel >
+        <hr></hr>
+
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-6">
+                <span class="text-danger">#{msgs.message_info_values_required}</span>
+            </div>
+            <div class="ui-g-12 ui-md-6" style="display: flex;flex-direction: row-reverse">
+                <p:commandButton value="#{msgs.button_cancel}"
+                                 action="startPagePercentsStudyFormsByAnswerReport"
+                                 styleClass="button-prime btn btn-flat btn-labeled btn-danger pull-right"
+                                 icon="pi pi-times"
+
+                />
+                <p:commandButton value="#{msgs.button_view_Report}"
+                                 action="#{percentsStudyFormsByAnswerReportBean.updateList}"
+                                 styleClass="button-prime btn btn-flat btn-labeled btn-primary pull-right"
+                                 update="panel form"
+                                 process="panel @this"
+                                 icon="pi pi-file" style="margin-right:3px;"
+                />
+            </div>
+        </div>
+    </p:panel>
+
+    <div class="card">
+
+        <h:form id="form">
+
+            <div class="p-d-flex p-jc-between" >
+                <div>
+                    <h5>#{msgs.export}</h5>
+                    <p:commandButton value="XLS" styleClass="p-mr-2 p-mb-2" update="@this" process="@this">
+                        <p:dataExporter type="xls" target="tbl" fileName="#{msgs.report_students_percentage_forms}" encoding="ISO-8859-1"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="PDF" styleClass="p-mr-2 p-mb-2" update="@this" process="@this">
+                        <p:dataExporter type="pdf" target="tbl" fileName="#{msgs.report_students_percentage_forms}" encoding="ISO-8859-1"/>
+                    </p:commandButton>
+
+                    <p:commandButton value="CSV" styleClass="p-mr-2 p-mb-2" update="@this" process="@this">
+                        <p:dataExporter type="csv" target="tbl" fileName="#{msgs.report_students_percentage_forms}" encoding="ISO-8859-1"/>
+                    </p:commandButton>
+
+                </div>
+
+            </div>
+
+
+            <p:dataTable id="tbl" var="porcentage" value="#{percentsStudyFormsByAnswerReportBean.allPercentsStudyFormsByAnswer}"
+                         sortMode="single"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                         paginator="true" rows="10" styleClass="p-mt-2">
+
+                <p:column headerText="Forma de estudio" sortBy="#{porcentage.nameQuestion}">
+                    <h:outputText value="#{porcentage.nameQuestion}"/>
+                </p:column>
+                <p:column headerText="Mucho(%)" sortBy="#{porcentage.percentMuch}">
+                    <h:outputText style="vertical-align: middle; margin-left: .5rem"
+                                  value="#{porcentage.percentMuch}"/>
+                </p:column>
+                <p:column headerText="Un poco(%)" sortBy="#{porcentage.percentLittle}">
+                    <h:outputText style="vertical-align: middle; margin-left: .5rem"
+                                  value="#{porcentage.percentLittle}"/>
+                </p:column>
+                <p:column headerText="Nunca(%)" sortBy="#{porcentage.percentNever}">
+                    <h:outputText style="vertical-align: middle; margin-left: .5rem"
+                                  value="#{porcentage.percentNever}"/>
+                </p:column>
+                <p:column headerText="No sé(%)" sortBy="#{porcentage.percentNot}">
+                    <h:outputText style="vertical-align: middle; margin-left: .5rem"
+                                  value="#{porcentage.percentNot}"/>
+                </p:column>
+
+            </p:dataTable>
+        </h:form>
+    </div>
+</ui:composition>
