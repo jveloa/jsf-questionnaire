@@ -1,7 +1,9 @@
 package cu.edu.mes.sigenu.training.web.service.questionnaire;
 
+import cu.edu.mes.sigenu.training.web.dto.questionnaire.GroupQuestionDto;
 import cu.edu.mes.sigenu.training.web.dto.questionnaire.QuestionnaireDto;
 import cu.edu.mes.sigenu.training.web.security.CurrentUserUtils;
+import cu.edu.mes.sigenu.training.web.utils.ApiResponse;
 import cu.edu.mes.sigenu.training.web.utils.ApiRestMapper;
 import cu.edu.mes.sigenu.training.web.utils.RestService;
 import cu.edu.mes.vo.CareerVO;
@@ -40,4 +42,60 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
         }
         return listQuestionnaire;
     }
+
+    @Override
+    public ApiResponse save(QuestionnaireDto questionnaireDto) {
+        ApiResponse apiResponse = null;
+        try {
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            ApiRestMapper<ApiResponse> apiRestMapper = new ApiRestMapper<>();
+
+            UriTemplate template = new UriTemplate("/api/v1/training/questionnaire");
+            String response = (String) restService.POST(template.toString(), questionnaireDto, String.class,
+                                                        CurrentUserUtils.getTokenBearer()).getBody();
+
+            apiResponse = apiRestMapper.mapOne(response,ApiResponse.class);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  apiResponse;
+    }
+
+    @Override
+    public ApiResponse update(QuestionnaireDto questionnaireDto) {
+        ApiResponse apiResponse = null;
+        try {
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            ApiRestMapper<ApiResponse> apiRestMapper = new ApiRestMapper<>();
+
+            UriTemplate template = new UriTemplate("/api/v1/training/questionnaire");
+            String response = (String) restService.PUT(template.toString(),params,questionnaireDto,String.class,
+                                                       CurrentUserUtils.getTokenBearer()).getBody();
+
+            apiResponse = apiRestMapper.mapOne(response,ApiResponse.class);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  apiResponse;
+    }
+
+    @Override
+    public ApiResponse delete(Integer id) {
+        ApiResponse apiResponse = null;
+        try {
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            ApiRestMapper<ApiResponse> apiRestMapper = new ApiRestMapper<>();
+            UriTemplate template = new UriTemplate("/api/v1/training/questionnaire/{id}");
+            String uri = template.expand(id).toString();
+
+            String response = (String) restService.DELETE(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+            apiResponse = apiRestMapper.mapOne(response,ApiResponse.class);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  apiResponse;
+    }
+
+
 }

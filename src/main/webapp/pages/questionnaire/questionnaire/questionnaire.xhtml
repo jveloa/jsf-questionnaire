@@ -1,0 +1,73 @@
+<ui:composition xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:sec="http://www.springframework.org/security/tags"
+>
+    <p:panelGrid columns="1" layout="grid" id="principal">
+        
+        <p:outputPanel class="card" id="main">
+            
+            <p:toolbar styleClass="card">
+                <p:toolbarGroup>
+                    <p:commandButton value="Nuevo cuestionario" icon="pi pi-plus"
+                                     actionListener="#{questionnaireBean.openNew}"
+                                     update="manageQuestionnaire"
+                                     oncomplete="PF('questionnaire').show()"
+                                     styleClass="ui-button-success"
+                                     style="margin-right: .5rem"
+                                     process="manageQuestionnaire @this">
+                        <p:resetInput target="manageQuestionnaire"/>
+                    </p:commandButton>
+                </p:toolbarGroup>
+            </p:toolbar>
+            
+            <p:dataTable id="dt-Questionnaire" widgetVar="dtQuestionnaire" var="questionnaire" reflow="true" paginator="true"
+                         value="#{questionnaireBean.questionnaireDtos}" rows="10" paginatorPosition="bottom"
+                         styleClass="products-table">
+                
+                <p:column headerText="Id" sortBy="#{questionnaire.id}" >
+                    <h:outputText value="#{questionnaire.id}"/>
+                </p:column>
+                
+                <p:column headerText="Nombre" sortBy="#{questionnaire.name}" filterBy="#{questionnaire.name}">
+                    <h:outputText value="#{questionnaire.name}"/>
+                </p:column>
+                
+                <p:column headerText="Acciones">
+                    <p:outputPanel style="margin: 5px">
+                        <p:commandButton icon="pi pi-pencil"
+                                         update="@obs(event1)"
+                                         oncomplete="PF('questionnaire').show()"
+                                         styleClass="edit-button rounded-button ui-button-success"
+                                         style="margin-right: 5px"
+                                         process="@this">
+                            <f:setPropertyActionListener value="#{questionnaire}"
+                                                         target="#{questionnaireBean.selectedQuestionnaire}"/>
+                        </p:commandButton>
+                        <p:commandButton id="delete" icon="pi pi pi-trash"
+                                         styleClass="ui-button-warning rounded-button"
+                                         action="#{questionnaireBean.delete}"
+                                         update="dt-Questionnaire"
+                                         process="@this">
+                            <f:setPropertyActionListener value="#{questionnaire}"
+                                                         target="#{questionnaireBean.selectedQuestionnaire}"/>
+                            <p:confirm header="Confirmar" message="Está seguro de eliminar el cuestionario?"
+                                       icon="pi pi-exclamation-triangle"/>
+                        </p:commandButton>
+                    </p:outputPanel>
+                </p:column>
+            
+            </p:dataTable>
+            <ui:include src="questionnaireForm.xhtml"></ui:include>
+            
+            <p:confirmDialog global="true" showEffect="fade" width="300">
+                <p:commandButton value="Si" type="button"
+                                 styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
+                <p:commandButton value="No" type="button"
+                                 styleClass="ui-confirmdialog-no ui-button-secondary"
+                                 icon="pi pi-times"/>
+            </p:confirmDialog>
+        </p:outputPanel>
+    </p:panelGrid>
+</ui:composition>
