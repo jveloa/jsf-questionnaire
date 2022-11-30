@@ -5,16 +5,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Map;
-
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class StudentsWithNotesDto {
+public class StudentsNotesDto {
     private String name;
-    private  Float  numberAve;
-    private  Float  numberMax;
-    private  Float  numberMin;
+    private  Float  noteAve;
+    private  Float  noteMat;
+    private  Float  noteHistory;
+    private  Float  noteSpanish;
 }

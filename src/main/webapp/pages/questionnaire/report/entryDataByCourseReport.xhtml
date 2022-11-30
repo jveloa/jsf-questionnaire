@@ -9,7 +9,7 @@
     <p:panelGrid id="panel"  columns="2" layout="flex">
 
         <h:panelGroup styleClass="ui-float-label">
-            <p:spinner id="yearCld" value="#{studentNotComputerReportBean.year}"
+            <p:spinner id="yearCld" value="#{entryDataByCourseReportBean.year}"
                        min="2018" max="2050" required="true" onkeydown="return false"
                        thousandSeparator=""/>
 
@@ -17,9 +17,9 @@
         </h:panelGroup>
         <h:panelGroup styleClass="ui-float-label">
 
-            <p:selectOneMenu style="width:100%;" required="true" value="#{studentNotComputerReportBean.questionnarieId}">
+            <p:selectOneMenu style="width:100%;" required="true" value="#{entryDataByCourseReportBean.questionnarieId}">
                 <f:selectItem itemLabel="" noSelectionOption="true"/>
-                <f:selectItems value="#{studentNotComputerReportBean.allQuestionnaire}" var="questionnaire"
+                <f:selectItems value="#{entryDataByCourseReportBean.allQuestionnaire}" var="questionnaire"
                                itemLabel="#{questionnaire.name}" itemValue="#{questionnaire.id}"/>
             </p:selectOneMenu>
             <p:outputLabel for="@previous" value="#{msgs.completed_questionnaire}"/>
@@ -29,7 +29,7 @@
 
 
     </p:panelGrid>
-    <p:panel>
+    <p:panel >
         <hr></hr>
 
         <div class="ui-g">
@@ -38,12 +38,13 @@
             </div>
             <div class="ui-g-12 ui-md-6" style="display: flex;flex-direction: row-reverse">
                 <p:commandButton value="#{msgs.button_cancel}"
+                                 action="startEntryDataByCourseReport"
                                  styleClass="button-prime btn btn-flat btn-labeled btn-danger pull-right"
                                  icon="pi pi-times"
-                                 onclick="document.location.href = document.location.href"
+
                 />
                 <p:commandButton value="#{msgs.button_view_Report}"
-                                 action="#{studentNotComputerReportBean.updateList}"
+                                 action="#{entryDataByCourseReportBean.updateList}"
                                  styleClass="button-prime btn btn-flat btn-labeled btn-primary pull-right"
                                  update="panel form"
                                  process="panel @this"
@@ -55,37 +56,47 @@
 
     <div class="card">
 
-        <h:form id="form" >
+        <h:form id="form">
+
             <div class="p-d-flex p-jc-between" >
                 <div>
                     <h5>#{msgs.export}</h5>
                     <p:commandButton value="XLS" styleClass="p-mr-2 p-mb-2" update="@this" process="@this">
-                        <p:dataExporter type="xls" target="tbl" fileName="#{msgs.report_student_not_computer}" encoding="ISO-8859-1"/>
+                        <p:dataExporter type="xls" target="tbl" fileName="#{msgs.report_notes_by_course}" encoding="ISO-8859-1"/>
                     </p:commandButton>
 
                     <p:commandButton value="PDF" styleClass="p-mr-2 p-mb-2" update="@this" process="@this">
-                        <p:dataExporter type="pdf" target="tbl" fileName="#{msgs.report_student_not_computer}" encoding="ISO-8859-1"/>
+                        <p:dataExporter type="pdf" target="tbl" fileName="#{msgs.report_notes_by_course}" encoding="ISO-8859-1"/>
                     </p:commandButton>
 
                     <p:commandButton value="CSV" styleClass="p-mr-2 p-mb-2" update="@this" process="@this">
-                        <p:dataExporter type="csv" target="tbl" fileName="#{msgs.report_student_not_computer}" encoding="ISO-8859-1"/>
+                        <p:dataExporter type="csv" target="tbl" fileName="#{msgs.report_notes_by_course}" encoding="ISO-8859-1"/>
                     </p:commandButton>
 
                 </div>
+
             </div>
 
-            <p:dataTable id="tbl" var="students" value="#{studentNotComputerReportBean.allStudentNotComputer}"
-                         sortMode="single"
-                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
-                         paginator="true" rows="10" styleClass="p-mt-2">
 
-                <p:column headerText="Nombre" sortBy="#{students.name}" filterBy="#{students.name}">
-                    <h:outputText value="#{students.name}"/>
+            <p:dataTable id="tbl" var="notes" value="#{entryDataByCourseReportBean.allEntryDataByCourse}"
+                         reflow="true" paginator="true" rows="20" paginatorPosition="bottom" styleClass="products-table">
+
+                <p:column headerText="Tipo" sortBy="#{notes.name}">
+                    <h:outputText value="#{notes.name} "/>
                 </p:column>
-                <p:column headerText="CI" sortBy="#{students.studentSigenuId}">
+                <p:column headerText="Máximo" sortBy="#{notes.numberMax}">
                     <h:outputText style="vertical-align: middle; margin-left: .5rem"
-                                  value="#{students.studentSigenuId}"/>
+                                  value="#{notes.numberMax}"/>
                 </p:column>
+                <p:column headerText="Mínimo" sortBy="#{notes.numberMin}">
+                    <h:outputText style="vertical-align: middle; margin-left: .5rem"
+                                  value="#{notes.numberMin}"/>
+                </p:column>
+                <p:column headerText="Promedio" sortBy="#{notes.numberAve}">
+                    <h:outputText style="vertical-align: middle; margin-left: .5rem"
+                                  value="#{notes.numberAve}"/>
+                </p:column>
+
 
             </p:dataTable>
         </h:form>

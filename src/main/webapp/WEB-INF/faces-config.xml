@@ -224,12 +224,12 @@
 
 
     <managed-bean>
-        <managed-bean-name>studentNotComputerReportBeanDynTab</managed-bean-name>
+        <managed-bean-name>StudentNotComputerReportBeanDynTab</managed-bean-name>
         <managed-bean-class>cu.edu.mes.sigenu.training.web.config.spa.DynTab</managed-bean-class>
         <managed-bean-scope>view</managed-bean-scope>
         <managed-property>
             <property-name>uniqueIdentifier</property-name>
-            <value>studentNotComputerReportBean</value>
+            <value>StudentNotComputerReportBean</value>
         </managed-property>
         <managed-property>
             <property-name>title</property-name>
@@ -245,7 +245,94 @@
         </managed-property>
     </managed-bean>
 
+    <managed-bean>
+        <managed-bean-name>PercentsStudyHoursByAnswerReportBeanDynTab</managed-bean-name>
+        <managed-bean-class>cu.edu.mes.sigenu.training.web.config.spa.DynTab</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+        <managed-property>
+            <property-name>uniqueIdentifier</property-name>
+            <value>PercentsStudyHoursByAnswerReportBean</value>
+        </managed-property>
+        <managed-property>
+            <property-name>title</property-name>
+            <value>#{msgs.report_students_percentage}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>includePage</property-name>
+            <value>/pages/questionnaire/report/percentsStudyHoursByAnswerReport.xhtml</value>
+        </managed-property>
+        <managed-property>
+            <property-name>closeable</property-name>
+            <value>true</value>
+        </managed-property>
+    </managed-bean>
 
+
+    <managed-bean>
+        <managed-bean-name>StudentsWitchNotesReportBeanDynTab</managed-bean-name>
+        <managed-bean-class>cu.edu.mes.sigenu.training.web.config.spa.DynTab</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+        <managed-property>
+            <property-name>uniqueIdentifier</property-name>
+            <value>StudentsWitchNotesReportBean</value>
+        </managed-property>
+        <managed-property>
+            <property-name>title</property-name>
+            <value>#{msgs.report_students_notes}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>includePage</property-name>
+            <value>/pages/questionnaire/report/studentsWitchNotesReport.xhtml</value>
+        </managed-property>
+        <managed-property>
+            <property-name>closeable</property-name>
+            <value>true</value>
+        </managed-property>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>PercentsStudyFormsByAnswerReportBeanDynTab</managed-bean-name>
+        <managed-bean-class>cu.edu.mes.sigenu.training.web.config.spa.DynTab</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+        <managed-property>
+            <property-name>uniqueIdentifier</property-name>
+            <value>PercentsStudyFormsByAnswerReportBean</value>
+        </managed-property>
+        <managed-property>
+            <property-name>title</property-name>
+            <value>#{msgs.report_students_percentage_forms}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>includePage</property-name>
+            <value>/pages/questionnaire/report/percentsStudyFormsByAnswerReport.xhtml</value>
+        </managed-property>
+        <managed-property>
+            <property-name>closeable</property-name>
+            <value>true</value>
+        </managed-property>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>EntryDataByCourseReportBeanDynTab</managed-bean-name>
+        <managed-bean-class>cu.edu.mes.sigenu.training.web.config.spa.DynTab</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+        <managed-property>
+            <property-name>uniqueIdentifier</property-name>
+            <value>EntryDataByCourseReportBean</value>
+        </managed-property>
+        <managed-property>
+            <property-name>title</property-name>
+            <value>#{msgs.report_notes_by_course}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>includePage</property-name>
+            <value>/pages/questionnaire/report/entryDataByCourseReport.xhtml</value>
+        </managed-property>
+        <managed-property>
+            <property-name>closeable</property-name>
+            <value>true</value>
+        </managed-property>
+    </managed-bean>
 
     <!-- <managed-bean>
         <managed-bean-name>StudentListDynTab</managed-bean-name>

@@ -6,19 +6,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Map;
-
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class StudentsAnswerByAnswerByQuestionDto {
+public class PercentsStudyHoursByAnswerDto {
 
-    private String nameQuestion;
-    private Float percentMuch;
-    private Float percentLittle;
-    private Float percentNot;
-    private Float percentNever;
-
+    private String question;
+    private Double value;
 
 }
