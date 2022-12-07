@@ -37,9 +37,9 @@ public class StudentNotComputerReportBean implements Serializable {
 
     @PostConstruct
     public void init(){
-        studentNotComputerList = new ArrayList<>();
-        questionnarieId = 0;
-        year = 0;
+        this.studentNotComputerList = new ArrayList<>();
+        this.questionnarieId = 0;
+        this.year = 0;
     }
 
     public List<QuestionnaireDto> getAllQuestionnaire() {
