@@ -3,88 +3,93 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:pu="http://primefaces.org/ultima">
-    
+
     <h:form id="menuform">
         <div id="layout-menu-container"
              class="layout-menu #{guestPreferences.darkMenu ? 'layout-menu-dark' : ''}">
-            
+
             <ui:fragment
-                rendered="#{guestPreferences.profileMode == 'inline' and guestPreferences.menuLayoutClass != 'menu-layout-static menu-layout-horizontal'}">
+                    rendered="#{guestPreferences.profileMode == 'inline' and guestPreferences.menuLayoutClass != 'menu-layout-static menu-layout-horizontal'}">
                 <div class="profile">
                     <a id="profile-options" href="#"> <h:graphicImage
-                        name="avatar.png" library="images"
-                        styleClass="profile-image" style="border-radius:25px"/> <span
-                        class="profile-name">#{authentication.fullname}</span> <i class="pi pi-angle-down"></i>
+                            name="avatar.png" library="images"
+                            styleClass="profile-image" style="border-radius:25px"/> <span
+                            class="profile-name">#{authentication.fullname}</span> <i class="pi pi-angle-down"></i>
                     </a>
                 </div>
-                
+
                 <ul id="profile-menu" class="ultima-menu profile-menu">
                     <li role="menuitem"><a href="logout" class="ripplelink">
                         <i class="pi pi-sign-out"></i>
                         <span>Salir</span>
                     </a></li>
                 </ul>
-            
+
             </ui:fragment>
-            
+
             <pu:menu widgetVar="me">
                 <p:menuitem id="home" value="#{msgs.presentation}" icon="pi pi-home"/>
-    
+
                 <p:menuitem id="take_questionnaire" value="#{msgs.menu_questionnaire}" icon="pi pi-question"
                             action="uishell:listQuestionnaireBean"/>
-                
+
                 <p:submenu id="questionnaire_info" label="#{msgs.menu_crud}"
                            icon="pi pi-user-plus"
                            rendered="#{authentication.ifAnyGranted('SECRETARY, GENERAL_SECRETARY, ASSISTANT_STUDENTS_CONTROLLER')}">
-    
+
                     <p:menuitem value="#{msgs.sub_menu_questionnaire}"
                                 action="uishell:QuestionnaireViewBean"/>
-                    
+
                     <p:menuitem value="#{msgs.sub_menu_group_question}"
                                 action="uishell:groupQuestionViewBean"/>
-                    
+
                     <p:menuitem value="#{msgs.sub_menu_question}"
                                 action="uishell:"/>
-                    
+
                     <p:menuitem value="#{msgs.sub_menu_answer}"
                                 action="uishell:answerViewBean"/>
-                    
+
                 </p:submenu>
-                
+
                 <p:submenu label="#{msgs.menu_report}" icon="pi pi-file">
-                        <p:submenu label="#{msgs.submenu_ReportBoss}">
-                            <p:menuitem value="#{msgs.report_student_not_computer}"
-                                action="uishell:StudentNotComputerReportBean"/>
-                            <p:menuitem value="#{msgs.report_students_percentage}"
-                                        action="uishell:PercentsStudyHoursByAnswerReportBean"/>
-                            <p:menuitem value="#{msgs.report_students_notes}"
-                                        action="uishell:StudentsWitchNotesReportBean"/>
-                            <p:menuitem value="#{msgs.report_students_percentage_forms}"
-                                        action="uishell:PercentsStudyFormsByAnswerReportBean"/>
-                            <p:menuitem value="#{msgs.report_notes_by_course}"
-                                        action="uishell:EntryDataByCourseReportBean"/>
-                            <p:menuitem value="#{msgs.report_notes_by_configurable}"
-                                        action="uishell:StudentsByConfigurableNotesReportBean"/>
-                            <p:menuitem value="#{msgs.report_students_by_entry_source}"
-                                        action="uishell:StudentsByEntrySourceReportBean"/>
-                            <p:menuitem value="#{msgs.report_students_by_scholastic_origin}"
-                                        action="uishell:StudentsByPlaceEgressReportBean"/>
-                            <p:menuitem value="#{msgs.report_notes_by_course_by_scholastic_origin}"
-                                        action="uishell:EntryDataByCourseByPlaceEgressReportBean"/>
+                    <p:submenu label="#{msgs.submenu_ReportBoss}">
+                        <p:menuitem value="#{msgs.report_student_not_computer}"
+                                    action="uishell:StudentNotComputerReportBean"/>
+                        <p:menuitem value="#{msgs.report_students_percentage}"
+                                    action="uishell:PercentsStudyHoursByAnswerReportBean"/>
+                        <p:menuitem value="#{msgs.report_students_notes}"
+                                    action="uishell:StudentsWitchNotesReportBean"/>
+                        <p:menuitem value="#{msgs.report_students_percentage_forms}"
+                                    action="uishell:PercentsStudyFormsByAnswerReportBean"/>
+                        <p:menuitem value="#{msgs.report_notes_by_course}"
+                                    action="uishell:EntryDataByCourseReportBean"/>
+                        <p:menuitem value="#{msgs.report_notes_by_configurable}"
+                                    action="uishell:StudentsByConfigurableNotesReportBean"/>
+                        <p:menuitem value="#{msgs.report_students_by_entry_source}"
+                                    action="uishell:StudentsByEntrySourceReportBean"/>
+                        <p:menuitem value="#{msgs.report_students_by_scholastic_origin}"
+                                    action="uishell:StudentsByPlaceEgressReportBean"/>
+                        <p:menuitem value="#{msgs.report_notes_by_course_by_scholastic_origin}"
+                                    action="uishell:EntryDataByCourseByPlaceEgressReportBean"/>
+                    </p:submenu>
+
+                    <p:submenu label="#{msgs.submenu_report_feu}">
+                        <p:menuitem value="#{msgs.report_students_sport_list}"
+                                    action="uishell:StudentSportListReportBean"/>
 
 
 
-                        </p:submenu>
+                    </p:submenu>
 
                 </p:submenu>
-                
+
                 <p:submenu label="#{msgs.menu_chart_report}" icon="pi pi-chart-bar">
-                    
+
                     <p:menuitem value="#{msgs.submenu_studentsWithoutYear}"
                                 url="/pages/secretary/audit/studentsWithoutYear.xhtml"/>
-                    
+
                 </p:submenu>
-                
+
             </pu:menu>
         </div>
     </h:form>
