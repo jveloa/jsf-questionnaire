@@ -400,6 +400,28 @@
         </managed-property>
     </managed-bean>
 
+    <managed-bean>
+        <managed-bean-name>EntryDataByCourseByPlaceEgressReportBeanDynTab</managed-bean-name>
+        <managed-bean-class>cu.edu.mes.sigenu.training.web.config.spa.DynTab</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+        <managed-property>
+            <property-name>uniqueIdentifier</property-name>
+            <value>EntryDataByCourseByPlaceEgressReportBean</value>
+        </managed-property>
+        <managed-property>
+            <property-name>title</property-name>
+            <value>#{msgs.report_notes_by_course_by_scholastic_origin}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>includePage</property-name>
+            <value>/pages/questionnaire/report/entryDataByCourseByPlaceEgressReport.xhtml</value>
+        </managed-property>
+        <managed-property>
+            <property-name>closeable</property-name>
+            <value>true</value>
+        </managed-property>
+    </managed-bean>
+
 
 
     <!-- <managed-bean>
