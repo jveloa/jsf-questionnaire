@@ -271,7 +271,7 @@
     <managed-bean>
         <managed-bean-name>StudentsWitchNotesReportBeanDynTab</managed-bean-name>
         <managed-bean-class>cu.edu.mes.sigenu.training.web.config.spa.DynTab</managed-bean-class>
-        <managed-bean-scope>view</managed-bean-scope>
+        <managed-bean-scope>request</managed-bean-scope>
         <managed-property>
             <property-name>uniqueIdentifier</property-name>
             <value>StudentsWitchNotesReportBean</value>
@@ -293,7 +293,7 @@
     <managed-bean>
         <managed-bean-name>PercentsStudyFormsByAnswerReportBeanDynTab</managed-bean-name>
         <managed-bean-class>cu.edu.mes.sigenu.training.web.config.spa.DynTab</managed-bean-class>
-        <managed-bean-scope>view</managed-bean-scope>
+        <managed-bean-scope>request</managed-bean-scope>
         <managed-property>
             <property-name>uniqueIdentifier</property-name>
             <value>PercentsStudyFormsByAnswerReportBean</value>
@@ -315,7 +315,7 @@
     <managed-bean>
         <managed-bean-name>EntryDataByCourseReportBeanDynTab</managed-bean-name>
         <managed-bean-class>cu.edu.mes.sigenu.training.web.config.spa.DynTab</managed-bean-class>
-        <managed-bean-scope>view</managed-bean-scope>
+        <managed-bean-scope>request</managed-bean-scope>
         <managed-property>
             <property-name>uniqueIdentifier</property-name>
             <value>EntryDataByCourseReportBean</value>
@@ -337,7 +337,7 @@
     <managed-bean>
         <managed-bean-name>StudentsByConfigurableNotesReportBeanDynTab</managed-bean-name>
         <managed-bean-class>cu.edu.mes.sigenu.training.web.config.spa.DynTab</managed-bean-class>
-        <managed-bean-scope>view</managed-bean-scope>
+        <managed-bean-scope>request</managed-bean-scope>
         <managed-property>
             <property-name>uniqueIdentifier</property-name>
             <value>StudentsByConfigurableNotesReportBean</value>
@@ -359,7 +359,7 @@
     <managed-bean>
         <managed-bean-name>StudentsByEntrySourceReportBeanDynTab</managed-bean-name>
         <managed-bean-class>cu.edu.mes.sigenu.training.web.config.spa.DynTab</managed-bean-class>
-        <managed-bean-scope>view</managed-bean-scope>
+        <managed-bean-scope>request</managed-bean-scope>
         <managed-property>
             <property-name>uniqueIdentifier</property-name>
             <value>StudentsByEntrySourceReportBean</value>
@@ -381,7 +381,7 @@
     <managed-bean>
         <managed-bean-name>StudentsByPlaceEgressReportBeanDynTab</managed-bean-name>
         <managed-bean-class>cu.edu.mes.sigenu.training.web.config.spa.DynTab</managed-bean-class>
-        <managed-bean-scope>view</managed-bean-scope>
+        <managed-bean-scope>request</managed-bean-scope>
         <managed-property>
             <property-name>uniqueIdentifier</property-name>
             <value>StudentsByPlaceEgressReportBean</value>
@@ -403,7 +403,7 @@
     <managed-bean>
         <managed-bean-name>EntryDataByCourseByPlaceEgressReportBeanDynTab</managed-bean-name>
         <managed-bean-class>cu.edu.mes.sigenu.training.web.config.spa.DynTab</managed-bean-class>
-        <managed-bean-scope>view</managed-bean-scope>
+        <managed-bean-scope>request</managed-bean-scope>
         <managed-property>
             <property-name>uniqueIdentifier</property-name>
             <value>EntryDataByCourseByPlaceEgressReportBean</value>
@@ -425,7 +425,7 @@
     <managed-bean>
         <managed-bean-name>StudentSportListReportBeanDynTab</managed-bean-name>
         <managed-bean-class>cu.edu.mes.sigenu.training.web.config.spa.DynTab</managed-bean-class>
-        <managed-bean-scope>view</managed-bean-scope>
+        <managed-bean-scope>request</managed-bean-scope>
         <managed-property>
             <property-name>uniqueIdentifier</property-name>
             <value>StudentSportListReportBean</value>
@@ -448,7 +448,7 @@
     <managed-bean>
         <managed-bean-name>ArtListReportBeanDynTab</managed-bean-name>
         <managed-bean-class>cu.edu.mes.sigenu.training.web.config.spa.DynTab</managed-bean-class>
-        <managed-bean-scope>view</managed-bean-scope>
+        <managed-bean-scope>request</managed-bean-scope>
         <managed-property>
             <property-name>uniqueIdentifier</property-name>
             <value>ArtListReportBean</value>
@@ -460,6 +460,29 @@
         <managed-property>
             <property-name>includePage</property-name>
             <value>/pages/questionnaire/report/artListReport.xhtml</value>
+        </managed-property>
+        <managed-property>
+            <property-name>closeable</property-name>
+            <value>true</value>
+        </managed-property>
+    </managed-bean>
+
+
+    <managed-bean>
+        <managed-bean-name>StudentsResponsibilityReportBeanDynTab</managed-bean-name>
+        <managed-bean-class>cu.edu.mes.sigenu.training.web.config.spa.DynTab</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        <managed-property>
+            <property-name>uniqueIdentifier</property-name>
+            <value>StudentsResponsibilityReportBean</value>
+        </managed-property>
+        <managed-property>
+            <property-name>title</property-name>
+            <value>#{msgs.report_students_responsibility_list}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>includePage</property-name>
+            <value>/pages/questionnaire/report/studentsResponsibilityReport.xhtml</value>
         </managed-property>
         <managed-property>
             <property-name>closeable</property-name>
