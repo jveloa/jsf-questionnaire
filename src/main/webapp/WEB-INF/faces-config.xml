@@ -226,7 +226,7 @@
     <managed-bean>
         <managed-bean-name>StudentNotComputerReportBeanDynTab</managed-bean-name>
         <managed-bean-class>cu.edu.mes.sigenu.training.web.config.spa.DynTab</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
+        <managed-bean-scope>view</managed-bean-scope>
         <managed-property>
             <property-name>uniqueIdentifier</property-name>
             <value>StudentNotComputerReportBean</value>
@@ -483,6 +483,28 @@
         <managed-property>
             <property-name>includePage</property-name>
             <value>/pages/questionnaire/report/studentsResponsibilityReport.xhtml</value>
+        </managed-property>
+        <managed-property>
+            <property-name>closeable</property-name>
+            <value>true</value>
+        </managed-property>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>DeportArtListReportBeanDynTab</managed-bean-name>
+        <managed-bean-class>cu.edu.mes.sigenu.training.web.config.spa.DynTab</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        <managed-property>
+            <property-name>uniqueIdentifier</property-name>
+            <value>DeportArtListReportBean</value>
+        </managed-property>
+        <managed-property>
+            <property-name>title</property-name>
+            <value>#{msgs.report_students_deport_art_list}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>includePage</property-name>
+            <value>/pages/questionnaire/report/deportArtListReport.xhtml</value>
         </managed-property>
         <managed-property>
             <property-name>closeable</property-name>
