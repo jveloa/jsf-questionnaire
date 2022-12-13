@@ -9,7 +9,7 @@
     <p:panelGrid id="panel"  columns="2" layout="flex">
 
         <h:panelGroup styleClass="ui-float-label">
-            <p:spinner id="yearCld" value="#{entryDataByCourseReportBean.year}"
+            <p:spinner style="width:60%;" id="yearCld" value="#{entryDataByCourseReportBean.year}"
                        min="2018" max="2050" required="true" onkeydown="return false"
                        thousandSeparator=""/>
 
@@ -17,12 +17,12 @@
         </h:panelGroup>
         <h:panelGroup styleClass="ui-float-label">
 
-            <p:selectOneMenu style="width:100%;" required="true" value="#{entryDataByCourseReportBean.questionnarieId}">
+            <p:selectOneMenu style="width:60%; margin-left:200px;" required="true" value="#{entryDataByCourseReportBean.questionnarieId}">
                 <f:selectItem itemLabel="" noSelectionOption="true"/>
                 <f:selectItems value="#{entryDataByCourseReportBean.allQuestionnaire}" var="questionnaire"
                                itemLabel="#{questionnaire.name}" itemValue="#{questionnaire.id}"/>
             </p:selectOneMenu>
-            <p:outputLabel for="@previous" value="#{msgs.completed_questionnaire}"/>
+            <p:outputLabel style="margin-left:200px;" for="@previous" value="#{msgs.completed_questionnaire}"/>
         </h:panelGroup>
         <span></span>
 
@@ -38,7 +38,7 @@
             </div>
             <div class="ui-g-12 ui-md-6" style="display: flex;flex-direction: row-reverse">
                 <p:commandButton value="#{msgs.button_cancel}"
-                                 action="startEntryDataByCourseReport"
+                                 onclick="document.location.href = document.location.href"
                                  styleClass="button-prime btn btn-flat btn-labeled btn-danger pull-right"
                                  icon="pi pi-times"
 

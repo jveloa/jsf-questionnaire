@@ -6,5 +6,5 @@ import cu.edu.mes.sigenu.training.web.dto.questionnaire.report.StudentNotCompute
 import java.util.List;
 
 public interface StudentNotComputerReportService {
-    List<StudentNotComputerDto> getStudentsNotComputer (Integer year, Integer id);
+    List<StudentNotComputerDto> getStudentsNotComputer (Integer year, Integer questionnarieId);
 }

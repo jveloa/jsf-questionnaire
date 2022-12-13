@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface PercentsStudyHoursByAnswerReportService {
 
-    List<PercentsStudyHoursByAnswerDto> getPercentsStudyHoursByAnswer (Integer year, Integer id);
+    List<PercentsStudyHoursByAnswerDto> getPercentsStudyHoursByAnswer (Integer year, Integer questionnarieId);
 }

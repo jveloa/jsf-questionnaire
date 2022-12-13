@@ -26,15 +26,15 @@ public class StudentsByConfigurableNotesReportServiceImpl implements StudentsByC
 
     @Override
     public List<StudentsNotesDto> getStudentsByConfigurableNotes(Integer year, float academicIndex
-            , float noteSpanish, float noteMat, float noteHistory,Integer id) {
+            , float noteSpanish, float noteMat, float noteHistory,Integer questionnarieId) {
 
         List<StudentsNotesDto> items = new ArrayList<StudentsNotesDto>();
         try {
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             ApiRestMapper<StudentsNotesDto> apiRestMapper = new ApiRestMapper<>();
 
-            UriTemplate template = new UriTemplate("/api/v1/training/reportCareerChief/studentsByConfigurableNotes/{year}/{academicIndex}/{noteSpanish}/{noteMat}/{noteHistory}/{id}");
-            String uri = template.expand(year,academicIndex,noteSpanish,noteMat,noteHistory,id).toString();
+            UriTemplate template = new UriTemplate("/api/v1/training/reportCareerChief/studentsByConfigurableNotes/{year}/{academicIndex}/{noteSpanish}/{noteMat}/{noteHistory}/{questionnarieId}");
+            String uri = template.expand(year,academicIndex,noteSpanish,noteMat,noteHistory,questionnarieId).toString();
 
             String response = (String)restService.GET(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
             items = apiRestMapper.mapList(response, StudentsNotesDto.class);

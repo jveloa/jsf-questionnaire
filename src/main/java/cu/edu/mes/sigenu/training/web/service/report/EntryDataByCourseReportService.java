@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface EntryDataByCourseReportService {
 
-    List<StudentsWithNotesDto> getEntryDataByCourse (Integer year, Integer id);
+    List<StudentsWithNotesDto> getEntryDataByCourse (Integer year, Integer questionnarieId);
 }

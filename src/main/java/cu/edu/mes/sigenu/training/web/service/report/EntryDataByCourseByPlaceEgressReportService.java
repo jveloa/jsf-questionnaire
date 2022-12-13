@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface EntryDataByCourseByPlaceEgressReportService {
 
-    List<StudentsWithNotesDto> getEntryDataByCourseByPlaceEgress(Integer year, String idPlaceEgress, Integer id);
+    List<StudentsWithNotesDto> getEntryDataByCourseByPlaceEgress(Integer year, String idPlaceEgress, Integer questionnarieId);
 
     List<EntrySourceAuxDto> getAllPlaceEgress ();
 

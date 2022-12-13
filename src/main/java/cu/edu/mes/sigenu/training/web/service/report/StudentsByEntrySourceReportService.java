@@ -7,7 +7,7 @@ import cu.edu.mes.sigenu.training.web.dto.questionnaire.report.StudentNotCompute
 import java.util.List;
 
 public interface StudentsByEntrySourceReportService {
-    List<String> getStudentsByEntrySource (Integer year, String entrySource,Integer id);
+    List<String> getStudentsByEntrySource (Integer year, String entrySource,Integer questionnarieId);
 
     List<EntrySourceAuxDto> getAllEntrySource ();
 

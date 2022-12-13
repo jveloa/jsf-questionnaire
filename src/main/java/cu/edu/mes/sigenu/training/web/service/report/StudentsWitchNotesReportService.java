@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface StudentsWitchNotesReportService {
 
-    List<StudentsNotesDto> getStudentsWitchNotes (Integer year, Integer id);
+    List<StudentsNotesDto> getStudentsWitchNotes (Integer year, Integer questionnarieId);
 }

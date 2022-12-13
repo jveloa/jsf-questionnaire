@@ -26,15 +26,15 @@ public class EntryDataByCourseReportServiceImpl implements EntryDataByCourseRepo
 
 
     @Override
-    public List<StudentsWithNotesDto> getEntryDataByCourse(Integer year, Integer id) {
+    public List<StudentsWithNotesDto> getEntryDataByCourse(Integer year, Integer questionnarieId) {
 
         List<StudentsWithNotesDto> items = new ArrayList<StudentsWithNotesDto>();
         try {
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             ApiRestMapper<StudentsWithNotesDto> apiRestMapper = new ApiRestMapper<>();
 
-            UriTemplate template = new UriTemplate("/api/v1/training/reportCareerChief/entryDataByCourse/{year}/{id}");
-            String uri = template.expand(year, id).toString();
+            UriTemplate template = new UriTemplate("/api/v1/training/reportCareerChief/entryDataByCourse/{year}/{questionnarieId}");
+            String uri = template.expand(year, questionnarieId).toString();
 
             String response = (String)restService.GET(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
             items = apiRestMapper.mapList(response, StudentsWithNotesDto.class);

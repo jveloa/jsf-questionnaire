@@ -25,15 +25,15 @@ public class PercentsStudyFormsByAnswerReportServiceImpl implements PercentsStud
 
 
     @Override
-    public List<StudentsAnswerByAnswerByQuestionDto> getPercentsStudyFormsByAnswer(Integer year, Integer id) {
+    public List<StudentsAnswerByAnswerByQuestionDto> getPercentsStudyFormsByAnswer(Integer year, Integer questionnarieId) {
 
         List<StudentsAnswerByAnswerByQuestionDto> items = new ArrayList<StudentsAnswerByAnswerByQuestionDto>();
         try {
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             ApiRestMapper<StudentsAnswerByAnswerByQuestionDto> apiRestMapper = new ApiRestMapper<>();
 
-            UriTemplate template = new UriTemplate("/api/v1/training/reportCareerChief/percentsStudyFomrsByAnswer/{year}/{id}");
-            String uri = template.expand(year, id).toString();
+            UriTemplate template = new UriTemplate("/api/v1/training/reportCareerChief/percentsStudyFomrsByAnswer/{year}/{questionnarieId}");
+            String uri = template.expand(year, questionnarieId).toString();
 
             String response = (String)restService.GET(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
             items = apiRestMapper.mapList(response, StudentsAnswerByAnswerByQuestionDto.class);

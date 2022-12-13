@@ -28,7 +28,7 @@ public class StudentsByEntrySourceReportServiceImpl implements StudentsByEntrySo
 
 
     @Override
-    public List<String> getStudentsByEntrySource (Integer year, @PathVariable String entrySource, Integer id){
+    public List<String> getStudentsByEntrySource (Integer year, @PathVariable String entrySource, Integer questionnarieId){
 
 
         List<String> items = new ArrayList<String>();
@@ -36,11 +36,9 @@ public class StudentsByEntrySourceReportServiceImpl implements StudentsByEntrySo
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             ApiRestMapper<String> apiRestMapper = new ApiRestMapper<>();
 
-            UriTemplate template = new UriTemplate("/api/v1/training/reportCareerChief/studentsByEntrySource/{year}/{entrySource}/{id}");
-            //String uri = template.expand(year,entrySource,id).toString();
-            String uri = template.expand(year,entrySource,id).toString();
-            //String uri1=uri.replaceAll("%20"," ");
+            UriTemplate template = new UriTemplate("/api/v1/training/reportCareerChief/studentsByEntrySource/{year}/{entrySource}/{questionnarieId}");
 
+            String uri = template.expand(year,entrySource,questionnarieId).toString();
             String response = (String)restService.GET(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
             items = apiRestMapper.mapList(response, String.class);
         } catch (IOException e) {

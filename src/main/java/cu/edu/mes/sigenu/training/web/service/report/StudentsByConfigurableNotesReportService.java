@@ -8,5 +8,5 @@ import java.util.List;
 public interface StudentsByConfigurableNotesReportService {
 
     List<StudentsNotesDto> getStudentsByConfigurableNotes (Integer year, float academicIndex
-            , float noteSpanish, float noteMat, float noteHistory,Integer id);
+            , float noteSpanish, float noteMat, float noteHistory,Integer questionnarieId);
 }

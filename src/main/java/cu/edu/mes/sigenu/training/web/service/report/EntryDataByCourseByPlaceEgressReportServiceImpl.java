@@ -26,7 +26,7 @@ public class EntryDataByCourseByPlaceEgressReportServiceImpl implements EntryDat
 
 
     @Override
-    public List<StudentsWithNotesDto> getEntryDataByCourseByPlaceEgress (Integer year, String idPlaceEgress, Integer id){
+    public List<StudentsWithNotesDto> getEntryDataByCourseByPlaceEgress (Integer year, String idPlaceEgress, Integer questionnarieId){
 
 
         List<StudentsWithNotesDto> items = new ArrayList<StudentsWithNotesDto>();
@@ -34,9 +34,9 @@ public class EntryDataByCourseByPlaceEgressReportServiceImpl implements EntryDat
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             ApiRestMapper<StudentsWithNotesDto> apiRestMapper = new ApiRestMapper<>();
 
-            UriTemplate template = new UriTemplate("/api/v1/training/reportCareerChief/entryDataByCourseByPlaceEgress/{year}/{idPlaceEgress}/{id}");
+            UriTemplate template = new UriTemplate("/api/v1/training/reportCareerChief/entryDataByCourseByPlaceEgress/{year}/{idPlaceEgress}/{questionnarieId}");
 
-            String uri = template.expand(year,idPlaceEgress,id).toString();
+            String uri = template.expand(year,idPlaceEgress,questionnarieId).toString();
 
             String response = (String)restService.GET(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
             items = apiRestMapper.mapList(response, StudentsWithNotesDto.class);

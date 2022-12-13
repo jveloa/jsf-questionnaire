@@ -24,15 +24,15 @@ public class StudentNotComputerReportServiceImpl implements StudentNotComputerRe
 
 
     @Override
-    public List<StudentNotComputerDto> getStudentsNotComputer(Integer year, Integer id) {
+    public List<StudentNotComputerDto> getStudentsNotComputer(Integer year, Integer questionnarieId) {
 
         List<StudentNotComputerDto> items = new ArrayList<StudentNotComputerDto>();
         try {
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             ApiRestMapper<StudentNotComputerDto> apiRestMapper = new ApiRestMapper<>();
 
-            UriTemplate template = new UriTemplate("/api/v1/training/reportCareerChief/studentNotComputerList/{year}/{id}");
-            String uri = template.expand(year, id).toString();
+            UriTemplate template = new UriTemplate("/api/v1/training/reportCareerChief/studentNotComputerList/{year}/{questionnarieId}");
+            String uri = template.expand(year, questionnarieId).toString();
 
             String response = (String)restService.GET(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
             items = apiRestMapper.mapList(response, StudentNotComputerDto.class);

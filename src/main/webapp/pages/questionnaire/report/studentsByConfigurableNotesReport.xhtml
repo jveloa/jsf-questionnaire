@@ -47,7 +47,7 @@
             <p:spinner id="his" value="#{studentsByConfigurableNotesReportBean.noteHistory}"
                        min="60" max="100" decimalSeparator="."
                        thousandSeparator="" style="width:70%;" stepFactor="0.5" >
-                <p:ajax  process="ave mat his spa" listener="#{studentsByConfigurableNotesReportBean.validate}"/>
+                <p:ajax process="ave mat his spa" listener="#{studentsByConfigurableNotesReportBean.validate}"/>
             </p:spinner>
             <p:outputLabel for="@previous" value="#{msgs.note_history}"/>
 
@@ -75,7 +75,7 @@
             </div>
             <div class="ui-g-12 ui-md-6" style="display: flex;flex-direction: row-reverse">
                 <p:commandButton value="#{msgs.button_cancel}"
-                                 action="startPageStudentsByConfigurableNotesReport"
+                                 onclick="document.location.href = document.location.href"
                                  styleClass="button-prime btn btn-flat btn-labeled btn-danger pull-right"
                                  icon="pi pi-times"
 
