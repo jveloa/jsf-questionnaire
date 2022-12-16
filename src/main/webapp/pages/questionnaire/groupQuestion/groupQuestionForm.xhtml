@@ -29,6 +29,12 @@
                             <p:inputText id="description" required="false"
                                          value="#{groupQuestionBean.seletedGroupQuestion.description}"/>
                         </p:outputPanel>
+    
+                        <p:outputPanel class="p-field">
+                            <p:outputLabel for="@next">Orden de aparición en el cuestionario</p:outputLabel>
+                            <p:spinner id="organizationOrder" required="false"
+                                         value="#{groupQuestionBean.seletedGroupQuestion.organizationOrder}"/>
+                        </p:outputPanel>
                         
                     </h:panelGroup>
                 </p:panelGrid>

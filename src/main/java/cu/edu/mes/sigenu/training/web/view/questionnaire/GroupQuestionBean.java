@@ -44,6 +44,11 @@ public class GroupQuestionBean implements Serializable{
             return;
         }
 
+        if (seletedGroupQuestion.getOrganizationOrder() == null){
+            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_WARN, "message_group_invalid_order");
+            return;
+        }
+
 		if(this.seletedGroupQuestion.getId() == null){
 			groupQuestionService.save(seletedGroupQuestion);
 			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_added");
