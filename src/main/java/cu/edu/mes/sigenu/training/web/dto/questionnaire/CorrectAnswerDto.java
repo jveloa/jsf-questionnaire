@@ -9,9 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class QuestionAnswerDto {
+public class CorrectAnswerDto {
     private Integer id;
-    private Integer questionId;
-    private Integer answerId;
-    private CorrectAnswerDto correctAnswer;
+    private Integer questionAnswerId;
 }

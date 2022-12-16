@@ -14,4 +14,5 @@ public class QuestionDto {
     private Integer id;
 	private Integer groupQuestionId;
 	private String question;
+    private boolean isEvaluationQuestion;
 }

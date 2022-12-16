@@ -10,4 +10,5 @@ public class GroupQuestionDto {
     private Integer id;
     private String nameGroup;
     private String description;
+    private Integer organizationOrder;
 }
