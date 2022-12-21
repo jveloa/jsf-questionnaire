@@ -1,0 +1,55 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    
+    <p:dialog header="Respuesta" showEffect="fade" modal="true"
+              widgetVar="question" responsive="true">
+        <p:outputPanel id="manageQuestion" class="ui-fluid">
+            <p:autoUpdate on="event1"/>
+            <p:outputPanel >
+                <p:panelGrid layout="grid" columns="1">
+                    <h:panelGroup>
+                        
+                        <p:outputPanel class="p-field" rendered="#{questionBean.selectedQuestion.id != null}">
+                            <p:outputLabel for="@next">Id</p:outputLabel>
+                            <p:inputText id="Id" required="false" disabled="#{questionBean.selectedQuestion.id != null}"
+                                         value="#{questionBean.selectedQuestion.id}"/>
+                        </p:outputPanel>
+                        
+                        <p:outputPanel class="p-field">
+                            <p:outputLabel for="@next">Pregunta</p:outputLabel>
+                            <p:inputText id="question"
+                                         value="#{questionBean.selectedQuestion.question}"/>
+                        </p:outputPanel>
+    
+                        <p:outputPanel class="p-field">
+                            <p:outputLabel for="@next">Grupo de pregunta</p:outputLabel>
+                            <p:selectOneMenu id="group" value="#{questionBean.selectedGroupQuestion}" >
+                                <f:selectItems value="#{questionBean.groupQuestionDtos}" var="group" itemLabel="#{group.nameGroup}"/>
+                            </p:selectOneMenu>
+                        </p:outputPanel>
+    
+                        <p:outputPanel class="p-field">
+                            <p:outputLabel for="@next">Carrera a la que pertenece</p:outputLabel>
+                            <p:selectOneMenu id="careerQuestion" value="#{questionBean.selectedCareer}">
+                                <f:selectItems value="#{questionBean.careerList}" var="career" itemLabel="#{career.nationalCareerVO.name}" />
+                            </p:selectOneMenu>
+                        </p:outputPanel>
+                    
+                    </h:panelGroup>
+                </p:panelGrid>
+            </p:outputPanel>
+        </p:outputPanel>
+        
+        <f:facet name="footer">
+            <p:commandButton value="Salvar" icon="pi pi-check"
+                             actionListener="#{questionBean.save}"
+                             process="manageQuestion, @this"
+                             update="dt-Question"/>
+            <p:commandButton value="Cancelar" icon="pi pi-times"
+                             onclick="PF('question').hide()" class="ui-button-secondary"/>
+        </f:facet>
+    </p:dialog>
+</ui:composition>

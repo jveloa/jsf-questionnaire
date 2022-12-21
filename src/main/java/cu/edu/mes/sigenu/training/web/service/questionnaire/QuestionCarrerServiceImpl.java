@@ -31,7 +31,7 @@ public class QuestionCarrerServiceImpl implements QuestionCareerService {
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             ApiRestMapper<CareerVO> apiRestMapper = new ApiRestMapper<>();
 
-            UriTemplate template = new UriTemplate("/api/v1/training/question-carrer/career/");
+            UriTemplate template = new UriTemplate("/api/v1/training/question-carrer/career");
             String response = (String)restService.GET(template.toString(), params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
             listCareerSigenu = apiRestMapper.mapList(response,CareerVO.class);
         }

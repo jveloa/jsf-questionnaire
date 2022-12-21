@@ -1,0 +1,78 @@
+<ui:composition xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:sec="http://www.springframework.org/security/tags"
+>
+    <p:panelGrid columns="1" layout="grid" id="principal">
+        
+        <p:outputPanel class="card" id="main">
+            
+            <p:toolbar styleClass="card">
+                <p:toolbarGroup>
+                    <p:commandButton value="Nueva pregunta" icon="pi pi-plus"
+                                     actionListener="#{questionBean.openNew}"
+                                     update="manageQuestion"
+                                     oncomplete="PF('question').show()"
+                                     styleClass="ui-button-success"
+                                     style="margin-right: .5rem"
+                                     process="manageQuestion @this">
+                        <p:resetInput target="manageQuestion"/>
+                    </p:commandButton>
+                </p:toolbarGroup>
+            </p:toolbar>
+            
+            <p:dataTable id="dt-Question" widgetVar="dtQuestion" var="question" reflow="true" paginator="true"
+                         value="#{questionBean.questionWithCareerDtos}" rows="10" paginatorPosition="bottom"
+                         styleClass="products-table">
+                
+                <p:column headerText="Id" sortBy="#{question.id}" >
+                    <h:outputText value="#{question.id}"/>
+                </p:column>
+                
+                <p:column headerText="Pregunta" sortBy="#{question.question}" filterBy="#{question.question}">
+                    <h:outputText value="#{question.question}"/>
+                </p:column>
+    
+                <p:column headerText="Grupo de pregunta"  filterBy="#{questionBean.getGroupQuestionById(question.groupQuestionId)}">
+                    <h:outputText value="#{questionBean.getGroupQuestionById(question.groupQuestionId)}"/>
+                </p:column>
+    
+                <p:column headerText="Carrera"  filterBy="#{questionBean.getCarrerById(question.questionCarrerId)}">
+                    <h:outputText value="#{questionBean.getCarrerById(question.questionCarrerId)}"/>
+                </p:column>
+                
+                <p:column headerText="Acciones">
+                    <p:outputPanel style="margin: 5px">
+                        <p:commandButton icon="pi pi-pencil"
+                                        
+                                         
+                                         styleClass="edit-button rounded-button ui-button-success"
+                                         style="margin-right: 5px"
+                                         >
+                           
+                        </p:commandButton>
+                        <p:commandButton id="delete" icon="pi pi pi-trash"
+                                         styleClass="ui-button-warning rounded-button"
+                                        
+                                        >
+                           
+                            <p:confirm header="Confirmar" message="Está seguro de eliminar la respuesta?"
+                                       icon="pi pi-exclamation-triangle"/>
+                        </p:commandButton>
+                    </p:outputPanel>
+                </p:column>
+            
+            </p:dataTable>
+    
+            <ui:include src="questionForm.xhtml"></ui:include>
+            <p:confirmDialog global="true" showEffect="fade" width="300">
+                <p:commandButton value="Si" type="button"
+                                 styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
+                <p:commandButton value="No" type="button"
+                                 styleClass="ui-confirmdialog-no ui-button-secondary"
+                                 icon="pi pi-times"/>
+            </p:confirmDialog>
+        </p:outputPanel>
+    </p:panelGrid>
+</ui:composition>
