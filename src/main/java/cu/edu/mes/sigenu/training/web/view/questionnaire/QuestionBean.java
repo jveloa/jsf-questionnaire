@@ -8,6 +8,7 @@ import cu.edu.mes.sigenu.training.web.service.questionnaire.GroupQuestionService
 import cu.edu.mes.sigenu.training.web.service.questionnaire.QuestionCareerService;
 import cu.edu.mes.sigenu.training.web.service.questionnaire.QuestionService;
 import cu.edu.mes.vo.CareerVO;
+import cu.edu.mes.vo.NationalCareerVO;
 import lombok.Data;
 
 import javax.annotation.PostConstruct;
@@ -36,20 +37,17 @@ public class QuestionBean implements Serializable {
 
     private List<GroupQuestionDto> groupQuestionDtos;
 
-    private List<CareerVO> careerList;
+    private List<NationalCareerVO> careerList;
 
     private QuestionWithCareerDto selectedQuestion;
 
-    private GroupQuestionDto selectedGroupQuestion;
-
-    private CareerVO selectedCareer;
 
 
     public void openNew() {
         this.selectedQuestion = new QuestionWithCareerDto();
         selectedQuestion.setQuestion("");
-        groupQuestionDtos = groupQuestionService.getAll();
         careerList = questionCareerService.getCareersSigenu();
+        groupQuestionDtos = groupQuestionService.getAll();
 
     }
 
@@ -75,7 +73,7 @@ public class QuestionBean implements Serializable {
     }
 
     public String getCarrerById(String IdCareer){
-        return careerList.stream().filter(career -> career.getNationalCareerVO().getIdNationalCareer().equals(IdCareer)).findFirst().get().getNameNationalCareer();
+        return careerList.stream().filter(career -> career.getIdNationalCareer().equals(IdCareer)).findFirst().get().getName();
     }
 
 

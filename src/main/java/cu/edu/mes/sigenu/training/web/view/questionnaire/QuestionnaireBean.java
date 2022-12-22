@@ -1,9 +1,11 @@
 package cu.edu.mes.sigenu.training.web.view.questionnaire;
 
 import cu.edu.mes.sigenu.training.web.dto.questionnaire.QuestionnaireDto;
+import cu.edu.mes.sigenu.training.web.service.questionnaire.QuestionCareerService;
 import cu.edu.mes.sigenu.training.web.service.questionnaire.QuestionnaireService;
 import cu.edu.mes.sigenu.training.web.utils.ApiResponse;
 import cu.edu.mes.sigenu.training.web.utils.JsfUtils;
+import cu.edu.mes.vo.NationalCareerVO;
 import lombok.Data;
 import org.primefaces.PrimeFaces;
 
@@ -23,9 +25,18 @@ public class QuestionnaireBean implements Serializable {
     @Inject
     private QuestionnaireService questionnaireService;
 
+    @Inject
+    private QuestionCareerService questionCareerService;
+
+
     private QuestionnaireDto selectedQuestionnaire;
 
     private List<QuestionnaireDto> questionnaireDtos;
+
+    private List<NationalCareerVO> careerList;
+
+    private NationalCareerVO selectedCareer;
+
 
     public List<QuestionnaireDto> getQuestionnaireDtos() {
         return questionnaireService.getAllQuestionnaire();
@@ -34,6 +45,7 @@ public class QuestionnaireBean implements Serializable {
     public void openNew(){
         selectedQuestionnaire = new QuestionnaireDto();
         selectedQuestionnaire.setName("");
+        careerList = questionCareerService.getCareersSigenu();
     }
 
     @PostConstruct

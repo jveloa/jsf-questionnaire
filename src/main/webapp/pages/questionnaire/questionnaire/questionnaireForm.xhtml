@@ -25,9 +25,10 @@
                         </p:outputPanel>
     
                         <p:outputPanel class="p-field">
-                            <p:outputLabel for="@next">Descripción</p:outputLabel>
-                            <p:inputText id="desciption"
-                                         value="#{questionnaireBean.selectedQuestionnaire.description}"/>
+                            <p:outputLabel for="@next">Carrera a la que pertenece</p:outputLabel>
+                            <p:selectOneMenu id="careerQuestion" value="#{questionnaireBean.selectedQuestionnaire.careerSigenuId}" disabled="#{questionnaireBean.selectedQuestionnaire.id != null}">
+                                <f:selectItems value="#{questionnaireBean.careerList}" var="career" itemLabel="#{career.name}" itemValue="#{career.idNationalCareer}"/>
+                            </p:selectOneMenu>
                         </p:outputPanel>
                     
                     </h:panelGroup>

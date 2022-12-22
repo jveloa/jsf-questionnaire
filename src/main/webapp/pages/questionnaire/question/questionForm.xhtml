@@ -4,7 +4,7 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui">
     
-    <p:dialog header="Respuesta" showEffect="fade" modal="true"
+    <p:dialog header="Pregunta" showEffect="fade" modal="true"
               widgetVar="question" responsive="true">
         <p:outputPanel id="manageQuestion" class="ui-fluid">
             <p:autoUpdate on="event1"/>
@@ -26,15 +26,15 @@
     
                         <p:outputPanel class="p-field">
                             <p:outputLabel for="@next">Grupo de pregunta</p:outputLabel>
-                            <p:selectOneMenu id="group" value="#{questionBean.selectedGroupQuestion}" >
-                                <f:selectItems value="#{questionBean.groupQuestionDtos}" var="group" itemLabel="#{group.nameGroup}"/>
+                            <p:selectOneMenu id="group" value="#{questionBean.selectedQuestion.groupQuestionId}" >
+                                <f:selectItems value="#{questionBean.groupQuestionDtos}" var="group" itemLabel="#{group.nameGroup}" itemValue="#{group.id}"/>
                             </p:selectOneMenu>
                         </p:outputPanel>
     
                         <p:outputPanel class="p-field">
                             <p:outputLabel for="@next">Carrera a la que pertenece</p:outputLabel>
-                            <p:selectOneMenu id="careerQuestion" value="#{questionBean.selectedCareer}">
-                                <f:selectItems value="#{questionBean.careerList}" var="career" itemLabel="#{career.nationalCareerVO.name}" />
+                            <p:selectOneMenu id="careerQuestion" value="#{questionBean.selectedQuestion.questionCarrerId}">
+                                <f:selectItems value="#{questionBean.careerList}" var="career" itemLabel="#{career.name}" itemValue="#{career.idNationalCareer}" />
                             </p:selectOneMenu>
                         </p:outputPanel>
                     

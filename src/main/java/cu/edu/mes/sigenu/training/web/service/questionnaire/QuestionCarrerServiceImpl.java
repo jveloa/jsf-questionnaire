@@ -5,6 +5,7 @@ import cu.edu.mes.sigenu.training.web.security.CurrentUserUtils;
 import cu.edu.mes.sigenu.training.web.utils.ApiRestMapper;
 import cu.edu.mes.sigenu.training.web.utils.RestService;
 import cu.edu.mes.vo.CareerVO;
+import cu.edu.mes.vo.NationalCareerVO;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.util.UriTemplate;
@@ -25,15 +26,15 @@ public class QuestionCarrerServiceImpl implements QuestionCareerService {
     private RestService restService;
 
     @Override
-    public List<CareerVO> getCareersSigenu() {
-        List<CareerVO> listCareerSigenu = new ArrayList<>();
+    public List<NationalCareerVO> getCareersSigenu() {
+        List<NationalCareerVO> listCareerSigenu = new ArrayList<>();
         try {
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-            ApiRestMapper<CareerVO> apiRestMapper = new ApiRestMapper<>();
+            ApiRestMapper<NationalCareerVO> apiRestMapper = new ApiRestMapper<>();
 
             UriTemplate template = new UriTemplate("/api/v1/training/question-carrer/career");
             String response = (String)restService.GET(template.toString(), params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
-            listCareerSigenu = apiRestMapper.mapList(response,CareerVO.class);
+            listCareerSigenu = apiRestMapper.mapList(response,NationalCareerVO.class);
         }
         catch (IOException e){
             e.printStackTrace();
