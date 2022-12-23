@@ -26,10 +26,6 @@
                          value="#{answerBean.answerDtos}" rows="10" paginatorPosition="bottom"
                          styleClass="products-table">
                 
-                <p:column headerText="Id" sortBy="#{answer.id}" >
-                    <h:outputText value="#{answer.id}"/>
-                </p:column>
-                
                 <p:column headerText="Respuesta" sortBy="#{answer.answer}" filterBy="#{answer.answer}">
                     <h:outputText value="#{answer.answer}"/>
                 </p:column>

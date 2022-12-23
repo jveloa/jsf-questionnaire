@@ -9,7 +9,7 @@
     
     <p:panelGrid id="panelMake" columns="1" layout="grid" styleClass="ui-panelgrid-blank">
         
-        
+        <h3>#{makeQuestionnaireBean.questionnaireName}</h3>
         <p:wizard nextLabel="#{msgs.next_button}" backLabel="#{msgs.back_button}" widgetVar="wizard" >
             
             <c:forEach items="#{makeQuestionnaireBean.questionsByGroup}" var="var" varStatus="status">

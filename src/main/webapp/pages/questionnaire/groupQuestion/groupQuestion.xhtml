@@ -26,8 +26,8 @@
                          value="#{groupQuestionBean.groupQuestionDtos}" rows="10" paginatorPosition="bottom"
                          styleClass="products-table">
     
-                <p:column headerText="Id" sortBy="#{group.id}" >
-                    <h:outputText value="#{group.id}"/>
+                <p:column headerText="Orden de aparición" sortBy="#{group.organizationOrder}" >
+                    <h:outputText value="#{group.organizationOrder}"/>
                 </p:column>
                 
                 <p:column headerText="Nombre" sortBy="#{group.nameGroup}" filterBy="#{group.nameGroup}">

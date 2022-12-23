@@ -26,10 +26,6 @@
                          value="#{questionnaireBean.questionnaireDtos}" rows="10" paginatorPosition="bottom"
                          styleClass="products-table">
                 
-                <p:column headerText="Id" sortBy="#{questionnaire.id}" >
-                    <h:outputText value="#{questionnaire.id}"/>
-                </p:column>
-                
                 <p:column headerText="Nombre" sortBy="#{questionnaire.name}" filterBy="#{questionnaire.name}">
                     <h:outputText value="#{questionnaire.name}"/>
                 </p:column>

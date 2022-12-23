@@ -39,6 +39,8 @@ public class MakeQuestionnaireBean implements Serializable {
 
     private Integer questionnarieId = 0;
 
+    private String questionnaireName = "Bienvenido";
+
     private String identification = "";
 
     private boolean change = false;
@@ -97,6 +99,7 @@ public class MakeQuestionnaireBean implements Serializable {
             return "";
         }
         this.change = true;
+        questionnaireName = getQuestionnaireName(questionnarieId);
         DynTabManager.getCurrentInstance().removeCurrentTab(true);
         return "uishell:makeQuestionnaireBean";
     }
@@ -109,5 +112,9 @@ public class MakeQuestionnaireBean implements Serializable {
     	
     	return questionnaireStudentService.questionnaireByStudent(sigenuId)
     				.stream().anyMatch(item -> item.getQuestionnarieId().getId().equals(questionnarieId));
+    }
+
+    public String getQuestionnaireName(Integer questionnarieId){
+        return getAllQuestionnaire().stream().filter(questionnaireDto -> questionnaireDto.getId().equals(questionnarieId)).findFirst().get().getName();
     }
 }
