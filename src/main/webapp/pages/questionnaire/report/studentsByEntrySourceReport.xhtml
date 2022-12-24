@@ -20,9 +20,9 @@
             <p:selectOneMenu style="width:100%;" required="true" value="#{studentsByEntrySourceReportBean.questionnarieId}">
                 <f:selectItem itemLabel="" noSelectionOption="true"/>
                 <f:selectItems value="#{studentsByEntrySourceReportBean.allQuestionnaire}" var="questionnaire"
-                               itemLabel="#{questionnaire.name}" itemValue="#{questionnaire.id}"/>
+                               itemLabel="#{studentsByEntrySourceReportBean.getCarrerById(questionnaire.careerSigenuId)}" itemValue="#{questionnaire.id}"/>
             </p:selectOneMenu>
-            <p:outputLabel for="@previous" value="#{msgs.completed_questionnaire}"/>
+            <p:outputLabel for="@previous" value="#{msgs.completed_career}"/>
         </h:panelGroup>
 
         <h:panelGroup styleClass="ui-float-label">
@@ -84,7 +84,7 @@
                 </div>
             </div>
 
-            <p:dataTable id="tbl" var="students" value="#{studentsByEntrySourceReportBean.allStudentsByEntrySource}"
+            <p:dataTable id="tbl" var="students" value="#{studentsByEntrySourceReportBean.studentsByEntrySource}"
                          sortMode="single"
                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
                          paginator="true" rows="10" styleClass="p-mt-2">
