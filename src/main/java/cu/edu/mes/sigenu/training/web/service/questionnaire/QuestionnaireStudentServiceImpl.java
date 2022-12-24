@@ -6,6 +6,7 @@ import cu.edu.mes.sigenu.training.web.security.CurrentUserUtils;
 import cu.edu.mes.sigenu.training.web.utils.ApiResponse;
 import cu.edu.mes.sigenu.training.web.utils.ApiRestMapper;
 import cu.edu.mes.sigenu.training.web.utils.RestService;
+import cu.edu.mes.subsystem.student.vo.StudentVO;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.util.UriTemplate;
@@ -43,21 +44,21 @@ public class QuestionnaireStudentServiceImpl implements QuestionnaireStudentServ
     }
 
     @Override
-    public String getCheckExistStudent(String identification) {
-        ApiResponse answer = null;
+    public StudentVO getCheckStudentByIdentification(String identification) {
+        StudentVO studentVO = null;
         try{
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-            ApiRestMapper<ApiResponse> apiRestMapper = new ApiRestMapper<>();
+            ApiRestMapper<StudentVO> apiRestMapper = new ApiRestMapper<>();
 
-            UriTemplate template = new UriTemplate("/api/v1/training/questionnaire-student/student-exist/{identification}/");
+            UriTemplate template = new UriTemplate("/api/v1/training/questionnaire-student/student-sigenu/{identification}/");
             String uri = template.expand(identification).toString();
 
             String response = (String)restService.GET(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
-            answer = apiRestMapper.mapOne(response,ApiResponse.class);
+            studentVO = apiRestMapper.mapOne(response,StudentVO.class);
         }catch (Exception e){
             e.printStackTrace();
         }
-        return answer.isSuccess() ? answer.getMessage() : "";
+        return studentVO;
     }
 
 

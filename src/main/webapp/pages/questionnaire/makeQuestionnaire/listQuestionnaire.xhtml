@@ -5,22 +5,16 @@
                 xmlns:p="http://primefaces.org/ui"
 >
     
-    <p:panelGrid columns="2" layout="grid">
+    <p:panelGrid columns="1" layout="grid">
+        
         <h:panelGroup styleClass="ui-float-label">
             <p:inputText style="width:100%;" value="#{makeQuestionnaireBean.identification}"
-                         maxlength="11" required="true"/>
+                         maxlength="11" required="true" type="numbre">
+                <p:keyFilter mask="num" />
+            </p:inputText>
             <p:outputLabel for="@previous" value="#{msgs.identification}"/>
         </h:panelGroup>
-        <h:panelGroup styleClass="ui-float-label">
-            
-            <p:selectOneMenu style="width:100%;" required="true" value="#{makeQuestionnaireBean.questionnarieId}">
-                <f:selectItem itemLabel="" noSelectionOption="true"/>
-                <f:selectItems value="#{makeQuestionnaireBean.allQuestionnaire}" var="questionnaire"
-                               itemLabel="#{questionnaire.name}" itemValue="#{questionnaire.id}"/>
-            </p:selectOneMenu>
-            <p:outputLabel for="@previous" value="#{msgs.take_questionnaire}"/>
-        </h:panelGroup>
-        <span></span>
+        
         
         <h:panelGroup style="display: flex;flex-direction: row-reverse">
             <p:commandButton style="margin-top: 20px; float: left" id="MakeQuestionnarie"
