@@ -9,7 +9,8 @@
     
     <p:panelGrid id="panelMake" columns="1" layout="grid" styleClass="ui-panelgrid-blank">
         
-        <h3>#{makeQuestionnaireBean.questionnaireName}</h3>
+        <h2>Cuestionario para estudiantes universitarios de nuevo ingreso</h2>
+        <p:staticMessage severity="info" summary="INFO" detail="Responda todas las preguntas presentes en el cuestionario, al finalizar presione el botón Enviar respuestas" style="width: 100%"/>
         <p:wizard nextLabel="#{msgs.next_button}" backLabel="#{msgs.back_button}" widgetVar="wizard" >
             
             <c:forEach items="#{makeQuestionnaireBean.questionsByGroup}" var="var" varStatus="status">
