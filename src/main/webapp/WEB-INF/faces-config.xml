@@ -232,7 +232,7 @@
         </managed-property>
         <managed-property>
             <property-name>title</property-name>
-            <value>#{msgs.sub_menu_question}</value>
+            <value>#{msgs.sub_menu_question_carrer}</value>
         </managed-property>
         <managed-property>
             <property-name>includePage</property-name>
@@ -243,6 +243,29 @@
             <value>true</value>
         </managed-property>
     </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>QuestionWithOutViewBeanDynTab</managed-bean-name>
+        <managed-bean-class>cu.edu.mes.sigenu.training.web.config.spa.DynTab</managed-bean-class>
+        <managed-bean-scope>view</managed-bean-scope>
+        <managed-property>
+            <property-name>uniqueIdentifier</property-name>
+            <value>QuestionWithOutViewBean</value>
+        </managed-property>
+        <managed-property>
+            <property-name>title</property-name>
+            <value>#{msgs.sub_menu_question}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>includePage</property-name>
+            <value>/pages/questionnaire/question/questionWithOutCareer.xhtml</value>
+        </managed-property>
+        <managed-property>
+            <property-name>closeable</property-name>
+            <value>true</value>
+        </managed-property>
+    </managed-bean>
+
 
 
     <managed-bean>

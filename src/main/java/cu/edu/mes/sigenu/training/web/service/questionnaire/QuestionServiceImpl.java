@@ -60,6 +60,24 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
+    public List<QuestionDto> getQuestionWithOutCareer() {
+        List<QuestionDto> questions = null;
+        try {
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            ApiRestMapper<QuestionDto> apiRestMapper = new ApiRestMapper<>();
+
+            UriTemplate template = new UriTemplate("/api/v1/training/question/questionWithoutCareer");
+            String response = (String)restService.GET(template.toString(), params, String.class,
+                                                      CurrentUserUtils.getTokenBearer()).getBody();
+
+            questions = apiRestMapper.mapList(response,QuestionDto.class);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return questions;
+    }
+
+    @Override
     public QuestionDto getById(Integer id) {
         QuestionDto question = null;
         try {

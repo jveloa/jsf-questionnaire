@@ -9,6 +9,7 @@ import java.util.List;
 public interface QuestionService {
     List<QuestionDto> getAll();
     List<QuestionWithCareerDto> getQuestionWithCareer();
+    List<QuestionDto> getQuestionWithOutCareer();
     QuestionDto getById(Integer id);
     ApiResponse save(QuestionDto questionDto);
     ApiResponse update(QuestionDto questionDto);
