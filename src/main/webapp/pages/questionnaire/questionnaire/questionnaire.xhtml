@@ -29,6 +29,10 @@
                 <p:column headerText="Nombre" sortBy="#{questionnaire.name}" filterBy="#{questionnaire.name}">
                     <h:outputText value="#{questionnaire.name}"/>
                 </p:column>
+    
+                <p:column headerText="Carrera " sortBy="#{questionnaireBean.getCarrerById(questionnaire.careerSigenuId)}" filterBy="#{questionnaireBean.getCarrerById(questionnaire.careerSigenuId)}">
+                    <h:outputText value="#{questionnaireBean.getCarrerById(questionnaire.careerSigenuId)}"/>
+                </p:column>
                 
                 <p:column headerText="Acciones">
                     <p:outputPanel style="margin: 5px">

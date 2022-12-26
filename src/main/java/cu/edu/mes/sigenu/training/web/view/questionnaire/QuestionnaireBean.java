@@ -45,7 +45,6 @@ public class QuestionnaireBean implements Serializable {
     public void openNew(){
         selectedQuestionnaire = new QuestionnaireDto();
         selectedQuestionnaire.setName("");
-        careerList = questionCareerService.getCareersSigenu();
     }
 
     @PostConstruct
@@ -78,6 +77,13 @@ public class QuestionnaireBean implements Serializable {
         }else{
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_WARN, "message_not_deleted");
         }
+    }
+
+    public String getCarrerById(String IdCareer){
+        if(careerList == null){
+            careerList = questionCareerService.getCareersSigenu();
+        }
+        return careerList.stream().filter(career -> career.getIdNationalCareer().equals(IdCareer)).findFirst().get().getName();
     }
 
 
