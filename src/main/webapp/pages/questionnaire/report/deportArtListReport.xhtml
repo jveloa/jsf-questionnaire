@@ -15,15 +15,18 @@
 
             <p:outputLabel for="@previous" value="#{msgs.year}"/>
         </h:panelGroup>
+
         <h:panelGroup styleClass="ui-float-label">
 
             <p:selectOneMenu style="width:60%; margin-left:200px;" required="true" value="#{deportArtListReportBean.questionnarieId}">
                 <f:selectItem itemLabel="" noSelectionOption="true"/>
                 <f:selectItems value="#{deportArtListReportBean.allQuestionnaire}" var="questionnaire"
-                               itemLabel="#{questionnaire.name}" itemValue="#{questionnaire.id}"/>
+                               itemLabel="#{deportArtListReportBean.getCarrerById(questionnaire.careerSigenuId)}" itemValue="#{questionnaire.id}"/>
             </p:selectOneMenu>
-            <p:outputLabel style="margin-left:200px;" for="@previous" value="#{msgs.completed_questionnaire}"/>
+            <p:outputLabel style="margin-left:200px;" for="@previous" value="#{msgs.completed_career}"/>
         </h:panelGroup>
+
+
         <span></span>
 
 
@@ -74,12 +77,12 @@
                 </div>
             </div>
 
-            <p:dataTable id="tbl" var="students" value="#{deportArtListReportBean.allDeportArtList}"
+            <p:dataTable id="tbl" var="students" value="#{deportArtListReportBean.deportArtList}"
                          sortMode="single"
                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
                          paginator="true" rows="10" styleClass="p-mt-2">
 
-                <p:column headerText="Nombre" sortBy="#{students.name}" filterBy="#{students.name}">
+                <p:column headerText="Nombre y apellidos" sortBy="#{students.name}" filterBy="#{students.name}" filterMatchMode="contains">
                     <h:outputText value="#{students.name}"/>
                 </p:column>
                 <p:column headerText="CI" sortBy="#{students.studentSigenuId}">

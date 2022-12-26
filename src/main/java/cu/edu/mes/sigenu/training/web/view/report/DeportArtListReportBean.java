@@ -3,10 +3,12 @@ package cu.edu.mes.sigenu.training.web.view.report;
 import cu.edu.mes.sigenu.training.web.dto.questionnaire.QuestionnaireDto;
 import cu.edu.mes.sigenu.training.web.dto.questionnaire.report.DeportArtListDto;
 import cu.edu.mes.sigenu.training.web.dto.questionnaire.report.StudentArtDto;
+import cu.edu.mes.sigenu.training.web.service.questionnaire.QuestionCareerService;
 import cu.edu.mes.sigenu.training.web.service.questionnaire.QuestionnaireService;
 import cu.edu.mes.sigenu.training.web.service.report.ArtListReportService;
 import cu.edu.mes.sigenu.training.web.service.report.DeportArtListReportService;
 import cu.edu.mes.sigenu.training.web.utils.JsfUtils;
+import cu.edu.mes.vo.NationalCareerVO;
 import lombok.Data;
 
 import javax.annotation.PostConstruct;
@@ -29,9 +31,14 @@ public class DeportArtListReportBean implements Serializable {
     private DeportArtListReportService deportArtListReportService;
 
     @Inject
+    private QuestionCareerService questionCareerService;
+
+    @Inject
     private QuestionnaireService questionnaireService;
 
     private Integer questionnarieId;
+
+    private List<NationalCareerVO> careerList;
 
     private Integer year;
 
@@ -60,6 +67,13 @@ public class DeportArtListReportBean implements Serializable {
             deportArtList = new ArrayList<>();
         }
 
+    }
+
+    public String getCarrerById(String IdCareer){
+        if(careerList == null){
+            careerList = questionCareerService.getCareersSigenu();
+        }
+        return careerList.stream().filter(career -> career.getIdNationalCareer().equals(IdCareer)).findFirst().get().getName();
     }
 
 

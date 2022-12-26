@@ -35,6 +35,8 @@ public class StudentsByEntrySourceReportBean implements Serializable {
     @Inject
     private QuestionCareerService questionCareerService;
 
+    private List<NationalCareerVO> careerList;
+
     private Integer questionnarieId;
 
     private Integer year;
@@ -43,7 +45,7 @@ public class StudentsByEntrySourceReportBean implements Serializable {
 
     private String idEntrySource;
 
-    private List<NationalCareerVO> careerList;
+
 
     @PostConstruct
     public void init(){

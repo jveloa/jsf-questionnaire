@@ -89,7 +89,7 @@
                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
                          paginator="true" rows="10" styleClass="p-mt-2">
 
-                <p:column headerText="Nombre" sortBy="#{students}" filterBy="#{students}">
+                <p:column headerText="Nombre y appellidos" sortBy="#{students}" filterBy="#{students}" filterMatchMode="contains">
                     <h:outputText value="#{students}" />
                 </p:column>
 
