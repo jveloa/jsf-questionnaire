@@ -3,10 +3,12 @@ package cu.edu.mes.sigenu.training.web.view.report;
 import cu.edu.mes.sigenu.training.web.dto.questionnaire.QuestionnaireDto;
 import cu.edu.mes.sigenu.training.web.dto.questionnaire.report.StudentArtDto;
 import cu.edu.mes.sigenu.training.web.dto.questionnaire.report.StudentSportDto;
+import cu.edu.mes.sigenu.training.web.service.questionnaire.QuestionCareerService;
 import cu.edu.mes.sigenu.training.web.service.questionnaire.QuestionnaireService;
 import cu.edu.mes.sigenu.training.web.service.report.ArtListReportService;
 import cu.edu.mes.sigenu.training.web.service.report.StudentSportListReportService;
 import cu.edu.mes.sigenu.training.web.utils.JsfUtils;
+import cu.edu.mes.vo.NationalCareerVO;
 import lombok.Data;
 
 import javax.annotation.PostConstruct;
@@ -28,6 +30,9 @@ public class ArtListReportBean implements Serializable {
     private ArtListReportService artListReportService;
 
     @Inject
+    private QuestionCareerService questionCareerService;
+
+    @Inject
     private QuestionnaireService questionnaireService;
 
     private Integer questionnarieId;
@@ -35,6 +40,8 @@ public class ArtListReportBean implements Serializable {
     private Integer year;
 
     private List<StudentArtDto> studentArtList;
+
+    private List<NationalCareerVO> careerList;
 
     @PostConstruct
     public void init(){
@@ -59,6 +66,13 @@ public class ArtListReportBean implements Serializable {
             studentArtList = new ArrayList<>();
         }
 
+    }
+
+    public String getCarrerById(String IdCareer){
+        if(careerList == null){
+            careerList = questionCareerService.getCareersSigenu();
+        }
+        return careerList.stream().filter(career -> career.getIdNationalCareer().equals(IdCareer)).findFirst().get().getName();
     }
 
 

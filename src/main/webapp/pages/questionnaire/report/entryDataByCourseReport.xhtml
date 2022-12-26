@@ -15,15 +15,18 @@
 
             <p:outputLabel for="@previous" value="#{msgs.year}"/>
         </h:panelGroup>
+
         <h:panelGroup styleClass="ui-float-label">
 
             <p:selectOneMenu style="width:60%; margin-left:200px;" required="true" value="#{entryDataByCourseReportBean.questionnarieId}">
                 <f:selectItem itemLabel="" noSelectionOption="true"/>
                 <f:selectItems value="#{entryDataByCourseReportBean.allQuestionnaire}" var="questionnaire"
-                               itemLabel="#{questionnaire.name}" itemValue="#{questionnaire.id}"/>
+                               itemLabel="#{entryDataByCourseReportBean.getCarrerById(questionnaire.careerSigenuId)}" itemValue="#{questionnaire.id}"/>
             </p:selectOneMenu>
-            <p:outputLabel style="margin-left:200px;" for="@previous" value="#{msgs.completed_questionnaire}"/>
+            <p:outputLabel style="margin-left:200px;" for="@previous" value="#{msgs.completed_career}"/>
         </h:panelGroup>
+
+
         <span></span>
 
 
@@ -78,7 +81,7 @@
             </div>
 
 
-            <p:dataTable id="tbl" var="notes" value="#{entryDataByCourseReportBean.allEntryDataByCourse}"
+            <p:dataTable id="tbl" var="notes" value="#{entryDataByCourseReportBean.studentsWithNotesList}"
                          reflow="true" paginator="true" rows="20" paginatorPosition="bottom" styleClass="products-table">
 
                 <p:column headerText="Tipo" sortBy="#{notes.name}">

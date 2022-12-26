@@ -2,10 +2,12 @@ package cu.edu.mes.sigenu.training.web.view.report;
 
 import cu.edu.mes.sigenu.training.web.dto.questionnaire.QuestionnaireDto;
 import cu.edu.mes.sigenu.training.web.dto.questionnaire.report.EntrySourceAuxDto;
+import cu.edu.mes.sigenu.training.web.service.questionnaire.QuestionCareerService;
 import cu.edu.mes.sigenu.training.web.service.questionnaire.QuestionnaireService;
 import cu.edu.mes.sigenu.training.web.service.report.StudentsByEntrySourceReportService;
 import cu.edu.mes.sigenu.training.web.service.report.StudentsByPlaceEgressReportService;
 import cu.edu.mes.sigenu.training.web.utils.JsfUtils;
+import cu.edu.mes.vo.NationalCareerVO;
 import lombok.Data;
 
 import javax.annotation.PostConstruct;
@@ -28,6 +30,11 @@ public class StudentsByPlaceEgressReportBean implements Serializable {
 
     @Inject
     private QuestionnaireService questionnaireService;
+
+    @Inject
+    private QuestionCareerService questionCareerService;
+
+    private List<NationalCareerVO> careerList;
 
     private Integer questionnarieId;
 
@@ -70,6 +77,13 @@ public class StudentsByPlaceEgressReportBean implements Serializable {
             studentsByPlaceEgress = new ArrayList<String>();
         }
 
+    }
+
+    public String getCarrerById(String IdCareer){
+        if(careerList == null){
+            careerList = questionCareerService.getCareersSigenu();
+        }
+        return careerList.stream().filter(career -> career.getIdNationalCareer().equals(IdCareer)).findFirst().get().getName();
     }
 
 

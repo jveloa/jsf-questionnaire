@@ -15,15 +15,17 @@
 
             <p:outputLabel for="@previous" value="#{msgs.year}"/>
         </h:panelGroup>
+
         <h:panelGroup styleClass="ui-float-label">
 
             <p:selectOneMenu style="width:60%; margin-left:200px;" required="true" value="#{studentsWitchNotesReportBean.questionnarieId}">
                 <f:selectItem itemLabel="" noSelectionOption="true"/>
                 <f:selectItems value="#{studentsWitchNotesReportBean.allQuestionnaire}" var="questionnaire"
-                               itemLabel="#{questionnaire.name}" itemValue="#{questionnaire.id}"/>
+                               itemLabel="#{studentsWitchNotesReportBean.getCarrerById(questionnaire.careerSigenuId)}" itemValue="#{questionnaire.id}"/>
             </p:selectOneMenu>
-            <p:outputLabel style="margin-left:200px;" for="@previous" value="#{msgs.completed_questionnaire}"/>
+            <p:outputLabel style="margin-left:200px;" for="@previous" value="#{msgs.completed_career}"/>
         </h:panelGroup>
+
         <span></span>
 
 
@@ -78,10 +80,10 @@
             </div>
 
 
-            <p:dataTable id="tbl" var="studentsNotes" value="#{studentsWitchNotesReportBean.allStudentsWitchNotes}"
+            <p:dataTable id="tbl" var="studentsNotes" value="#{studentsWitchNotesReportBean.studentsNotesList}"
                          reflow="true" paginator="true" rows="20" paginatorPosition="bottom" styleClass="products-table">
 
-                <p:column headerText="Nombre" sortBy="#{studentsNotes.name}" filterBy="#{studentsNotes.name}">
+                <p:column headerText="Nombre y apellidos" sortBy="#{studentsNotes.name}" filterBy="#{studentsNotes.name}" filterMatchMode="contains">
                     <h:outputText value="#{studentsNotes.name} "/>
                 </p:column>
                 <p:column headerText="Índice Académico" sortBy="#{studentsNotes.noteAve}">

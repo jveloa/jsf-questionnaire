@@ -15,15 +15,17 @@
 
             <p:outputLabel for="@previous" value="#{msgs.year}"/>
         </h:panelGroup>
+
         <h:panelGroup styleClass="ui-float-label">
 
             <p:selectOneMenu style="width:100%;" required="true" value="#{entryDataByCourseByPlaceEgressReportBean.questionnarieId}">
                 <f:selectItem itemLabel="" noSelectionOption="true"/>
                 <f:selectItems value="#{entryDataByCourseByPlaceEgressReportBean.allQuestionnaire}" var="questionnaire"
-                               itemLabel="#{questionnaire.name}" itemValue="#{questionnaire.id}"/>
+                               itemLabel="#{entryDataByCourseByPlaceEgressReportBean.getCarrerById(questionnaire.careerSigenuId)}" itemValue="#{questionnaire.id}"/>
             </p:selectOneMenu>
-            <p:outputLabel for="@previous" value="#{msgs.completed_questionnaire}"/>
+            <p:outputLabel for="@previous" value="#{msgs.completed_career}"/>
         </h:panelGroup>
+
 
         <h:panelGroup styleClass="ui-float-label">
 
@@ -84,12 +86,12 @@
                 </div>
             </div>
 
-            <p:dataTable id="tbl" var="notes" value="#{entryDataByCourseByPlaceEgressReportBean.allEntryDataByCourseByPlaceEgress}"
+            <p:dataTable id="tbl" var="notes" value="#{entryDataByCourseByPlaceEgressReportBean.entryDataByCourseByPlaceEgress}"
                          sortMode="single"
                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
                          paginator="true" rows="10" styleClass="p-mt-2">
 
-                <p:column headerText="Tipo" sortBy="#{notes.name}">
+                <p:column headerText="Tipo" sortBy="#{notes.name}" >
                     <h:outputText value="#{notes.name} "/>
                 </p:column>
                 <p:column headerText="Máximo" sortBy="#{notes.numberMax}">
