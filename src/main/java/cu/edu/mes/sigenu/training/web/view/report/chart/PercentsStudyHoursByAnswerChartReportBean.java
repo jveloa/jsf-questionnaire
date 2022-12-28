@@ -75,7 +75,12 @@ public class PercentsStudyHoursByAnswerChartReportBean implements Serializable {
     }
 
     public boolean setHidden(){
-        return this.hidden = true;
+        createStackedBarModel();
+        /*if (this.hidden == false)
+            JsfUtils.addMessageFromBundle("casa", FacesMessage.SEVERITY_WARN, "search_not_found");
+
+        */return this.hidden;
+
     }
 
     public void createStackedBarModel() {
@@ -86,130 +91,136 @@ public class PercentsStudyHoursByAnswerChartReportBean implements Serializable {
 
 
         List<String> yearList = percentsStudyHoursByAnswerChartReportService.getAllYears(this.questionnarieId);
-        stackedBarModel = new BarChartModel();
-        ChartData data = new ChartData();
+        if (!(yearList.isEmpty())){
 
-        BarChartDataSet barDataSet = new BarChartDataSet();
-        barDataSet.setLabel("20 o más");
-        barDataSet.setBackgroundColor("rgb(255, 99, 132)");
-        List<Number> dataVal = new ArrayList<>();
+            stackedBarModel = new BarChartModel();
+            ChartData data = new ChartData();
 
-        BarChartDataSet barDataSet2 = new BarChartDataSet();
-        barDataSet2.setLabel("Entre 15 y 20");
-        barDataSet2.setBackgroundColor("rgb(54, 162, 235)");
-        List<Number> dataVal2 = new ArrayList<>();
+            BarChartDataSet barDataSet = new BarChartDataSet();
+            barDataSet.setLabel("20 o más");
+            barDataSet.setBackgroundColor("rgb(255, 99, 132)");
+            List<Number> dataVal = new ArrayList<>();
 
-        BarChartDataSet barDataSet3 = new BarChartDataSet();
-        barDataSet3.setLabel("Entre 10 y 15");
-        barDataSet3.setBackgroundColor("rgb(75, 192, 192)");
-        List<Number> dataVal3 = new ArrayList<>();
+            BarChartDataSet barDataSet2 = new BarChartDataSet();
+            barDataSet2.setLabel("Entre 15 y 20");
+            barDataSet2.setBackgroundColor("rgb(54, 162, 235)");
+            List<Number> dataVal2 = new ArrayList<>();
 
-        BarChartDataSet barDataSet4 = new BarChartDataSet();
-        barDataSet4.setLabel("Entre 5 y 10");
-        barDataSet4.setBackgroundColor("rgb(100, 102, 255)");
-        List<Number> dataVal4 = new ArrayList<>();
+            BarChartDataSet barDataSet3 = new BarChartDataSet();
+            barDataSet3.setLabel("Entre 10 y 15");
+            barDataSet3.setBackgroundColor("rgb(75, 192, 192)");
+            List<Number> dataVal3 = new ArrayList<>();
 
-        BarChartDataSet barDataSet5 = new BarChartDataSet();
-        barDataSet5.setLabel("Entre 2 y 5");
-        barDataSet5.setBackgroundColor("rgb(201, 203, 207)");
-        List<Number> dataVal5 = new ArrayList<>();
+            BarChartDataSet barDataSet4 = new BarChartDataSet();
+            barDataSet4.setLabel("Entre 5 y 10");
+            barDataSet4.setBackgroundColor("rgb(100, 102, 255)");
+            List<Number> dataVal4 = new ArrayList<>();
 
-        BarChartDataSet barDataSet6 = new BarChartDataSet();
-        barDataSet6.setLabel("Menos de 2");
-        barDataSet6.setBackgroundColor("rgb(255, 205, 86)");
-        List<Number> dataVal6 = new ArrayList<>();
+            BarChartDataSet barDataSet5 = new BarChartDataSet();
+            barDataSet5.setLabel("Entre 2 y 5");
+            barDataSet5.setBackgroundColor("rgb(201, 203, 207)");
+            List<Number> dataVal5 = new ArrayList<>();
 
-        List<String> labels = new ArrayList<>();
+            BarChartDataSet barDataSet6 = new BarChartDataSet();
+            barDataSet6.setLabel("Menos de 2");
+            barDataSet6.setBackgroundColor("rgb(255, 205, 86)");
+            List<Number> dataVal6 = new ArrayList<>();
 
-        for ( int i = 0; i < yearList.size();i++){
+            List<String> labels = new ArrayList<>();
 
-            String year = yearList.get(i).substring(0,4);
-            labels.add(year);
+            for (int i = 0; i < yearList.size(); i++) {
 
-            try {
-                valueYear = Integer.valueOf(year);
+                String year = yearList.get(i).substring(0, 4);
+                labels.add(year);
+
+                try {
+                    valueYear = Integer.valueOf(year);
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
+                List<PercentsStudyHoursByAnswerDto> list = percentsStudyHoursByAnswerReportService.getPercentsStudyHoursByAnswer(valueYear, this.questionnarieId);
+                for (int j = 0; j < list.size(); j++) {
+
+                    if (list.get(j).getQuestion().contains("20 o más"))
+                        dataVal.add(list.get(j).getValue());
+
+                    else if (list.get(j).getQuestion().contains("Entre 15 y 20"))
+                        dataVal2.add(list.get(j).getValue());
+
+                    else if (list.get(j).getQuestion().contains("Entre 10 y 15"))
+                        dataVal3.add(list.get(j).getValue());
+
+                    else if (list.get(j).getQuestion().contains("Entre 5 y 10"))
+                        dataVal4.add(list.get(j).getValue());
+
+                    else if (list.get(j).getQuestion().contains("Entre 2 y 5"))
+                        dataVal5.add(list.get(j).getValue());
+
+                    else if (list.get(j).getQuestion().contains("Menos de 2"))
+                        dataVal6.add(list.get(j).getValue());
+                }
+
+
             }
-            catch (NumberFormatException e){
-                e.printStackTrace();
-            }
-            List<PercentsStudyHoursByAnswerDto> list = percentsStudyHoursByAnswerReportService.getPercentsStudyHoursByAnswer(valueYear,this.questionnarieId);
-            for (int j = 0;j < list.size();j++){
 
-                if (list.get(j).getQuestion().contains("20 o más"))
-                    dataVal.add(list.get(j).getValue());
+            barDataSet.setData(dataVal);
+            barDataSet2.setData(dataVal2);
+            barDataSet3.setData(dataVal3);
+            barDataSet4.setData(dataVal4);
+            barDataSet5.setData(dataVal5);
+            barDataSet6.setData(dataVal6);
 
-                else if (list.get(j).getQuestion().contains("Entre 15 y 20"))
-                    dataVal2.add(list.get(j).getValue());
+            data.addChartDataSet(barDataSet);
+            data.addChartDataSet(barDataSet2);
+            data.addChartDataSet(barDataSet3);
+            data.addChartDataSet(barDataSet4);
+            data.addChartDataSet(barDataSet5);
+            data.addChartDataSet(barDataSet6);
 
-                else if (list.get(j).getQuestion().contains("Entre 10 y 15"))
-                    dataVal3.add(list.get(j).getValue());
 
-                else if (list.get(j).getQuestion().contains("Entre 5 y 10"))
-                    dataVal4.add(list.get(j).getValue());
+            data.setLabels(labels);
+            stackedBarModel.setData(data);
 
-                else if (list.get(j).getQuestion().contains("Entre 2 y 5"))
-                    dataVal5.add(list.get(j).getValue());
+            //Options
+            BarChartOptions options = new BarChartOptions();
+            CartesianScales cScales = new CartesianScales();
+            CartesianLinearAxes linearAxes = new CartesianLinearAxes();
+            linearAxes.setStacked(true);
+            linearAxes.setOffset(true);
+            cScales.addXAxesData(linearAxes);
+            cScales.addYAxesData(linearAxes);
+            options.setScales(cScales);
 
-                else if (list.get(j).getQuestion().contains("Menos de 2"))
-                    dataVal6.add(list.get(j).getValue());
-            }
 
+            Title title = new Title();
+            title.setDisplay(true);
+            title.setText("Rangos de horas dedicadas al estudio");
+            options.setTitle(title);
+
+            Tooltip tooltip = new Tooltip();
+            tooltip.setMode("index");
+            tooltip.setIntersect(false);
+            options.setTooltip(tooltip);
+
+            stackedBarModel.setOptions(options);
+
+            this.hidden = true;
 
         }
-
-        barDataSet.setData(dataVal);
-        barDataSet2.setData(dataVal2);
-        barDataSet3.setData(dataVal3);
-        barDataSet4.setData(dataVal4);
-        barDataSet5.setData(dataVal5);
-        barDataSet6.setData(dataVal6);
-
-        data.addChartDataSet(barDataSet);
-        data.addChartDataSet(barDataSet2);
-        data.addChartDataSet(barDataSet3);
-        data.addChartDataSet(barDataSet4);
-        data.addChartDataSet(barDataSet5);
-        data.addChartDataSet(barDataSet6);
-
-
-        data.setLabels(labels);
-        stackedBarModel.setData(data);
-
-        //Options
-        BarChartOptions options = new BarChartOptions();
-        CartesianScales cScales = new CartesianScales();
-        CartesianLinearAxes linearAxes = new CartesianLinearAxes();
-        linearAxes.setStacked(true);
-        linearAxes.setOffset(true);
-        cScales.addXAxesData(linearAxes);
-        cScales.addYAxesData(linearAxes);
-        options.setScales(cScales);
-
-
-
-        Title title = new Title();
-        title.setDisplay(true);
-        title.setText("Rangos de horas dedicadas al estudio");
-        options.setTitle(title);
-
-        Tooltip tooltip = new Tooltip();
-        tooltip.setMode("index");
-        tooltip.setIntersect(false);
-        options.setTooltip(tooltip);
-
-        stackedBarModel.setOptions(options);
+        else
+            this.hidden = false;
 
 
     }
 
-    public BarChartModel getStackedBarModel() {
+    /*public BarChartModel getStackedBarModel() {
         createStackedBarModel();
         return stackedBarModel;
-    }
+    }*/
 
-    public void setStackedBarModel(BarChartModel stackedBarModel) {
+    /*public void setStackedBarModel(BarChartModel stackedBarModel) {
         this.stackedBarModel = stackedBarModel;
-    }
+    }*/
 
     public boolean getHidden() {
         return this.hidden;
