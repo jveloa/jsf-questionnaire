@@ -93,7 +93,7 @@ public class StudentCareerOptionsChartReportBean implements Serializable {
             ChartData data = new ChartData();
 
             BarChartDataSet barDataSetOne = new BarChartDataSet();
-            barDataSetOne.setLabel("Opción uno");
+            barDataSetOne.setLabel("Opción 1");
             barDataSetOne.setBackgroundColor("rgb(255, 99, 132)");
             List<Number> dataVal = new ArrayList<>();
 
