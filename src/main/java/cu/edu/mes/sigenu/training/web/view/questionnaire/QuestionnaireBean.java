@@ -59,8 +59,11 @@ public class QuestionnaireBean implements Serializable {
         }
 
         if(this.selectedQuestionnaire.getId() == null){
-            questionnaireService.save(selectedQuestionnaire);
-            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_added");
+            ApiResponse response = questionnaireService.save(selectedQuestionnaire);
+            if (response.isSuccess())
+                JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_added");
+            else
+                JsfUtils.addMessageFromBundle(null,FacesMessage.SEVERITY_WARN,"message_questionnarie_exist");
         }else{
             questionnaireService.update(selectedQuestionnaire);
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_edited");
