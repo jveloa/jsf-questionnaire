@@ -21,6 +21,8 @@ import org.primefaces.model.charts.optionconfig.tooltip.Tooltip;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -72,10 +74,11 @@ public class StudentCareerOptionsChartReportBean implements Serializable {
 
     public boolean setHidden(){
         createStackedBarModel();
-        /*if (this.hidden == false)
-            JsfUtils.addMessageFromBundle("casa", FacesMessage.SEVERITY_WARN, "search_not_found");
+        if (this.hidden == false)
+            FacesContext.getCurrentInstance().
+                    addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Mensaje de error", "No se encontraron elementos que coincidan  con su búsqueda"));
 
-        */return this.hidden;
+        return this.hidden;
 
     }
 

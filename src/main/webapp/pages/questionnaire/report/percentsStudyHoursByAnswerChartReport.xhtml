@@ -6,6 +6,7 @@
 
 >
 
+    <p:growl id="growl" showDetail="true" severity="info, error"/>
 
 
     <p:panelGrid id="panel"  columns="1" layout="flex">
@@ -42,7 +43,7 @@
                 <p:commandButton value="#{msgs.button_view_Chart}"
                                  action="#{percentsStudyHoursByAnswerChartReportBean.setHidden}"
                                  styleClass="button-prime btn btn-flat btn-labeled btn-primary pull-right"
-                                 update="panel form"
+                                 update="panel form growl"
                                  process="panel @this form"
                                  icon="pi pi-chart-bar" style="margin-right:3px;"
 

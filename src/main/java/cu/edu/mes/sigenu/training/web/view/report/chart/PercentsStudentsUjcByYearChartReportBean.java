@@ -78,7 +78,11 @@ public class PercentsStudentsUjcByYearChartReportBean implements Serializable {
         createLineModel();
         if (this.hidden == false)
 
-    JsfUtils.addMessageFromBundle("panel", FacesMessage.SEVERITY_WARN, "search_not_found");
+
+            FacesContext.getCurrentInstance().
+                    addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Mensaje de error", "No se encontraron elementos que coincidan  con su búsqueda"));
+
+    //JsfUtils.addMessageFromBundle("panel", FacesMessage.SEVERITY_WARN, "search_not_found");
 
     return this.hidden;
 
