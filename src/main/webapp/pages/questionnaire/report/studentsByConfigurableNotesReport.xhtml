@@ -31,7 +31,7 @@
             <p:spinner id="ave" value="#{studentsByConfigurableNotesReportBean.noteAve}"
                        min="60" max="100" style="width:70%;" thousandSeparator=""
                        decimalSeparator="."  stepFactor="0.50" >
-                <p:ajax   process="ave mat his spa" listener="#{studentsByConfigurableNotesReportBean.validate}"/>
+                <p:ajax   process="ave mat his spa"  listener="#{studentsByConfigurableNotesReportBean.validate}"/>
             </p:spinner>
             <p:outputLabel for="@previous" value="#{msgs.note_ave}"/>
         </h:panelGroup>

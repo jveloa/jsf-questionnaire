@@ -6,6 +6,7 @@ import cu.edu.mes.sigenu.training.web.service.questionnaire.QuestionCareerServic
 import cu.edu.mes.sigenu.training.web.service.questionnaire.QuestionnaireService;
 import cu.edu.mes.sigenu.training.web.service.report.chart.PercentsStudentsUjcByYearChartReportService;
 import cu.edu.mes.sigenu.training.web.service.report.chart.StudentCareerOptionsChartReportService;
+import cu.edu.mes.sigenu.training.web.utils.JsfUtils;
 import cu.edu.mes.vo.NationalCareerVO;
 import lombok.Data;
 import org.primefaces.model.charts.ChartData;
@@ -22,6 +23,8 @@ import org.primefaces.model.charts.optionconfig.tooltip.Tooltip;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -73,10 +76,11 @@ public class PercentsStudentsUjcByYearChartReportBean implements Serializable {
 
     public boolean setHidden(){
         createLineModel();
-        /*if (this.hidden == false)
-            JsfUtils.addMessageFromBundle("casa", FacesMessage.SEVERITY_WARN, "search_not_found");
+        if (this.hidden == false)
 
-        */return this.hidden;
+    JsfUtils.addMessageFromBundle("panel", FacesMessage.SEVERITY_WARN, "search_not_found");
+
+    return this.hidden;
 
     }
 

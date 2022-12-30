@@ -26,7 +26,7 @@
                          value="#{answerBean.answerDtos}" rows="10" paginatorPosition="bottom"
                          styleClass="products-table">
                 
-                <p:column headerText="Respuesta" sortBy="#{answer.answer}" filterBy="#{answer.answer}">
+                <p:column headerText="Respuesta" sortBy="#{answer.answer}" filterBy="#{answer.answer}" filterMatchMode="contains">
                     <h:outputText value="#{answer.answer}"/>
                 </p:column>
                 

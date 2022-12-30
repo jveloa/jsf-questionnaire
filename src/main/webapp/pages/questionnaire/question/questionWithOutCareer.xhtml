@@ -13,11 +13,11 @@
                          styleClass="products-table">
                 
                 
-                <p:column headerText="Pregunta" sortBy="#{question.question}" filterBy="#{question.question}">
+                <p:column headerText="Pregunta" sortBy="#{question.question}" filterBy="#{question.question}" filterMatchMode="contains">
                     <h:outputText value="#{question.question}"/>
                 </p:column>
                 
-                <p:column headerText="Grupo de pregunta"  filterBy="#{questionWithOutCareerBean.getGroupQuestionById(question.groupQuestionId)}">
+                <p:column headerText="Grupo de pregunta"  filterBy="#{questionWithOutCareerBean.getGroupQuestionById(question.groupQuestionId)}" filterMatchMode="contains">
                     <h:outputText value="#{questionWithOutCareerBean.getGroupQuestionById(question.groupQuestionId)}"/>
                 </p:column>
                 

@@ -26,11 +26,11 @@
                          value="#{questionnaireBean.questionnaireDtos}" rows="10" paginatorPosition="bottom"
                          styleClass="products-table">
                 
-                <p:column headerText="Nombre" sortBy="#{questionnaire.name}" filterBy="#{questionnaire.name}">
+                <p:column headerText="Nombre" sortBy="#{questionnaire.name}" filterBy="#{questionnaire.name}" filterMatchMode="contains">
                     <h:outputText value="#{questionnaire.name}"/>
                 </p:column>
     
-                <p:column headerText="Carrera " sortBy="#{questionnaireBean.getCarrerById(questionnaire.careerSigenuId)}" filterBy="#{questionnaireBean.getCarrerById(questionnaire.careerSigenuId)}">
+                <p:column headerText="Carrera " sortBy="#{questionnaireBean.getCarrerById(questionnaire.careerSigenuId)}" filterBy="#{questionnaireBean.getCarrerById(questionnaire.careerSigenuId)}" filterMatchMode="contains">
                     <h:outputText value="#{questionnaireBean.getCarrerById(questionnaire.careerSigenuId)}"/>
                 </p:column>
                 
