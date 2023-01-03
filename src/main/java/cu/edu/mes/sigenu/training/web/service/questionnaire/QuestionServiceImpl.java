@@ -96,6 +96,24 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
+    public QuestionDto getByName(String name) {
+        QuestionDto question = null;
+        try {
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            ApiRestMapper<QuestionDto> apiRestMapper = new ApiRestMapper<>();
+
+            UriTemplate template = new UriTemplate("/api/v1/training/question/name/{name}");
+            String uri = template.expand(name).toString();
+
+            String response = (String)restService.GET(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
+            question = apiRestMapper.mapOne(response,QuestionDto.class);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return question;
+    }
+
+    @Override
     public ApiResponse save(QuestionDto questionDto) {
         ApiResponse apiResponse = null;
         try {
@@ -104,6 +122,24 @@ public class QuestionServiceImpl implements QuestionService {
 
             UriTemplate template = new UriTemplate("/api/v1/training/question");
             String response = (String) restService.POST(template.toString(), questionDto, String.class,
+                                                        CurrentUserUtils.getTokenBearer()).getBody();
+
+            apiResponse = apiRestMapper.mapOne(response,ApiResponse.class);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return apiResponse;
+    }
+
+    @Override
+    public ApiResponse saveWithCareer(QuestionWithCareerDto questionWithCareerDto) {
+        ApiResponse apiResponse = null;
+        try {
+            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+            ApiRestMapper<ApiResponse> apiRestMapper = new ApiRestMapper<>();
+
+            UriTemplate template = new UriTemplate("/api/v1/training/question/questionWithCareer");
+            String response = (String) restService.POST(template.toString(), questionWithCareerDto, String.class,
                                                         CurrentUserUtils.getTokenBearer()).getBody();
 
             apiResponse = apiRestMapper.mapOne(response,ApiResponse.class);

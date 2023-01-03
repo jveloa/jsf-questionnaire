@@ -27,7 +27,7 @@
                          styleClass="products-table">
                 
                 
-                <p:column headerText="Pregunta" sortBy="#{question.question}" filterBy="#{question.question}">
+                <p:column headerText="Pregunta" filterBy="#{question.question}">
                     <h:outputText value="#{question.question}"/>
                 </p:column>
     
@@ -39,23 +39,49 @@
                     <h:outputText value="#{questionBean.getCarrerById(question.questionCarrerId)}"/>
                 </p:column>
                 
-                <p:column headerText="Acciones">
+                <p:column headerText="Acciones" style="margin: 5px">
                     <p:outputPanel style="margin: 5px">
                         <p:commandButton icon="pi pi-pencil"
-                                        
-                                         
+                                         update="@obs(event1)"
+                                         oncomplete="PF('question').show()"
                                          styleClass="edit-button rounded-button ui-button-success"
                                          style="margin-right: 5px"
-                                         >
-                           
+                                         process="@this">
+                            <f:setPropertyActionListener value="#{question}"
+                                                         target="#{questionBean.selectedQuestion}"/>
                         </p:commandButton>
-                        <p:commandButton id="delete" icon="pi pi pi-trash"
+                        <p:commandButton id="delete" icon="pi pi-trash"
                                          styleClass="ui-button-warning rounded-button"
-                                        
-                                        >
-                           
+                                         action="#{questionBean.delete}"
+                                         update="dt-Question"
+                                         style="margin-right: 5px"
+                                         process="@this">
+                            <f:setPropertyActionListener value="#{question}"
+                                                         target="#{questionBean.selectedQuestion}"/>
                             <p:confirm header="Confirmar" message="Está seguro de eliminar la respuesta?"
                                        icon="pi pi-exclamation-triangle"/>
+                        </p:commandButton>
+    
+                        <p:commandButton icon="pi pi-plus"
+                                         action="#{questionBean.openForAdd}"
+                                         update="@obs(event2)"
+                                         oncomplete="PF('questionAddAnswer').show()"
+                                         styleClass="edit-button rounded-button ui-button-success"
+                                         style="margin-right: 5px"
+                                         process="@this">
+                            <f:setPropertyActionListener value="#{question}"
+                                                         target="#{questionBean.selectedQuestion}"/>
+                        </p:commandButton>
+                        
+                        <p:commandButton icon="pi pi-minus"
+                                         action="#{questionBean.openForDelete}"
+                                         update="@obs(event3)"
+                                         oncomplete="PF('questionDeleteAnswer').show()"
+                                         styleClass="edit-button rounded-button ui-button-success"
+                                         style="margin-right: 5px"
+                                         process="@this">
+                            <f:setPropertyActionListener value="#{question}"
+                                                         target="#{questionBean.selectedQuestion}"/>
                         </p:commandButton>
                     </p:outputPanel>
                 </p:column>
@@ -63,6 +89,8 @@
             </p:dataTable>
     
             <ui:include src="questionForm.xhtml"></ui:include>
+            <ui:include src="questionAddAnswer.xhtml"></ui:include>
+            <ui:include src="questionDeleteAnswer.xhtml"></ui:include>
             <p:confirmDialog global="true" showEffect="fade" width="300">
                 <p:commandButton value="Si" type="button"
                                  styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>

@@ -54,7 +54,7 @@ public class QuestionnaireBean implements Serializable {
 
     public void save(){
         if (!(selectedQuestionnaire.getName().length() > 2)){
-            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_WARN, "message_group_invalid");
+            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_WARN, "message_questionnarie_invalid");
             return;
         }
 
