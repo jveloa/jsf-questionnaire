@@ -1,13 +1,13 @@
 package cu.edu.mes.sigenu.training.web.view.report.chart;
 
 import cu.edu.mes.sigenu.training.web.dto.questionnaire.QuestionnaireDto;
+import cu.edu.mes.sigenu.training.web.dto.questionnaire.report.CareerOptionsDto;
 import cu.edu.mes.sigenu.training.web.dto.questionnaire.report.PercentsStudyHoursByAnswerDto;
 import cu.edu.mes.sigenu.training.web.service.questionnaire.QuestionCareerService;
 import cu.edu.mes.sigenu.training.web.service.questionnaire.QuestionnaireService;
-
 import cu.edu.mes.sigenu.training.web.service.report.PercentsStudyHoursByAnswerReportService;
 import cu.edu.mes.sigenu.training.web.service.report.chart.PercentsStudyHoursByAnswerChartReportService;
-import cu.edu.mes.sigenu.training.web.utils.JsfUtils;
+import cu.edu.mes.sigenu.training.web.service.report.chart.StudentCareerOptionsChartReportService;
 import cu.edu.mes.vo.NationalCareerVO;
 import lombok.Data;
 import org.primefaces.model.charts.ChartData;
@@ -23,7 +23,6 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -34,13 +33,11 @@ import java.util.List;
 @Named
 @RequestScoped
 @Data
-public class PercentsStudyHoursByAnswerChartReportBean implements Serializable {
+public class StudentCareerOptionsChartReportBean implements Serializable {
+
 
     @Inject
-    private PercentsStudyHoursByAnswerReportService percentsStudyHoursByAnswerReportService;
-
-    @Inject
-    private PercentsStudyHoursByAnswerChartReportService percentsStudyHoursByAnswerChartReportService;
+    private StudentCareerOptionsChartReportService studentCareerOptionsChartReportService;
 
     @Inject
     private QuestionnaireService questionnaireService;
@@ -92,41 +89,31 @@ public class PercentsStudyHoursByAnswerChartReportBean implements Serializable {
         Integer valueYear = 0;
 
 
-        List<String> yearList = percentsStudyHoursByAnswerChartReportService.getAllYears(this.questionnarieId);
+        List<String> yearList = studentCareerOptionsChartReportService.getAllYears(this.questionnarieId);
         if (!(yearList.isEmpty())){
 
             stackedBarModel = new BarChartModel();
             ChartData data = new ChartData();
 
-            BarChartDataSet barDataSet = new BarChartDataSet();
-            barDataSet.setLabel("20 o más");
-            barDataSet.setBackgroundColor("rgb(255, 99, 132)");
+            BarChartDataSet barDataSetOne = new BarChartDataSet();
+            barDataSetOne.setLabel("Opción 1");
+            barDataSetOne.setBackgroundColor("rgb(255, 99, 132)");
             List<Number> dataVal = new ArrayList<>();
 
-            BarChartDataSet barDataSet2 = new BarChartDataSet();
-            barDataSet2.setLabel("Entre 15 y 20");
-            barDataSet2.setBackgroundColor("rgb(54, 162, 235)");
+            BarChartDataSet barDataSetTwo = new BarChartDataSet();
+            barDataSetTwo.setLabel("Opción 2");
+            barDataSetTwo.setBackgroundColor("rgb(54, 162, 235)");
             List<Number> dataVal2 = new ArrayList<>();
 
-            BarChartDataSet barDataSet3 = new BarChartDataSet();
-            barDataSet3.setLabel("Entre 10 y 15");
-            barDataSet3.setBackgroundColor("rgb(75, 192, 192)");
+            BarChartDataSet barDataSetThree = new BarChartDataSet();
+            barDataSetThree.setLabel("Opción 3");
+            barDataSetThree.setBackgroundColor("rgb(255, 205, 86)");
             List<Number> dataVal3 = new ArrayList<>();
 
-            BarChartDataSet barDataSet4 = new BarChartDataSet();
-            barDataSet4.setLabel("Entre 5 y 10");
-            barDataSet4.setBackgroundColor("rgb(100, 102, 255)");
+            BarChartDataSet barDataSetPlusThree= new BarChartDataSet();
+            barDataSetPlusThree.setLabel("Más de 3");
+            barDataSetPlusThree.setBackgroundColor("rgb(201, 203, 207)");
             List<Number> dataVal4 = new ArrayList<>();
-
-            BarChartDataSet barDataSet5 = new BarChartDataSet();
-            barDataSet5.setLabel("Entre 2 y 5");
-            barDataSet5.setBackgroundColor("rgb(201, 203, 207)");
-            List<Number> dataVal5 = new ArrayList<>();
-
-            BarChartDataSet barDataSet6 = new BarChartDataSet();
-            barDataSet6.setLabel("Menos de 2");
-            barDataSet6.setBackgroundColor("rgb(255, 205, 86)");
-            List<Number> dataVal6 = new ArrayList<>();
 
             List<String> labels = new ArrayList<>();
 
@@ -140,44 +127,27 @@ public class PercentsStudyHoursByAnswerChartReportBean implements Serializable {
                 } catch (NumberFormatException e) {
                     e.printStackTrace();
                 }
-                List<PercentsStudyHoursByAnswerDto> list = percentsStudyHoursByAnswerReportService.getPercentsStudyHoursByAnswer(valueYear, this.questionnarieId);
-                for (int j = 0; j < list.size(); j++) {
+                CareerOptionsDto list = studentCareerOptionsChartReportService.studentCareerOptions(valueYear, this.questionnarieId);
 
-                    if (list.get(j).getQuestion().contains("20 o más"))
-                        dataVal.add(list.get(j).getValue());
-
-                    else if (list.get(j).getQuestion().contains("Entre 15 y 20"))
-                        dataVal2.add(list.get(j).getValue());
-
-                    else if (list.get(j).getQuestion().contains("Entre 10 y 15"))
-                        dataVal3.add(list.get(j).getValue());
-
-                    else if (list.get(j).getQuestion().contains("Entre 5 y 10"))
-                        dataVal4.add(list.get(j).getValue());
-
-                    else if (list.get(j).getQuestion().contains("Entre 2 y 5"))
-                        dataVal5.add(list.get(j).getValue());
-
-                    else if (list.get(j).getQuestion().contains("Menos de 2"))
-                        dataVal6.add(list.get(j).getValue());
-                }
+                dataVal.add(list.getQuantityOptionOne());
+                dataVal2.add(list.getQuantityOptionTwo());
+                dataVal3.add(list.getQuantityOptionThree());
+                dataVal4.add(list.getQuantityOptionPlusThree());
 
 
             }
 
-            barDataSet.setData(dataVal);
-            barDataSet2.setData(dataVal2);
-            barDataSet3.setData(dataVal3);
-            barDataSet4.setData(dataVal4);
-            barDataSet5.setData(dataVal5);
-            barDataSet6.setData(dataVal6);
+            barDataSetOne.setData(dataVal);
+            barDataSetTwo.setData(dataVal2);
+            barDataSetThree.setData(dataVal3);
+            barDataSetPlusThree.setData(dataVal4);
 
-            data.addChartDataSet(barDataSet);
-            data.addChartDataSet(barDataSet2);
-            data.addChartDataSet(barDataSet3);
-            data.addChartDataSet(barDataSet4);
-            data.addChartDataSet(barDataSet5);
-            data.addChartDataSet(barDataSet6);
+
+            data.addChartDataSet(barDataSetOne);
+            data.addChartDataSet(barDataSetTwo);
+            data.addChartDataSet(barDataSetThree);
+            data.addChartDataSet(barDataSetPlusThree);
+
 
 
             data.setLabels(labels);
@@ -196,7 +166,7 @@ public class PercentsStudyHoursByAnswerChartReportBean implements Serializable {
 
             Title title = new Title();
             title.setDisplay(true);
-            title.setText("Rangos de horas dedicadas al estudio");
+            title.setText("Opción de selección de carrera");
             options.setTitle(title);
 
             Tooltip tooltip = new Tooltip();

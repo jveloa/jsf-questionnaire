@@ -4,19 +4,19 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
 
+
 >
 
     <p:growl id="growl" showDetail="true" severity="info, error"/>
-
 
     <p:panelGrid id="panel"  columns="1" layout="flex">
 
         <h:panelGroup styleClass="ui-float-label">
 
-            <p:selectOneMenu style="width:30%;" required="true" value="#{percentsStudyHoursByAnswerChartReportBean.questionnarieId}">
+            <p:selectOneMenu style="width:30%;" required="true" value="#{percentsStudentsUjcByYearChartReportBean.questionnarieId}">
                 <f:selectItem itemLabel="" noSelectionOption="true"/>
-                <f:selectItems value="#{percentsStudyHoursByAnswerChartReportBean.allQuestionnaire}" var="questionnaire"
-                               itemLabel="#{percentsStudyHoursByAnswerChartReportBean.getCarrerById(questionnaire.careerSigenuId)}" itemValue="#{questionnaire.id}"/>
+                <f:selectItems value="#{percentsStudentsUjcByYearChartReportBean.allQuestionnaire}" var="questionnaire"
+                               itemLabel="#{percentsStudentsUjcByYearChartReportBean.getCarrerById(questionnaire.careerSigenuId)}" itemValue="#{questionnaire.id}"/>
             </p:selectOneMenu>
             <p:outputLabel for="@previous" value="#{msgs.completed_career}"/>
         </h:panelGroup>
@@ -26,7 +26,7 @@
 
 
     </p:panelGrid>
-    <p:panel >
+    <p:panel>
         <hr></hr>
 
         <div class="ui-g">
@@ -41,7 +41,7 @@
 
                 />
                 <p:commandButton value="#{msgs.button_view_Chart}"
-                                 action="#{percentsStudyHoursByAnswerChartReportBean.setHidden}"
+                                 action="#{percentsStudentsUjcByYearChartReportBean.setHidden}"
                                  styleClass="button-prime btn btn-flat btn-labeled btn-primary pull-right"
                                  update="panel form growl"
                                  process="panel @this form"
@@ -55,18 +55,15 @@
 
     <p:outputPanel id="form">
 
-            <h:form rendered="#{percentsStudyHoursByAnswerChartReportBean.hidden}">
+            <h:form rendered="#{percentsStudentsUjcByYearChartReportBean.hidden}">
 
                 <div>
 
-
                     <span></span>
 
-                    <h5>#{msgs.report_students_percentage_by_years}</h5>
-
-                    <p:barChart  model="#{percentsStudyHoursByAnswerChartReportBean.stackedBarModel}" style="width: 100%; height: 500px;"
-
-                    />
+                    <div class="card">
+                        <p:lineChart model="#{percentsStudentsUjcByYearChartReportBean.lineModel}" style="width: 100%; height: 400px;"/>
+                    </div>
 
                 </div>
 
