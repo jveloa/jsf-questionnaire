@@ -33,7 +33,8 @@
                         <p:outputPanel class="p-field">
                             <p:outputLabel for="@next">Orden de aparición en el cuestionario</p:outputLabel>
                             <p:spinner id="organizationOrder" required="false"
-                                         value="#{groupQuestionBean.seletedGroupQuestion.organizationOrder}"/>
+                                       min="1"   onkeydown="return false"
+                                       thousandSeparator="" value="#{groupQuestionBean.seletedGroupQuestion.organizationOrder}"/>
                         </p:outputPanel>
                         
                     </h:panelGroup>
