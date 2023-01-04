@@ -101,7 +101,7 @@ public class QuestionBean implements Serializable {
 
         if(selectedQuestion.getId() == null){
             ApiResponse apiResponse = questionService.saveWithCareer(selectedQuestion);
-            Integer questionId = questionService.getByName(selectedQuestion.getQuestion()).getId();
+            Integer questionId = Integer.valueOf(apiResponse.getCode());
             selectedAnswerDtos.forEach(answerDto -> questionAnswerService.save(new QuestionAnswerDto(0,questionId,answerDto.getId(),null)));
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_added");
         }else{

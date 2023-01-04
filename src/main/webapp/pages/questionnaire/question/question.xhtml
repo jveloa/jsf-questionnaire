@@ -39,13 +39,13 @@
                     <h:outputText value="#{questionBean.getCarrerById(question.questionCarrerId)}"/>
                 </p:column>
                 
-                <p:column headerText="Acciones" style="margin: 5px">
-                    <p:outputPanel style="margin: 5px">
+                <p:column headerText="Acciones">
+                    <p:outputPanel >
                         <p:commandButton icon="pi pi-pencil"
                                          update="@obs(event1)"
                                          oncomplete="PF('question').show()"
                                          styleClass="edit-button rounded-button ui-button-success"
-                                         style="margin-right: 5px"
+                                         style="margin-right: 5px ;margin-bottom: 5px"
                                          process="@this">
                             <f:setPropertyActionListener value="#{question}"
                                                          target="#{questionBean.selectedQuestion}"/>
@@ -54,7 +54,7 @@
                                          styleClass="ui-button-warning rounded-button"
                                          action="#{questionBean.delete}"
                                          update="dt-Question"
-                                         style="margin-right: 5px"
+                                         style="margin-right: 5px ;margin-bottom: 5px"
                                          process="@this">
                             <f:setPropertyActionListener value="#{question}"
                                                          target="#{questionBean.selectedQuestion}"/>
@@ -67,7 +67,7 @@
                                          update="@obs(event2)"
                                          oncomplete="PF('questionAddAnswer').show()"
                                          styleClass="edit-button rounded-button ui-button-success"
-                                         style="margin-right: 5px"
+                                         style="margin-right: 5px ;margin-bottom: 5px"
                                          process="@this">
                             <f:setPropertyActionListener value="#{question}"
                                                          target="#{questionBean.selectedQuestion}"/>
@@ -78,7 +78,7 @@
                                          update="@obs(event3)"
                                          oncomplete="PF('questionDeleteAnswer').show()"
                                          styleClass="edit-button rounded-button ui-button-success"
-                                         style="margin-right: 5px"
+                                         style="margin-right: 5px ;margin-bottom: 5px"
                                          process="@this">
                             <f:setPropertyActionListener value="#{question}"
                                                          target="#{questionBean.selectedQuestion}"/>

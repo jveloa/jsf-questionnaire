@@ -9,6 +9,7 @@ import cu.edu.mes.sigenu.training.web.utils.ApiRestMapper;
 import cu.edu.mes.sigenu.training.web.utils.RestService;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriTemplate;
 
 import javax.enterprise.context.RequestScoped;
@@ -96,7 +97,7 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public QuestionDto getByName(String name) {
+    public QuestionDto getByName(@RequestParam String name) {
         QuestionDto question = null;
         try {
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
