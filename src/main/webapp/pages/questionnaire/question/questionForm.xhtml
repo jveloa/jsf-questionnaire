@@ -31,11 +31,19 @@
                             </p:selectOneMenu>
                         </p:outputPanel>
     
-                        <p:outputPanel class="p-field">
+                        <p:outputPanel class="p-field" rendered="#{questionBean.selectedQuestion.id == null}">
                             <p:outputLabel for="@next">Carrera a la que pertenece</p:outputLabel>
                             <p:selectOneMenu id="careerQuestion" value="#{questionBean.selectedQuestion.questionCarrerId}">
                                 <f:selectItems value="#{questionBean.careerList}" var="career" itemLabel="#{career.name}" itemValue="#{career.idNationalCareer}" />
                             </p:selectOneMenu>
+                        </p:outputPanel>
+    
+                        <p:outputPanel class="p-field" rendered="#{questionBean.selectedQuestion.id == null}">
+                            <p:outputLabel for="@next">Respuestas asociadas</p:outputLabel>
+                            <p:selectCheckboxMenu id="multiple" value="#{questionBean.selectedAnswerDtos}" label="Respuestas" style="min-width: 15rem"
+                                                      multiple="true" filter="true" filterMatchMode="contains" panelStyle="width: 30rem" scrollHeight="250">
+                                <f:selectItems value="#{questionBean.answerDtos}" var="answer" itemLabel="#{answer.answer}" itemValue="#{answer}"/>
+                            </p:selectCheckboxMenu>
                         </p:outputPanel>
                     
                     </h:panelGroup>

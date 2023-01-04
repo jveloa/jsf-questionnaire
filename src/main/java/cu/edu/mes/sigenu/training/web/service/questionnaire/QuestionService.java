@@ -11,7 +11,9 @@ public interface QuestionService {
     List<QuestionWithCareerDto> getQuestionWithCareer();
     List<QuestionDto> getQuestionWithOutCareer();
     QuestionDto getById(Integer id);
+    QuestionDto getByName(String name);
     ApiResponse save(QuestionDto questionDto);
+    ApiResponse saveWithCareer(QuestionWithCareerDto questionWithCareerDto);
     ApiResponse update(QuestionDto questionDto);
     ApiResponse delete(Integer id);
 }
