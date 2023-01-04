@@ -26,15 +26,15 @@
                          value="#{groupQuestionBean.groupQuestionDtos}" rows="10" paginatorPosition="bottom"
                          styleClass="products-table">
     
-                <p:column headerText="Orden de aparición" sortBy="#{group.organizationOrder}" filterMatchMode="contains">
+                <p:column headerText="Orden de aparición" filterMatchMode="contains">
                     <h:outputText value="#{group.organizationOrder}"/>
                 </p:column>
                 
-                <p:column headerText="Nombre" sortBy="#{group.nameGroup}" filterBy="#{group.nameGroup}" filterMatchMode="contains">
+                <p:column headerText="Nombre" filterBy="#{group.nameGroup}" filterMatchMode="contains">
                     <h:outputText value="#{group.nameGroup}"/>
                 </p:column>
                 
-                <p:column headerText="Descripción" sortBy="#{group.description}">
+                <p:column headerText="Descripción" >
                     <h:outputText value="#{group.description}"/>
                 </p:column>
                 
