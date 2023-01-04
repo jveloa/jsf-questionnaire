@@ -5,7 +5,7 @@
                 xmlns:p="http://primefaces.org/ui"
 
 >
-
+    <p:growl id="growl" showDetail="true" severity="info, error" showSummary="Error"/>
     <p:panelGrid id="panel"  columns="3" layout="flex">
 
         <h:panelGroup styleClass="ui-float-label">
@@ -57,7 +57,7 @@
                 <p:commandButton value="#{msgs.button_view_Report}"
                                  action="#{entryDataByCourseByPlaceEgressReportBean.updateList}"
                                  styleClass="button-prime btn btn-flat btn-labeled btn-primary pull-right"
-                                 update="panel form"
+                                 update="panel form growl"
                                  process="panel @this"
                                  icon="pi pi-file" style="margin-right:3px;"
                 />

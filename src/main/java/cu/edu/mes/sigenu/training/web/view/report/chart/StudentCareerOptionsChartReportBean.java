@@ -76,7 +76,7 @@ public class StudentCareerOptionsChartReportBean implements Serializable {
         createStackedBarModel();
         if (this.hidden == false)
             FacesContext.getCurrentInstance().
-                    addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Mensaje de error", "No se encontraron elementos que coincidan  con su búsqueda"));
+                    addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "No se encontraron elementos que coincidan  con su búsqueda"));
 
         return this.hidden;
 

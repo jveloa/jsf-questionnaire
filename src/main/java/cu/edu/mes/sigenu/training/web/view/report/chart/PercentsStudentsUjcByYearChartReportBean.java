@@ -80,7 +80,7 @@ public class PercentsStudentsUjcByYearChartReportBean implements Serializable {
 
 
             FacesContext.getCurrentInstance().
-                    addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Mensaje de error", "No se encontraron elementos que coincidan  con su búsqueda"));
+                    addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "No se encontraron elementos que coincidan  con su búsqueda"));
 
     //JsfUtils.addMessageFromBundle("panel", FacesMessage.SEVERITY_WARN, "search_not_found");
 

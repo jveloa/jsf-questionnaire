@@ -5,7 +5,7 @@
                 xmlns:p="http://primefaces.org/ui"
 
 >
-
+    <p:growl id="growl" showDetail="true" severity="info, error" showSummary="Error"/>
     <p:panelGrid id="panel"  columns="2" layout="flex" styleClass="ui-panelgrid-blank form-group">
 
         <h:panelGroup styleClass="ui-float-label">
@@ -34,15 +34,17 @@
                 <p:ajax   process="ave mat his spa"  listener="#{studentsByConfigurableNotesReportBean.validate}"/>
             </p:spinner>
             <p:outputLabel for="@previous" value="#{msgs.note_ave}"/>
+            <small class="p-d-block">#{msgs.message_info_spinner}</small>
         </h:panelGroup>
 
         <h:panelGroup styleClass="ui-float-label">
             <p:spinner id="mat" value="#{studentsByConfigurableNotesReportBean.noteMat}"
                        min="60" max="100" style="width:70%;"
-                       thousandSeparator="" decimalSeparator="."  stepFactor="0.5" >
-                <p:ajax  process="ave mat his spa" listener="#{studentsByConfigurableNotesReportBean.validate}"/>
+                       thousandSeparator="" decimalSeparator="."  stepFactor="0.5">
+                <p:ajax process=" @this ave mat his spa" listener="#{studentsByConfigurableNotesReportBean.validate}"/>
             </p:spinner>
             <p:outputLabel for="@previous" value="#{msgs.note_mat}"/>
+            <small class="p-d-block">#{msgs.message_info_spinner}</small>
 
         </h:panelGroup>
         <h:panelGroup styleClass="ui-float-label">
@@ -52,6 +54,7 @@
                 <p:ajax process="ave mat his spa" listener="#{studentsByConfigurableNotesReportBean.validate}"/>
             </p:spinner>
             <p:outputLabel for="@previous" value="#{msgs.note_history}"/>
+            <small class="p-d-block">#{msgs.message_info_spinner}</small>
 
         </h:panelGroup>
         <h:panelGroup styleClass="ui-float-label">
@@ -61,6 +64,7 @@
                 <p:ajax  process="ave mat his spa" listener="#{studentsByConfigurableNotesReportBean.validate}"/>
             </p:spinner>
             <p:outputLabel for="@previous" value="#{msgs.note_spanish}"/>
+            <small class="p-d-block">#{msgs.message_info_spinner}</small>
 
         </h:panelGroup>
         <span></span>
@@ -85,7 +89,7 @@
                 <p:commandButton value="#{msgs.button_view_Report}"
                                  action="#{studentsByConfigurableNotesReportBean.updateList}"
                                  styleClass="button-prime btn btn-flat btn-labeled btn-primary pull-right"
-                                 update="option form"
+                                 update="option form growl"
                                  process="panel @this"
                                  icon="pi pi-file" style="margin-right:3px;"
                 />
@@ -120,7 +124,7 @@
             <p:dataTable id="tbl" var="studentsNotes" value="#{studentsByConfigurableNotesReportBean.studentsByConfigurableNotesList}"
                          reflow="true" paginator="true" rows="20" paginatorPosition="bottom" styleClass="products-table">
 
-                <p:column headerText="Nombre" sortBy="#{studentsNotes.name}" filterBy="#{studentsNotes.name}">
+                <p:column headerText="Nombre y apellidos" sortBy="#{studentsNotes.name}" filterBy="#{studentsNotes.name}" filterMatchMode="contains">
                     <h:outputText value="#{studentsNotes.name} "/>
                 </p:column>
                 <p:column headerText="Índice Académico" sortBy="#{studentsNotes.noteAve}">
