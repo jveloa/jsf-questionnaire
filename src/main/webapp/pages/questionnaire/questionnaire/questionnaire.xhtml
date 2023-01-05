@@ -50,6 +50,8 @@
                                          update="dt-Questionnaire"
                                          style="margin-right: 5px ;margin-bottom: 5px"
                                          process="@this">
+                            <f:setPropertyActionListener value="#{questionnaire}"
+                                                         target="#{questionnaireBean.selectedQuestionnaire}"/>
                             <p:confirm header="Confirmar" message="Está seguro de eliminar el cuestionario?"
                                        icon="pi pi-exclamation-triangle"/>
                         </p:commandButton>
