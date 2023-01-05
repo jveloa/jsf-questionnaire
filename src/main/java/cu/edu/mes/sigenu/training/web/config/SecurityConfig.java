@@ -16,8 +16,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // todas las solicitudes deben estar autenticadas excepto las que se definan en este code
         http.authorizeRequests().antMatchers("/javax.faces.resource/**", "/resources/**", "/signin", "/error-**")
         .permitAll()
-        .antMatchers("/workspace").hasAnyAuthority("SECRETARY", "GENERAL_SECRETARY", "MATRICULATOR", "SP_CONTROLLER", "ASSISTANT_STUDENTS_CONTROLLER", "SECRETARY_PARTIAL")
-        .antMatchers("/change-password").hasAnyAuthority("SECRETARY", "GENERAL_SECRETARY", "MATRICULATOR", "SP_CONTROLLER", "ASSISTANT_STUDENTS_CONTROLLER", "SECRETARY_PARTIAL")
+        .antMatchers("/workspace").hasAnyAuthority("SECRETARY", "TRAINING_MANAGER", "HEAD_CAREER_GROUP", "HEAD_UNIVERSITY_YEAR", "FEU", "STUDENT")
         .antMatchers("/error-**").hasAnyAuthority("ANONYMOUS", "SECRETARY", "GENERAL_SECRETARY", "MATRICULATOR", "SP_CONTROLLER", "ASSISTANT_STUDENTS_CONTROLLER", "SECRETARY_PARTIAL")
         .anyRequest().authenticated();
         

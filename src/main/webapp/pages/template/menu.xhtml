@@ -35,27 +35,27 @@
 
                 <p:submenu id="questionnaire_info" label="#{msgs.menu_crud}"
                            icon="pi pi-user-plus"
-                           rendered="#{authentication.ifAnyGranted('SECRETARY, GENERAL_SECRETARY, ASSISTANT_STUDENTS_CONTROLLER')}">
+                           rendered="#{authentication.ifAnyGranted('TRAINING_MANAGER,HEAD_CAREER_GROUP')}">
 
                     <p:menuitem value="#{msgs.sub_menu_questionnaire}"
-                                action="uishell:QuestionnaireViewBean"/>
+                                action="uishell:QuestionnaireViewBean" rendered="#{authentication.ifAnyGranted('TRAINING_MANAGER')}"/>
 
                     <p:menuitem value="#{msgs.sub_menu_group_question}"
-                                action="uishell:groupQuestionViewBean"/>
+                                action="uishell:groupQuestionViewBean" rendered="#{authentication.ifAnyGranted('TRAINING_MANAGER')}"/>
 
                     <p:menuitem value="#{msgs.sub_menu_answer}"
-                                action="uishell:answerViewBean"/>
+                                action="uishell:answerViewBean" rendered="#{authentication.ifAnyGranted('HEAD_CAREER_GROUP')}"/>
     
                     <p:menuitem value="#{msgs.sub_menu_question_carrer}"
-                                action="uishell:QuestionViewBean"/>
+                                action="uishell:QuestionViewBean" rendered="#{authentication.ifAnyGranted('HEAD_CAREER_GROUP')}"/>
     
                     <p:menuitem value="#{msgs.sub_menu_question}"
-                                action="uishell:QuestionWithOutViewBean"/>
+                                action="uishell:QuestionWithOutViewBean" rendered="#{authentication.ifAnyGranted('TRAINING_MANAGER,HEAD_CAREER_GROUP')}"/>
 
                 </p:submenu>
 
-                <p:submenu label="#{msgs.menu_report}" icon="pi pi-file">
-                    <p:submenu label="#{msgs.submenu_ReportBoss}">
+                <p:submenu label="#{msgs.menu_report}" icon="pi pi-file" rendered="#{authentication.ifAnyGranted('TRAINING_MANAGER,FEU,HEAD_CAREER_GROUP,HEAD_UNIVERSITY_YEAR')}">
+                    <p:submenu label="#{msgs.submenu_ReportBoss}" rendered="#{authentication.ifAnyGranted('TRAINING_MANAGER,HEAD_CAREER_GROUP,HEAD_UNIVERSITY_YEAR')}">
                         <p:menuitem value="#{msgs.report_student_not_computer}"
                                     action="uishell:StudentNotComputerReportBean"/>
                         <p:menuitem value="#{msgs.report_students_percentage}"
@@ -76,7 +76,7 @@
                                     action="uishell:EntryDataByCourseByPlaceEgressReportBean"/>
                     </p:submenu>
 
-                    <p:submenu label="#{msgs.submenu_report_feu}">
+                    <p:submenu label="#{msgs.submenu_report_feu}" rendered="#{authentication.ifAnyGranted('FEU')}">
                         <p:menuitem value="#{msgs.report_students_sport_list}"
                                     action="uishell:StudentSportListReportBean"/>
                         <p:menuitem value="#{msgs.report_students_art_list}"
@@ -85,15 +85,12 @@
                                     action="uishell:StudentsResponsibilityReportBean"/>
                         <p:menuitem value="#{msgs.report_students_deport_art_list}"
                                     action="uishell:DeportArtListReportBean"/>
-
-
-
-
+                        
                     </p:submenu>
 
                 </p:submenu>
 
-                <p:submenu label="#{msgs.menu_chart_report}" icon="pi pi-chart-bar">
+                <p:submenu label="#{msgs.menu_chart_report}" icon="pi pi-chart-bar" rendered="#{authentication.ifAnyGranted('TRAINING_MANAGER,FEU,HEAD_CAREER_GROUP,HEAD_UNIVERSITY_YEAR')}">
                     <p:menuitem value="#{msgs.report_students_percentage_by_years}"
                                 action="uishell:PercentsStudyHoursByAnswerChartReportBean"/>
                     <p:menuitem value="#{msgs.report_quantity_career_options}"
