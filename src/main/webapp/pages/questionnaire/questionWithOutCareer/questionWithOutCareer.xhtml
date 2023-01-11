@@ -1,0 +1,98 @@
+<ui:composition xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:sec="http://www.springframework.org/security/tags"
+>
+    <p:panelGrid columns="1" layout="grid" id="principal">
+        
+        <p:outputPanel class="card" id="main">
+            
+            <p:toolbar styleClass="card">
+                <p:toolbarGroup>
+                    <p:commandButton value="Nueva pregunta" icon="pi pi-plus"
+                                     actionListener="#{questionWithOutCareerBean.openNew}"
+                                     update="manageQuestionWithOutCareer"
+                                     oncomplete="PF('questionWithOutCareer').show()"
+                                     styleClass="ui-button-success"
+                                     style="margin-right: .5rem"
+                                     process="manageQuestionWithOutCareer @this">
+                        <p:resetInput target="manageQuestionWithOutCareer"/>
+                    </p:commandButton>
+                </p:toolbarGroup>
+            </p:toolbar>
+            
+            <p:dataTable id="dt-QuestionWithOutCareer" widgetVar="dtQuestionWithOut" var="question" reflow="true" paginator="true"
+                         value="#{questionWithOutCareerBean.questionDtos}" rows="10" paginatorPosition="bottom"
+                         styleClass="products-table">
+                
+                
+                <p:column headerText="Pregunta" filterBy="#{question.question}" filterMatchMode="contains">
+                    <h:outputText value="#{question.question}"/>
+                </p:column>
+                
+                <p:column headerText="Grupo de pregunta"  filterBy="#{questionWithOutCareerBean.getGroupQuestionById(question.groupQuestionId)}" filterMatchMode="contains">
+                    <h:outputText value="#{questionWithOutCareerBean.getGroupQuestionById(question.groupQuestionId)}"/>
+                </p:column>
+    
+                <p:column headerText="Acciones">
+                    <p:outputPanel >
+                        <p:commandButton icon="pi pi-pencil"
+                                         update="@obs(event1)"
+                                         oncomplete="PF('questionWithOutCareer').show()"
+                                         styleClass="edit-button rounded-button ui-button-success"
+                                         style="margin-right: 5px ;margin-bottom: 5px"
+                                         process="@this">
+                            <f:setPropertyActionListener value="#{question}"
+                                                         target="#{questionWithOutCareerBean.selectedQuestion}"/>
+                        </p:commandButton>
+                        <p:commandButton id="delete" icon="pi pi-trash"
+                                         styleClass="ui-button-warning rounded-button"
+                                         action="#{questionWithOutCareerBean.delete}"
+                                         update="dt-QuestionWithOutCareer"
+                                         style="margin-right: 5px ;margin-bottom: 5px"
+                                         process="@this">
+                            <f:setPropertyActionListener value="#{question}"
+                                                         target="#{questionWithOutCareerBean.selectedQuestion}"/>
+                            <p:confirm header="Confirmar" message="Está seguro de eliminar la respuesta?"
+                                       icon="pi pi-exclamation-triangle"/>
+                        </p:commandButton>
+            
+                        <p:commandButton icon="pi pi-plus"
+                                         action="#{questionWithOutCareerBean.openForAdd}"
+                                         update="@obs(event2)"
+                                         oncomplete="PF('questionAddAnswer').show()"
+                                         styleClass="edit-button rounded-button ui-button-success"
+                                         style="margin-right: 5px ;margin-bottom: 5px"
+                                         process="@this">
+                            <f:setPropertyActionListener value="#{question}"
+                                                         target="#{questionWithOutCareerBean.selectedQuestion}"/>
+                        </p:commandButton>
+            
+                        <p:commandButton icon="pi pi-minus"
+                                         action="#{questionWithOutCareerBean.openForDelete}"
+                                         update="@obs(event3)"
+                                         oncomplete="PF('questionDeleteAnswer').show()"
+                                         styleClass="edit-button rounded-button ui-button-success"
+                                         style="margin-right: 5px ;margin-bottom: 5px"
+                                         process="@this">
+                            <f:setPropertyActionListener value="#{question}"
+                                                         target="#{questionWithOutCareerBean.selectedQuestion}"/>
+                        </p:commandButton>
+                    </p:outputPanel>
+                </p:column>
+                
+            </p:dataTable>
+            <ui:include src="questionWithOutCareerForm.xhtml"></ui:include>
+            <ui:include src="questionAddAnswer.xhtml"></ui:include>
+            <ui:include src="questionDeleteAnswer.xhtml"></ui:include>
+            <p:confirmDialog global="true" showEffect="fade" width="300">
+                <p:commandButton value="Si" type="button"
+                                 styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
+                <p:commandButton value="No" type="button"
+                                 styleClass="ui-confirmdialog-no ui-button-secondary"
+                                 icon="pi pi-times"/>
+            </p:confirmDialog>
+        </p:outputPanel>
+    </p:panelGrid>
+</ui:composition>

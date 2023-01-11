@@ -258,7 +258,7 @@
         </managed-property>
         <managed-property>
             <property-name>includePage</property-name>
-            <value>/pages/questionnaire/question/questionWithOutCareer.xhtml</value>
+            <value>/pages/questionnaire/questionWithOutCareer/questionWithOutCareer.xhtml</value>
         </managed-property>
         <managed-property>
             <property-name>closeable</property-name>

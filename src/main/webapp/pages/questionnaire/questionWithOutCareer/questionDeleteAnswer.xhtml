@@ -1,0 +1,40 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    
+    <p:dialog header="Desasociar respuestas de pregunta" showEffect="fade" modal="true"
+              widgetVar="questionDeleteAnswer" responsive="true">
+        <p:outputPanel id="manageQuestionDeleteAnswer" class="ui-fluid">
+            <p:autoUpdate on="event3"/>
+            <p:outputPanel >
+                <p:panelGrid layout="grid" columns="1">
+                    <h:panelGroup>
+                        <p:outputPanel class="p-field" rendered="#{not empty questionWithOutCareerBean.answerDtoforActions}">
+                            <p:staticMessage severity="info" summary="INFO" detail="Una pregunta debe tener como mínimo dos respuestas asociadas" style="width: 100%"/>
+                            <hr></hr>
+                            <p:outputLabel for="@next">Respuestas disponibles para desasociar</p:outputLabel>
+                            <p:selectCheckboxMenu value="#{questionWithOutCareerBean.selectedAnswerDtos}" label="Respuestas disponibles para desasociar" style="min-width: 15rem"
+                                                  multiple="true" filter="true" filterMatchMode="contains" panelStyle="width: 30rem" scrollHeight="250">
+                                <f:selectItems value="#{questionWithOutCareerBean.answerDtoforActions}" var="answer" itemLabel="#{answer.answer}" itemValue="#{answer}"/>
+                            </p:selectCheckboxMenu>
+                        </p:outputPanel>
+                        <p:outputPanel rendered="#{empty questionWithOutCareerBean.answerDtoforActions}">
+                            <p:staticMessage severity="info" summary="INFO" detail="No exiten respuestas que se puedan remover" style="width: 100%"/>
+                        </p:outputPanel>
+                    </h:panelGroup>
+                </p:panelGrid>
+            </p:outputPanel>
+        </p:outputPanel>
+        
+        <f:facet name="footer">
+            <p:commandButton value="Salvar" icon="pi pi-check"
+                             process="manageQuestionDeleteAnswer, @this"
+                             actionListener="#{questionWithOutCareerBean.deleteQuestionAnswer}"
+                             update="dt-QuestionWithOutCareer"/>
+            <p:commandButton value="Cancelar" icon="pi pi-times"
+                             onclick="PF('questionDeleteAnswer').hide()" class="ui-button-secondary"/>
+        </f:facet>
+    </p:dialog>
+</ui:composition>
