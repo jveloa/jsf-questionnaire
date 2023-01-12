@@ -54,6 +54,10 @@ public class QuestionnaireBean implements Serializable {
 
     private List<QuestionWithCareerDto> selectedQuestionDtos;
 
+    private List<QuestionDto> questionWithoutCareer;
+
+    private List<QuestionDto> selectedQuestionWithOutCareer;
+
 
     public List<QuestionnaireDto> getQuestionnaireDtos() {
         return questionnaireService.getAllQuestionnaire();
@@ -86,6 +90,30 @@ public class QuestionnaireBean implements Serializable {
             .filter(questionWithCareerDto -> questionByQuestionnaire
                 .stream()
                 .anyMatch(questionDto -> questionDto.getId().equals(questionWithCareerDto.getId())))
+            .collect(Collectors.toList());
+    }
+
+    public void openForAddQuestionWithoutCareer(){
+        selectedQuestionWithOutCareer = new ArrayList<>();
+        List<QuestionDto> questionByQuestionnaire = questionnaireQuestionService.getQuestions(selectedQuestionnaire.getId());
+        List<QuestionDto> allQuestion = questionService.getQuestionWithOutCareer();
+        questionWithoutCareer = allQuestion
+            .stream()
+            .filter(questionDto -> questionByQuestionnaire
+                .stream()
+                .allMatch(questionDtoAll -> !questionDto.getId().equals(questionDtoAll.getId()) ))
+            .collect(Collectors.toList());
+
+    }
+
+    public void openForDeleteQuestionWithoutCareer(){
+        selectedQuestionWithOutCareer = new ArrayList<>();
+        List<QuestionDto> questionByQuestionnaire = questionnaireQuestionService.getQuestions(selectedQuestionnaire.getId());
+        List<QuestionDto> allQuestion = questionService.getQuestionWithOutCareer();
+        questionWithoutCareer = allQuestion
+            .stream()
+            .filter(questionDto -> questionByQuestionnaire
+                .stream().anyMatch(questionDtoAll -> questionDto.getId().equals(questionDtoAll.getId())))
             .collect(Collectors.toList());
     }
 
@@ -137,6 +165,27 @@ public class QuestionnaireBean implements Serializable {
         PrimeFaces.current().executeScript("PF('questionnaireDeleteQuestion').hide()");
     }
 
+    public void addQuestionnaireQuestionWithOutCareer(){
+        if(selectedQuestionWithOutCareer.size() == 0){
+            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_WARN, "message_questionnaire_question_add_invalid");
+            return;
+        }
+        selectedQuestionWithOutCareer.forEach(
+            questionWithCareerDto -> questionnaireQuestionService.save(selectedQuestionnaire.getId(),questionWithCareerDto.getId()));
+        JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_associate");
+        PrimeFaces.current().executeScript("PF('questionnaireAddQuestionWithout').hide()");
+    }
+
+    public void deleteQuestionnaireQuestionWithOutCareer(){
+        if(selectedQuestionWithOutCareer.size() == 0){
+            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_WARN, "message_questionnaire_question_add_invalid");
+            return;
+        }
+        selectedQuestionWithOutCareer.forEach(
+            questionWithCareerDto -> questionnaireQuestionService.delete(selectedQuestionnaire.getId(),questionWithCareerDto.getId()));
+        JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_delete_associate");
+        PrimeFaces.current().executeScript("PF('questionnaireDeleteQuestionWithout').hide()");
+    }
 
     public void delete(){
         ApiResponse response = questionnaireService.delete(this.selectedQuestionnaire.getId());

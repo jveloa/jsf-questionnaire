@@ -35,46 +35,66 @@
     
                 <p:column headerText="Acciones">
                     <p:outputPanel>
-                        <p:commandButton icon="pi pi-pencil"
-                                         update="@obs(event1)"
-                                         oncomplete="PF('questionnaire').show()"
-                                         styleClass="edit-button rounded-button ui-button-success"
-                                         style="margin-right: 5px ;margin-bottom: 5px"
-                                         process="@this">
-                            <f:setPropertyActionListener value="#{questionnaire}"
-                                                         target="#{questionnaireBean.selectedQuestionnaire}"/>
-                        </p:commandButton>
-                        <p:commandButton id="delete" icon="pi pi pi-trash"
-                                         styleClass="ui-button-warning rounded-button"
-                                         action="#{questionnaireBean.delete}"
-                                         update="dt-Questionnaire"
-                                         style="margin-right: 5px ;margin-bottom: 5px"
-                                         process="@this">
-                            <f:setPropertyActionListener value="#{questionnaire}"
-                                                         target="#{questionnaireBean.selectedQuestionnaire}"/>
-                            <p:confirm header="Confirmar" message="Está seguro de eliminar el cuestionario?"
-                                       icon="pi pi-exclamation-triangle"/>
-                        </p:commandButton>
-                        <p:commandButton icon="pi pi-plus"
-                                         action="#{questionnaireBean.openForAdd}"
-                                         update="@obs(event2)"
-                                         oncomplete="PF('questionnaireAddQuestion').show()"
-                                         styleClass="edit-button rounded-button ui-button-success"
-                                         style="margin-right: 5px ;margin-bottom: 5px"
-                                         process="@this">
-                            <f:setPropertyActionListener value="#{questionnaire}"
-                                                         target="#{questionnaireBean.selectedQuestionnaire}"/>
-                        </p:commandButton>
-                        <p:commandButton icon="pi pi-minus"
-                                         action="#{questionnaireBean.openForDelete}"
-                                         update="@obs(event3)"
-                                         oncomplete="PF('questionnaireDeleteQuestion').show()"
-                                         styleClass="edit-button rounded-button ui-button-success"
-                                         style="margin-right: 5px ;margin-bottom: 5px"
-                                         process="@this">
-                            <f:setPropertyActionListener value="#{questionnaire}"
-                                                         target="#{questionnaireBean.selectedQuestionnaire}"/>
-                        </p:commandButton>
+                        <p:commandButton id="Mas" value="Acciones" type="button" icon="pi pi-plus"/>
+                        <p:tieredMenu overlay="true" trigger="Mas" my="left top" at="left bottom" style="width:300px">
+                            <p:menuitem icon="pi pi-pencil"
+                                        value="Editar cuestionario"
+                                        update="@obs(event1)"
+                                        oncomplete="PF('questionnaire').show()"
+                                        process="@this">
+                                <f:setPropertyActionListener value="#{questionnaire}"
+                                                             target="#{questionnaireBean.selectedQuestionnaire}"/>
+                            </p:menuitem>
+                            <p:menuitem id="delete"
+                                        value="Eliminar cuestionario"
+                                        icon="pi pi pi-trash"
+                                        action="#{questionnaireBean.delete}"
+                                        update="dt-Questionnaire"
+                                        process="@this">
+                                <f:setPropertyActionListener value="#{questionnaire}"
+                                                             target="#{questionnaireBean.selectedQuestionnaire}"/>
+                                <p:confirm header="Confirmar" message="Está seguro de eliminar el cuestionario?"
+                                           icon="pi pi-exclamation-triangle"/>
+                            </p:menuitem>
+                            <p:menuitem icon="pi pi-plus"
+                                        value="Añadir preguntas de la carrera"
+                                        action="#{questionnaireBean.openForAdd}"
+                                        update="@obs(event2)"
+                                        oncomplete="PF('questionnaireAddQuestion').show()"
+                                        process="@this">
+                                <f:setPropertyActionListener value="#{questionnaire}"
+                                                             target="#{questionnaireBean.selectedQuestionnaire}"/>
+                            </p:menuitem>
+                            <p:menuitem icon="pi pi-minus"
+                                        value="Eliminar preguntas de la carrera"
+                                        action="#{questionnaireBean.openForDelete}"
+                                        update="@obs(event3)"
+                                        oncomplete="PF('questionnaireDeleteQuestion').show()"
+                                        process="@this">
+                                <f:setPropertyActionListener value="#{questionnaire}"
+                                                             target="#{questionnaireBean.selectedQuestionnaire}"/>
+                            </p:menuitem>
+    
+                            <p:menuitem icon="pi pi-plus"
+                                        value="Añadir preguntas"
+                                        action="#{questionnaireBean.openForAddQuestionWithoutCareer}"
+                                        update="@obs(event2)"
+                                        oncomplete="PF('questionnaireAddQuestionWithout').show()"
+                                        process="@this">
+                                <f:setPropertyActionListener value="#{questionnaire}"
+                                                             target="#{questionnaireBean.selectedQuestionnaire}"/>
+                            </p:menuitem>
+                            <p:menuitem icon="pi pi-minus"
+                                        value="Eliminar preguntas"
+                                        action="#{questionnaireBean.openForDeleteQuestionWithoutCareer}"
+                                        update="@obs(event3)"
+                                        oncomplete="PF('questionnaireDeleteQuestionWithOut').show()"
+                                        process="@this">
+                                <f:setPropertyActionListener value="#{questionnaire}"
+                                                             target="#{questionnaireBean.selectedQuestionnaire}"/>
+                            </p:menuitem>
+                            
+                        </p:tieredMenu>
                     </p:outputPanel>
                 </p:column>
             
@@ -82,6 +102,8 @@
             <ui:include src="questionnaireForm.xhtml"></ui:include>
             <ui:include src="questionnaireAddQuestion.xhtml"></ui:include>
             <ui:include src="questionnaireDeleteQuestion.xhtml"></ui:include>
+            <ui:include src="questionnaireAddQuestionWithout.xhtml"></ui:include>
+            <ui:include src="questionnaireDeleteQuestionWithOut.xhtml"></ui:include>
             
             <p:confirmDialog global="true" showEffect="fade" width="300">
                 <p:commandButton value="Si" type="button"
